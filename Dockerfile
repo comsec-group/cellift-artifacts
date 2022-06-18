@@ -4,23 +4,13 @@ FROM docker.io/ethcomsec/cellift:cellift-tools-main
 COPY cellift-designs/*.tar.bz2 /cellift-designs/
 WORKDIR /cellift-designs/
 RUN for k in *.tar.bz2; do echo $k; tar -xjf $k; done
-
-WORKDIR /cellift-designs/cellift-ibex/cellift
-RUN bash tests.sh
-
-# handling dir cellift-designs/cellift-cva6, file Dockerfile
-WORKDIR /cellift-designs/cellift-cva6/cellift
-RUN bash tests.sh
-
-# handling dir cellift-designs/cellift-pulpissimo-hdac-2018, file Dockerfile
-# Base our tests on the tools image
-WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
-RUN bash tests.sh
+COPY tools /tools/
+RUN /bin/python3 /tools/setup.py
 
 # handling dir cellift-designs/cellift-chipyard, file Dockerfile-base
 # Base our tests on the tools image
 WORKDIR /cellift-designs/cellift-chipyard/
-RUN bash ./scripts/init-submodules-no-riscv-tools.sh --skip-validate
+RUN chown -R root /cellift-designs/cellift-chipyard ; bash ./scripts/init-submodules-no-riscv-tools.sh --skip-validate
 
 # handling dir cellift-designs/cellift-chipyard, file Dockerfile-rocket
 # Base our tests on the tools image
@@ -36,4 +26,17 @@ RUN bash -c ". ../../../../cellift-meta/env.sh ; make CONFIG=MySmallBoomConfig"
 WORKDIR /cellift-designs/cellift-chipyard/cellift-boom
 RUN bash tests.sh
 
+
+
+WORKDIR /cellift-designs/cellift-ibex/cellift
+RUN bash tests.sh
+
+# handling dir cellift-designs/cellift-cva6, file Dockerfile
+WORKDIR /cellift-designs/cellift-cva6/cellift
+RUN bash tests.sh
+
+# handling dir cellift-designs/cellift-pulpissimo-hdac-2018, file Dockerfile
+# Base our tests on the tools image
+WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
+RUN bash tests.sh
 
