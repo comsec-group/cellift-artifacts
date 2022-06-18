@@ -1,0 +1,150 @@
+% LaTeX template for Artifact Evaluation V20220119
+%
+% Original Authors 
+% * Grigori Fursin (cTuning foundation, France) 2014-2020
+% * Bruce Childers (University of Pittsburgh, USA) 2014
+% 
+% Modified by
+% * Clémentine Maurice (CNRS, France) 2021-2022
+% * Cristiano Giuffrida (Vrije Universiteit Amsterdam, Netherlands) 2021-2022
+%
+% (C)opyright 2014-2022
+%
+% CC BY 4.0 license
+%
+
+\documentclass[letterpaper,twocolumn,10pt]{article}
+\usepackage{usenix-2020-09}
+
+\usepackage{hyperref}
+
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% To add the badges to the final version after notification, first download
+% the appropriate `usenixbadges` package version as detailed on the Final
+% Artifact Appendix instructions page on the USENIX Security website.
+%
+% Then, uncomment the following line using the appropriate options:
+% \usepackage[available,functional,reproduced]{usenixbadges}
+%
+% In the options, list the badges that have been awarded to your paper.
+% The possible badges are:
+%
+%  * `available`  --- affix the "Artifacts Available" badge
+%  * `functional` --- affix the "Artifacts Functional" badge
+%  * `reproduced` --- affix the "Results Reproduced" badge
+%
+% Example:
+%  \usepackage[available,functional]{usenixbadges}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\special{papersize=8.5in,11in}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% When adding this appendix to your paper, 
+% please remove the part above
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+\section{Artifact Appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% See the Artifact Appendix guidelines page on the USENIX
+% Security website to compile the appendix. Please preserve
+% the provided Artifact Appendix template as much as
+% possible (e.g., keep the original (sub)section names
+% and order). 
+%
+% See also examples of past reproduced papers with a similar Artifact Appendix at: https://cknowledge.io/?q=%22reproduced-papers%22+AND+lib+AND+%28secur*+OR+harden*+OR+mitigat*+OR+defen*+OR+attack*+OR+bug*+OR+vulnerab*%29
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Abstract}
+
+{\em Obligatory. Briefly describe your artifact including minimal hardware and software requirements, how it supports your paper, how it can be validated, and what is the expected result. At submission time, it will also be used to select appropriate reviewers. It will also help readers understand what was evaluated and how.}
+
+\subsection{Artifact check-list (meta-information)}
+
+{\em Obligatory. Fill in whatever is applicable with some keywords and remove unrelated items.}
+
+{\small
+\begin{itemize}
+  \item {\bf Algorithm: }
+  \item {\bf Program: }
+  \item {\bf Compilation: }
+  \item {\bf Transformations: }
+  \item {\bf Binary: }
+  \item {\bf Model: }
+  \item {\bf Data set: }
+  \item {\bf Run-time environment: }
+  \item {\bf Hardware: }
+  \item {\bf Run-time state: }
+  \item {\bf Execution: }
+  \item {\bf Security, privacy, and ethical concerns: }
+  \item {\bf Metrics: }
+  \item {\bf Output: }
+  \item {\bf Experiments: }
+  \item {\bf How much disk space required (approximately)?: }
+  \item {\bf How much time is needed to prepare workflow (approximately)?: }
+  \item {\bf How much time is needed to complete experiments (approximately)?: }
+  \item {\bf Publicly available (explicitly provide evolving version reference)?: }
+  \item {\bf Code licenses (if publicly available)?: }
+  \item {\bf Data licenses (if publicly available)?: }
+  \item {\bf Workflow frameworks used?: }
+  \item {\bf Archived (explicitly provide DOI or stable reference)?: }
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Description}
+
+{\em Obligatory. For inapplicable subsections (e.g., the ``How to access'' subsection when not applying for the ``Artifacts Available'' badge), please specify 'N/A'.}
+
+\subsubsection{How to access}
+
+\subsubsection{Hardware dependencies}
+
+\subsubsection{Software dependencies}
+
+\subsubsection{Data sets}
+
+\subsubsection{Models}
+
+\subsubsection{Security, privacy, and ethical concerns}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Installation}
+
+{\em Obligatory. Describe the setup procedures for your artifact targeting novice users (even if you use a VM image or access to a remote machine).}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experiment workflow}
+
+{\em Describe the high-level view of your experimental workflow and how it is implemented, invoked and customized (if needed), i.e. some OS scripts, IPython/Jupyter notebook, portable CK workflow, etc. This subsection is optional as long as the experiment workflow can be easily embedded in the next subsection.
+% See past reproduced papers with a similar Artifact Appendix.
+% https://cknowledge.io/?q=%22reproduced-papers%22+AND+lib+AND+%28secur*+OR+harden*+OR+mitigat*+OR+defen*+OR+attack*+OR+bug*+OR+vulnerab*%29
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Evaluation and expected results}
+
+{\em Obligatory. Start by listing the main claims in your paper. Next, list your key results and detail how they each support the main claims. Finally, detail all the steps to reproduce each of the key results in your paper by running the artifacts. Describe the expected results and the maximum variation of empirical results (particularly important for performance numbers).}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Experiment customization}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Notes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Version}
+%%%%%%%%%%%%%%%%%%%%
+% Obligatory.
+% Do not change/remove.
+%%%%%%%%%%%%%%%%%%%%
+Based on the LaTeX template for Artifact Evaluation V20220119.
+
+\end{document}
