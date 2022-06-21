@@ -1,5 +1,5 @@
 diff --git a/python-experiments/listtaintedelems/luigi/plotcountelems.py b/python-experiments/listtaintedelems/luigi/plotcountelems.py
-index f6750a1..7a8cb98 100644
+index f6750a1..146f378 100644
 --- a/python-experiments/listtaintedelems/luigi/plotcountelems.py
 +++ b/python-experiments/listtaintedelems/luigi/plotcountelems.py
 @@ -32,13 +32,16 @@ class PlotCountElems(luigi.Task):
@@ -30,8 +30,11 @@ index f6750a1..7a8cb98 100644
          # For Spectre
          # minx, maxx = 400, 750
  
-@@ -75,6 +79,6 @@ class PlotCountElems(luigi.Task):
+@@ -73,8 +77,9 @@ class PlotCountElems(luigi.Task):
+         plt.plot(X, Y)
+         plt.xlabel("Clock cycle")
          plt.ylabel("Num. tainted bits")
++        plt.ylim(0,400)
  
          plt.tight_layout()
 -        plt.savefig("meltdown_{}.png".format(self.design_name), dpi=300)
@@ -42,7 +45,7 @@ index f6750a1..7a8cb98 100644
 +#        plt.savefig("meltdown_{}.pdf".format(self.design_name), dpi=300)
 +    
 diff --git a/python-experiments/plot_tainted_elements.py b/python-experiments/plot_tainted_elements.py
-index c09c883..950122e 100644
+index c09c883..551bdfd 100644
 --- a/python-experiments/plot_tainted_elements.py
 +++ b/python-experiments/plot_tainted_elements.py
 @@ -21,6 +21,12 @@ from common.taintfile import parse_taintfile
@@ -51,9 +54,9 @@ index c09c883..950122e 100644
  if __name__ == '__main__':
 +  jobs=[]
 +  for scenario_name in ["scenario_1_load_tainted_data_forbidden",
++          "scenario_1_load_tainted_data_ok",
 +          "boom_attacks_v1",
 +          "boom_attacks_v1_nofdiv",
-+          "scenario_load_tainted_data_user_mode",
 +          ]:
      num_workers = (multiprocessing.cpu_count()+process_division_factor)//process_division_factor
  
