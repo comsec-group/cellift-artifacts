@@ -1,0 +1,41 @@
+diff --git a/python-experiments/plot_tainted_elements.py b/python-experiments/plot_tainted_elements.py
+index c09c883..74e4196 100644
+--- a/python-experiments/plot_tainted_elements.py
++++ b/python-experiments/plot_tainted_elements.py
+@@ -21,6 +21,8 @@ from common.taintfile import parse_taintfile
+ process_division_factor = 4
+ 
+ if __name__ == '__main__':
++  jobs=[]
++  for scenario_name in ["scenario_1_load_tainted_data_forbidden", "boom_attacks_v1", "boom_attacks_v1_nofdiv"]:
+     num_workers = (multiprocessing.cpu_count()+process_division_factor)//process_division_factor
+ 
+     if "CELLIFT_ENV_SOURCED" not in os.environ:
+@@ -28,12 +30,15 @@ if __name__ == '__main__':
+ 
+     SIMULATOR = Simulator.VERILATOR
+ 
+-    simtime = 2000 # 2000 is useful for MDS analysis, and 5000 for Meltdown analysis. This number must be larger than the upper bound of the window given in `listtaintedelems/luigi/plotcountelems.py`.
++    if 'load_tainted' in scenario_name:
++        simtime = 5000 # 2000 is useful for MDS analysis, and 5000 for Meltdown analysis. This number must be larger than the upper bound of the window given in `listtaintedelems/luigi/plotcountelems.py`.
++    else:
++        simtime = 2000 # 2000 is useful for MDS analysis, and 5000 for Meltdown analysis. This number must be larger than the upper bound of the window given in `listtaintedelems/luigi/plotcountelems.py`.
+ 
+     design_name = "boom"
+ 
+     # For Meltdown
+-    scenario_name = "scenario_1_load_tainted_data_forbidden" # Make sure to have compiled the executable first (in the `sw` subfolder of the design).
++#    scenario_name = "scenario_1_load_tainted_data_forbidden" # Make sure to have compiled the executable first (in the `sw` subfolder of the design).
+ 
+     # For Spectre
+     # scenario_name = "boom_attacks_v1"
+@@ -51,7 +56,8 @@ if __name__ == '__main__':
+         "instrumentation" : InstrumentationMethod.CELLIFT,
+     }
+ 
+-    luigi.build([PlotCountElems(**run_params)], workers=num_workers, local_scheduler=True, log_level='INFO')
++    jobs.append(PlotCountElems(**run_params))
++  luigi.build(jobs, workers=num_workers, local_scheduler=True, log_level='INFO')
+ 
+ else:
+     raise Exception("This module must be at the toplevel.")
