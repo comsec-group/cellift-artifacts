@@ -1,0 +1,12 @@
+if { [info exists ::env(CELL_NAME)] }   { set CELL_NAME $::env(CELL_NAME) } else { puts "Please set CELL_NAME environment variable"; exit 1 }
+
+yosys read_verilog -defer -sv build/$CELL_NAME/sv2v_out.v
+yosys hierarchy -top mycell -check
+
+yosys techmap
+yosys breakdown_glift
+yosys opt -purge
+yosys cellift -imprecise-shl-sshl -num-distinct-labels 1
+yosys opt -purge
+yosys stat
+yosys write_verilog -sv -noattr build/$CELL_NAME/yosys_out.sv

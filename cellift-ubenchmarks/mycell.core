@@ -1,0 +1,44 @@
+CAPI=2:
+# Copyright lowRISC contributors.
+# Licensed under the Apache License, Version 2.0, see LICENSE for details.
+# SPDX-License-Identifier: Apache-2.0
+name: "::mycell:0.1"
+description: "mycell design testing"
+
+filesets:
+  files_cells:
+    files:
+      - $CELL_BUILD_PATH/yosys_out.sv
+    file_type: verilogSource
+
+  files_dv:
+    files:
+      - $CELL_PATH/dv/mycell.h  : {is_include_file: true}
+      - common/dv/testbench.h   : {is_include_file: true}
+      - common/dv/toplevel.cc
+    file_type: cppSource
+
+targets:
+  default:
+    default_tool: verilator
+    filesets:
+      - files_cells
+      - files_dv
+    toplevel: mycell
+    tools:
+      verilator:
+        mode: cc
+        verilator_options:
+#          - '--trace'
+#          - '--trace-fst' # this requires -DVM_TRACE_FMT_FST in CFLAGS below!
+#          - '--trace-structs'
+#          - '--trace-params'
+#          - '--trace-max-array 1024'
+          - '-CFLAGS "-std=c++11 -Wall -DTOPLEVEL_NAME=mycell -g -O0 -DDATA_WIDTH=$(CELL_DATA_WIDTH) -DNUM_INSTANCES=$(CELL_NUM_INSTANCES)"'
+          - '-LDFLAGS "-pthread -lutil"'
+          - "-Wall"
+          - "-Wno-PINCONNECTEMPTY"
+          - "-Wno-fatal"
+          - "-Wno-DECLFILENAME"
+          - "-Wno-UNUSED"
+
