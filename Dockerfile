@@ -18,13 +18,13 @@ WORKDIR /cellift-designs/cellift-chipyard/
 RUN chown -R root /cellift-designs/cellift-chipyard ; bash ./scripts/init-submodules-no-riscv-tools.sh --skip-validate
 
 WORKDIR /cellift-designs/cellift-chipyard/sims/verilator
-RUN bash -c ". ../../../../cellift-meta/env.sh ; make -j$CELLIFT_JOBS CONFIG=MySmallVMRocketConfig"
+RUN bash -c ". ../../../../cellift-meta/env.sh ; make CONFIG=MySmallVMRocketConfig"
 WORKDIR /cellift-designs/cellift-chipyard/cellift-rocket
 RUN bash tests.sh vanilla_trace
 RUN bash tests.sh vanilla_notrace
 
 WORKDIR /cellift-designs/cellift-chipyard/sims/verilator
-RUN bash -c ". ../../../../cellift-meta/env.sh ; make -j$CELLIFT_JOBS CONFIG=MySmallBoomConfig"
+RUN bash -c ". ../../../../cellift-meta/env.sh ; make CONFIG=MySmallBoomConfig"
 WORKDIR /cellift-designs/cellift-chipyard/cellift-boom
 RUN bash tests.sh vanilla_trace
 RUN bash tests.sh vanilla_notrace
