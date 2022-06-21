@@ -1,0 +1,23 @@
+Hi Ben, I looked a bit at how we could do this artifact thing. For all graphs until the scenarios, it is quite straightforward (I hope):
+
+    - all designs should be instrumented first (using run_cellift_notrace for example, for cellift, glift, vanilla and passthrough, and also for notrace and for trace).
+
+    - you can use the Python scripts in the root of python-experiments until the Scenarios section
+      (excluding also the FPGA results).
+
+    - For the Meltdown and Spectre experiments, you can use the python-experiments/plot_tainted_elements.py script,
+      with the proper scenario_name and design_name Python variables.
+
+    - For the microarchitectural exploration (scenario 1 in the paper), I think I deleted/modified the script.
+      To reproduce the scenario, you should just modify plot_tainted_elements to use the
+      listtaintedelems.listelems.ListElems Luigi task instead of  PlotCountElems.
+
+    - For the FPGA experiments, I created a new repo here. There are instructions in readmes.
+      In summary, you will need to copy some files (or change paths in the .tcl files) and then use Vivado in command
+      line (tcl) mode and just run the .tcl scripts of your choice.
+
+    - For the PULPissimo scenarios, simply do bash run_scenarios.sh in the cellift directory of the design.
+
+    - For the ubenchmarks, it's in cellift-ubenchmarks , then iirc you need to run make verilator_build ,
+      then make verilator_run , then make collect , and finally you can run the plot.py script (without cmd line arguments).
+
