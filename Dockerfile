@@ -80,7 +80,7 @@ RUN mkdir -p /cellift-meta/design-processing/../../cellift-designs/cellift-chipy
 # Execute Meltdown and Spectre experiments (data for Figure 11).
 WORKDIR /cellift-meta/python-experiments
 # Build spectre POCs, fdiv and no fdiv, and meltdown POC
-RUN bash -c ". /cellift-meta/env.sh && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1_nofdiv/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_forbidden/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_load_tainted_data_user_mode && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_load_tainted_data_user_mode/scenario_1_load_tainted_data_ok"
+RUN bash -c ". /cellift-meta/env.sh && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1_nofdiv/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_forbidden/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_load_tainted_data_user_mode && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_ok"
 # Simulate them
 RUN bash -c ". /cellift-meta/env.sh && python plot_tainted_elements.py"
 
