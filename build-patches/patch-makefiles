@@ -38,13 +38,6 @@ index 6ee3628..811c83f 100644
  
  
  RV_ARCH_FLAGS ?= -march=rv64g -mabi=lp64
-@@ -10,4 +10,4 @@ CC = $(RISCV_PREFIX)-gcc
- 
- main.o: main.S link.ld
-        $(CC) $(RISCV_GCC_OPTS) $< -o $@ $(LDFLAGS)
--       $(RISCV_OBJDUMP) $@ > $@.dump
-\ No newline at end of file
-+       $(RISCV_OBJDUMP) $@ > $@.dump
 diff --git a/cellift-boom/sw/scenario_load_tainted_data_user_mode/Makefile b/cellift-boom/sw/scenario_load_tainted_data_user_mode/Makefile
 index 64bf197..59169a7 100644
 --- a/cellift-boom/sw/scenario_load_tainted_data_user_mode/Makefile

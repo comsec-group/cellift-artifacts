@@ -1,25 +1,85 @@
+diff --git a/python-experiments/listtaintedelems/luigi/plotcountelems.py b/python-experiments/listtaintedelems/luigi/plotcountelems.py
+index f6750a1..7a8cb98 100644
+--- a/python-experiments/listtaintedelems/luigi/plotcountelems.py
++++ b/python-experiments/listtaintedelems/luigi/plotcountelems.py
+@@ -32,13 +32,16 @@ class PlotCountElems(luigi.Task):
+     simtime          = luigi.IntParameter()
+     design_name      = luigi.Parameter()
+     instrumentation  = luigi.ListParameter()
++    minx             = luigi.IntParameter()
++    maxx             = luigi.IntParameter()
++    expname          = luigi.Parameter()
+ 
+     def __init__(self, *args, **kwargs):
+         super(PlotCountElems, self).__init__(*args, **kwargs)
+         self.experiment_name = "plotcountelems-{}-{}-{}-{}-{}-{}".format(self.simulator, taintstr(self.taintbits), binarycrc(self.binary), self.simtime, self.design_name, self.instrumentation)
+ 
+     def output(self):
+-        return luigi.LocalTarget('{}/experiments/{}.png'.format(os.environ["CELLIFT_DATADIR"], self.experiment_name), format=luigi.format.Nop)
++        return luigi.LocalTarget('{}/experiments/{}-{}.png'.format(os.environ["CELLIFT_DATADIR"], self.experiment_name, self.expname), format=luigi.format.Nop)
+ 
+     def requires(self):
+         return [CountElems(
+@@ -60,7 +63,8 @@ class PlotCountElems(luigi.Task):
+         json_data = [json.load(x.open()) for x in self.input()][0]
+ 
+         # For Meltdown
+-        minx, maxx = 1000, 1700
++        # minx, maxx = 1000, 1700
++        minx, maxx = self.minx, self.maxx
+         # For Spectre
+         # minx, maxx = 400, 750
+ 
+@@ -75,6 +79,6 @@ class PlotCountElems(luigi.Task):
+         plt.ylabel("Num. tainted bits")
+ 
+         plt.tight_layout()
+-        plt.savefig("meltdown_{}.png".format(self.design_name), dpi=300)
+-        plt.savefig("meltdown_{}.pdf".format(self.design_name), dpi=300)
+-    
+\ No newline at end of file
++        plt.savefig(self.output().path, dpi=300)
++#        plt.savefig("meltdown_{}.pdf".format(self.design_name), dpi=300)
++    
 diff --git a/python-experiments/plot_tainted_elements.py b/python-experiments/plot_tainted_elements.py
-index c09c883..74e4196 100644
+index c09c883..950122e 100644
 --- a/python-experiments/plot_tainted_elements.py
 +++ b/python-experiments/plot_tainted_elements.py
-@@ -21,6 +21,8 @@ from common.taintfile import parse_taintfile
+@@ -21,6 +21,12 @@ from common.taintfile import parse_taintfile
  process_division_factor = 4
  
  if __name__ == '__main__':
 +  jobs=[]
-+  for scenario_name in ["scenario_1_load_tainted_data_forbidden", "boom_attacks_v1", "boom_attacks_v1_nofdiv"]:
++  for scenario_name in ["scenario_1_load_tainted_data_forbidden",
++          "boom_attacks_v1",
++          "boom_attacks_v1_nofdiv",
++          "scenario_load_tainted_data_user_mode",
++          ]:
      num_workers = (multiprocessing.cpu_count()+process_division_factor)//process_division_factor
  
      if "CELLIFT_ENV_SOURCED" not in os.environ:
-@@ -28,12 +30,15 @@ if __name__ == '__main__':
+@@ -28,12 +34,28 @@ if __name__ == '__main__':
  
      SIMULATOR = Simulator.VERILATOR
  
 -    simtime = 2000 # 2000 is useful for MDS analysis, and 5000 for Meltdown analysis. This number must be larger than the upper bound of the window given in `listtaintedelems/luigi/plotcountelems.py`.
++    # 2000 is useful for MDS analysis, and 5000 for Meltdown analysis. This number must be larger than the upper bound of the window given in `listtaintedelems/luigi/plotcountelems.py`.
 +    if 'load_tainted' in scenario_name:
-+        simtime = 5000 # 2000 is useful for MDS analysis, and 5000 for Meltdown analysis. This number must be larger than the upper bound of the window given in `listtaintedelems/luigi/plotcountelems.py`.
++        simtime = 5000 
++        minx, maxx = 1000, 1700
++        if 'forbidden' in scenario_name:
++            expname = "meltdown-forbidden"
++        else:
++            expname = "meltdown-not-forbidden"
++
 +    else:
-+        simtime = 2000 # 2000 is useful for MDS analysis, and 5000 for Meltdown analysis. This number must be larger than the upper bound of the window given in `listtaintedelems/luigi/plotcountelems.py`.
++        simtime = 2000
++        minx, maxx = 400, 750
++        expname = "spectre"
++        if 'nofdiv' in scenario_name:
++            expname = 'spectre-nofdiv'
++        else:
++            expname = 'spectre-fdiv'
  
      design_name = "boom"
  
@@ -29,13 +89,21 @@ index c09c883..74e4196 100644
  
      # For Spectre
      # scenario_name = "boom_attacks_v1"
-@@ -51,7 +56,8 @@ if __name__ == '__main__':
+@@ -49,9 +71,16 @@ if __name__ == '__main__':
+         "design_name"     : design_name,
+         "simtime"         : simtime,
          "instrumentation" : InstrumentationMethod.CELLIFT,
++        "minx":             minx,
++        "maxx":             maxx,
++        "expname":          expname
      }
  
 -    luigi.build([PlotCountElems(**run_params)], workers=num_workers, local_scheduler=True, log_level='INFO')
 +    jobs.append(PlotCountElems(**run_params))
 +  luigi.build(jobs, workers=num_workers, local_scheduler=True, log_level='INFO')
++
++  for j in jobs:
++    print('out: %s' % j.output().path)
  
  else:
      raise Exception("This module must be at the toplevel.")
