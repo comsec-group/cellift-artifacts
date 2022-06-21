@@ -67,3 +67,5 @@ RUN bash tests.sh glift_notrace
 
 WORKDIR /cellift-designs/cellift-chipyard/cellift-rocket
 RUN bash tests.sh glift_notrace
+
+RUN find / -name '*.o' | xargs -n50 rm
