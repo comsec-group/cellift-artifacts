@@ -75,7 +75,7 @@ WORKDIR /cellift-designs/cellift-chipyard
 # More last minute changes
 RUN /bin/patch -p1 </build-patches/patch-makefiles # apply last-minute patches to cellift-meta repo after image was frozen
 # More last minute changes
-COPY build-patches/plot_tainted_elements.py /cellift-meta/python-experiments/plot_tainted_elements.py
+#COPY build-patches/plot_tainted_elements.py /cellift-meta/python-experiments/plot_tainted_elements.py
 
 # Execute Meltdown and Spectre experiments (data for Figure 11).
 WORKDIR /cellift-meta/python-experiments
