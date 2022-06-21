@@ -68,4 +68,5 @@ RUN bash tests.sh glift_notrace
 WORKDIR /cellift-designs/cellift-chipyard/cellift-rocket
 RUN bash tests.sh glift_notrace
 
-RUN find / -name '*.o' | xargs -n50 rm
+RUN bash -c "du -hs /.  ; find / -name '*.o' | xargs -n50 rm  ; apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ; du -hs /. ; true" || true
+
