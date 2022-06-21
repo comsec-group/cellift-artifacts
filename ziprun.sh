@@ -7,5 +7,6 @@ set -e
 	done
 )
 #(cd ../cellift-meta && git diff) >tools/cellift-meta-patch
+# docker build -t ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation-small -f Dockerfile-small . 2>&1 | tee docker-build-log1
 docker build -t ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation-2 . 2>&1 | tee docker-build-log
-docker build -t ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation-2-squashed -f Dockerfile-squash . 2>&1 | tee docker-build-log-suqash
+#docker build -t ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation-2-squashed -f Dockerfile-squash . 2>&1 | tee docker-build-log-suqash
