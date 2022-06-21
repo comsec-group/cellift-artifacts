@@ -1,3 +1,69 @@
+diff --git a/python-experiments/collectrss/luigi/plot.py b/python-experiments/collectrss/luigi/plot.py
+index 7e68e79..2a3bc9a 100644
+--- a/python-experiments/collectrss/luigi/plot.py
++++ b/python-experiments/collectrss/luigi/plot.py
+@@ -41,7 +41,7 @@ class RSSPlot(luigi.Task):
+         self.experiment_name = "perfbenchmark-plot-{}".format(self.simulator)
+ 
+     def output(self):
+-        return luigi.LocalTarget('{}/results/{}.png'.format(os.environ["CELLIFT_DATADIR"], self.experiment_name), format=luigi.format.Nop)
++        return luigi.LocalTarget('{}/rss-{}.png'.format(os.environ["CELLIFT_DATADIR"], self.experiment_name), format=luigi.format.Nop)
+ 
+     def requires(self):
+         run_params = {
+@@ -190,11 +190,16 @@ class RSSPlot(luigi.Task):
+             rects_cellift_verilator_x     = [xticks_verilator[0]+0.0*width] + [xticks_verilator[1]+0.0*width] + [xticks_verilator[2]+0.0*width] + [xticks_verilator[3]+0.5*width] + [xticks_verilator[4]+0.5*width]
+             rects_glift_verilator_x       = [xticks_verilator[0]+1.0*width] + [xticks_verilator[1]+1.0*width] + [xticks_verilator[2]+1.0*width]
+ 
++        def get_glift(d):
++            if InstrumentationMethod.GLIFT in d:
++                    return d[InstrumentationMethod.GLIFT]
++            return 0
++
+         # Data heights
+         if PLOT_PASSTHROUGH:
+             rects_passthrough_yosys_y = [plot_data['yosys'][d][InstrumentationMethod.PASSTHROUGH] for d in design_names]
+         rects_cellift_yosys_y     = [plot_data['yosys'][d][InstrumentationMethod.CELLIFT]     for d in design_names]
+-        rects_glift_yosys_y       = [plot_data['yosys'][d][InstrumentationMethod.GLIFT]       for d in design_names]
++        rects_glift_yosys_y       = [get_glift(plot_data['yosys'][d])       for d in design_names]
+ 
+         rects_vanilla_verilator_y     = [plot_data['verilator'][d][InstrumentationMethod.VANILLA] for d in design_names]
+         if PLOT_PASSTHROUGH:
+@@ -246,5 +251,4 @@ class RSSPlot(luigi.Task):
+         plt.subplots_adjust(wspace=0, hspace=0)
+         fig.tight_layout()
+ 
+-        plt.savefig("rss.png", dpi=300)
+-        plt.savefig("rss.pdf", dpi=300)
++        plt.savefig(self.output().path, dpi=300)
+diff --git a/python-experiments/common/designcfgs.py b/python-experiments/common/designcfgs.py
+index d5d5944..04cd731 100644
+--- a/python-experiments/common/designcfgs.py
++++ b/python-experiments/common/designcfgs.py
+@@ -65,10 +65,12 @@ def get_instrumentation_methods_per_design_yosys(design_name):
+     assert design_name in ["ibex", "cva6", "pulpissimo", "rocket", "boom"]
+     instrumentation_methods = [
+         InstrumentationMethod.VANILLA,
+-        InstrumentationMethod.PASSTHROUGH,
++#        InstrumentationMethod.PASSTHROUGH,
+         InstrumentationMethod.CELLIFT,
+-        InstrumentationMethod.GLIFT
+     ]
++    # Only some designs  GLIFT target.
++    if design_name in ["ibex", "pulpissimo", "rocket"]:
++        instrumentation_methods.append(InstrumentationMethod.GLIFT)
+     return instrumentation_methods
+ 
+ # Returns the list of supported instrumentation methods supported by the given design for synthesis.
+@@ -76,7 +78,7 @@ def get_instrumentation_methods_per_design_verilator(design_name):
+     assert design_name in ["ibex", "cva6", "pulpissimo", "rocket", "boom"]
+     instrumentation_methods = [
+         InstrumentationMethod.VANILLA,
+-        InstrumentationMethod.PASSTHROUGH,
++#        InstrumentationMethod.PASSTHROUGH,
+         InstrumentationMethod.CELLIFT,
+     ]
+     # Only some designs  GLIFT target.
 diff --git a/python-experiments/listtaintedelems/luigi/plotcountelems.py b/python-experiments/listtaintedelems/luigi/plotcountelems.py
 index f6750a1..146f378 100644
 --- a/python-experiments/listtaintedelems/luigi/plotcountelems.py
@@ -44,6 +110,159 @@ index f6750a1..146f378 100644
 +        plt.savefig(self.output().path, dpi=300)
 +#        plt.savefig("meltdown_{}.pdf".format(self.design_name), dpi=300)
 +    
+diff --git a/python-experiments/perfbenchmark/common.py b/python-experiments/perfbenchmark/common.py
+index 2ed7d58..d56110c 100644
+--- a/python-experiments/perfbenchmark/common.py
++++ b/python-experiments/perfbenchmark/common.py
+@@ -12,10 +12,11 @@ def get_design_names():
+     ]
+ 
+ def get_design_numcycles(design_name):
+-    {
++    d2n = {
+         "ibex": 40000000,
+         "rocket": 40000,
+         "pulpissimo": 200000,
+         "cva6": 40000,
+         "boom": 40000
+-    }[design_name]
++    }
++    return d2n[design_name]
+diff --git a/python-experiments/perfbenchmark/luigi/plot.py b/python-experiments/perfbenchmark/luigi/plot.py
+index 79f74a6..c5a73c6 100644
+--- a/python-experiments/perfbenchmark/luigi/plot.py
++++ b/python-experiments/perfbenchmark/luigi/plot.py
+@@ -42,7 +42,7 @@ class PerformancePlot(luigi.Task):
+         self.experiment_name = "perfbenchmark-plot-{}-{}".format(self.simulator, self.simtime)
+ 
+     def output(self):
+-        return luigi.LocalTarget('{}/results/{}.png'.format(os.environ["CELLIFT_DATADIR"], self.experiment_name), format=luigi.format.Nop)
++        return luigi.LocalTarget('{}/perf-slowdowns-{}.png'.format(os.environ["CELLIFT_DATADIR"], self.experiment_name), format=luigi.format.Nop)
+ 
+     def requires(self):
+         run_params = {
+@@ -201,5 +201,4 @@ class PerformancePlot(luigi.Task):
+ 
+         print("rects_glift_y", rects_glift_y)
+ 
+-        plt.savefig("slowdowns.png", dpi=300)
+-        plt.savefig("slowdowns.pdf", dpi=300)
++        plt.savefig(self.output().path, dpi=300)
+diff --git a/python-experiments/perfinstrum/luigi/plot.py b/python-experiments/perfinstrum/luigi/plot.py
+index c78732a..f1595a6 100644
+--- a/python-experiments/perfinstrum/luigi/plot.py
++++ b/python-experiments/perfinstrum/luigi/plot.py
+@@ -40,7 +40,7 @@ class InstrumentationPerformancePlot(luigi.Task):
+         self.experiment_name = "perfinstr-plot-{}".format(self.simulator)
+ 
+     def output(self):
+-        return luigi.LocalTarget('{}/results/{}.png'.format(os.environ["CELLIFT_DATADIR"], self.experiment_name), format=luigi.format.Nop)
++        return luigi.LocalTarget('{}/{}.png'.format(os.environ["CELLIFT_DATADIR"], self.experiment_name), format=luigi.format.Nop)
+ 
+     def requires(self):
+         run_params = {
+@@ -140,6 +140,12 @@ class InstrumentationPerformancePlot(luigi.Task):
+         all_axes[0].set_ylim([192, 196])
+         all_axes[-1].set_ylim([0, 90])
+ 
++        def get_glift(d):
++            if InstrumentationMethod.GLIFT in d:
++                return d[InstrumentationMethod.GLIFT]
++            else:
++                return 200
++
+         # Remove axes between the two subplots.
+         all_axes[0].spines['bottom'].set_visible(False)
+         if len(all_axes) > 2:
+@@ -178,7 +184,7 @@ class InstrumentationPerformancePlot(luigi.Task):
+         if PLOT_PASSTHROUGH:
+             rects_passthrough_yosys_y = [plot_data['yosys'][d][InstrumentationMethod.PASSTHROUGH] for d in design_names]
+         rects_cellift_yosys_y     = [plot_data['yosys'][d][InstrumentationMethod.CELLIFT]     for d in design_names]
+-        rects_glift_yosys_y       = [plot_data['yosys'][d][InstrumentationMethod.GLIFT]       for d in design_names]
++        rects_glift_yosys_y       = [get_glift(plot_data['yosys'][d])       for d in design_names]
+         # Order is wrhong in this line. rects_glift_yosys_y_restrained_to_synthesizable = [plot_data['yosys']['ibex'][InstrumentationMethod.GLIFT], plot_data['yosys']['pulpissimo'][InstrumentationMethod.GLIFT], plot_data['yosys']['rocket'][InstrumentationMethod.GLIFT]]
+ 
+         # Data heights (verilator)
+@@ -188,7 +194,9 @@ class InstrumentationPerformancePlot(luigi.Task):
+         rects_cellift_verilator_y     = [plot_data['verilator'][d][InstrumentationMethod.CELLIFT]     for d in design_names]
+         rects_glift_verilator_y       = [plot_data['verilator']['ibex'][InstrumentationMethod.GLIFT], plot_data['verilator']['rocket'][InstrumentationMethod.GLIFT], plot_data['verilator']['pulpissimo'][InstrumentationMethod.GLIFT], 100, 1000]
+ 
++        print('yosys y')
+         pp.pprint(rects_glift_yosys_y)
++        print('verilator y')
+         pp.pprint(rects_glift_verilator_y)
+ 
+         # Rectangles (yosys).
+@@ -209,8 +217,10 @@ class InstrumentationPerformancePlot(luigi.Task):
+             # Do the coloring manually with glift.
+             for design_id, design_name in enumerate(design_names):
+                 if design_name in ["cva6", "boom"]:
++                    print('red glift because design name is %s' % design_name)
+                     curr_color = "red"
+                 else:
++                    print('regular glift because design name is %s' % design_name)
+                     curr_color=rectangle_colors[InstrumentationMethod.GLIFT]
+                 each_ax.bar(rects_glift_verilator_x[design_id], rects_glift_verilator_y[design_id], width, alpha=1, zorder=3, color=curr_color, ec='black', hatch="///", bottom=rects_glift_yosys_y[design_id])
+ 
+@@ -236,5 +246,4 @@ class InstrumentationPerformancePlot(luigi.Task):
+     
+         fig.tight_layout()
+ 
+-        plt.savefig("perfinstrum.png", dpi=300)
+-        plt.savefig("perfinstrum.pdf", dpi=300)
++        plt.savefig(self.output().path, dpi=300)
+diff --git a/python-experiments/plot_benchmark_performance.py b/python-experiments/plot_benchmark_performance.py
+index a3136c6..bb1c4a0 100644
+--- a/python-experiments/plot_benchmark_performance.py
++++ b/python-experiments/plot_benchmark_performance.py
+@@ -22,9 +22,12 @@ if __name__ == '__main__':
+         raise Exception("The CellIFT environment must be sourced prior to running the Python recipes.")
+ 
+     SIMULATOR = Simulator.VERILATOR
+-    MAX_SIM_CYCLES = 1000000000 # This value allows for shorter experiments. Set to a lower value to cap the experiment duration.
++    MAX_SIM_CYCLES = 10 # This value allows for shorter experiments. Set to a lower value to cap the experiment duration.
+ 
+-    luigi.build([PerformancePlot(simulator=SIMULATOR, simtime=MAX_SIM_CYCLES)], workers=num_workers, local_scheduler=True, log_level='INFO')
++    jobs = [PerformancePlot(simulator=SIMULATOR, simtime=MAX_SIM_CYCLES)]
++    luigi.build(jobs, workers=num_workers, local_scheduler=True, log_level='INFO')
++    for j in jobs:
++        print('%s' % j.output().path)
+ 
+ else:
+     raise Exception("This module must be at the toplevel.")
+diff --git a/python-experiments/plot_instrumentation_performance.py b/python-experiments/plot_instrumentation_performance.py
+index 1f9f6d2..31e3038 100644
+--- a/python-experiments/plot_instrumentation_performance.py
++++ b/python-experiments/plot_instrumentation_performance.py
+@@ -21,7 +21,11 @@ if __name__ == '__main__':
+ 
+     SIMULATOR = Simulator.VERILATOR
+ 
+-    luigi.build([InstrumentationPerformancePlot(simulator=SIMULATOR)], workers=num_workers, local_scheduler=True, log_level='INFO')
++    jobs=[InstrumentationPerformancePlot(simulator=SIMULATOR)]
++    luigi.build(jobs, workers=num_workers, local_scheduler=True, log_level='INFO')
++
++    for j in jobs:
++       print('out: %s' % j.output().path)
+ 
+ else:
+     raise Exception("This module must be at the toplevel.")
+diff --git a/python-experiments/plot_rss.py b/python-experiments/plot_rss.py
+index 9d0566d..dc085f1 100644
+--- a/python-experiments/plot_rss.py
++++ b/python-experiments/plot_rss.py
+@@ -16,7 +16,10 @@ if __name__ == '__main__':
+ 
+     SIMULATOR = Simulator.VERILATOR
+ 
+-    luigi.build([RSSPlot(simulator=SIMULATOR)], workers=1, local_scheduler=True, log_level='INFO')
++    jobs=[RSSPlot(simulator=SIMULATOR)]
++    luigi.build(jobs, workers=1, local_scheduler=True, log_level='INFO')
++    for j in jobs:
++        print('%s' % j.output().path)
+ 
+ else:
+     raise Exception("This module must be at the toplevel.")
 diff --git a/python-experiments/plot_tainted_elements.py b/python-experiments/plot_tainted_elements.py
 index c09c883..551bdfd 100644
 --- a/python-experiments/plot_tainted_elements.py

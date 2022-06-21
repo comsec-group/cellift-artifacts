@@ -79,14 +79,28 @@ RUN mkdir -p /cellift-meta/design-processing/../../cellift-designs/cellift-chipy
 
 # Execute Meltdown and Spectre experiments (data for Figure 11).
 WORKDIR /cellift-meta/python-experiments
-# Build spectre POCs, fdiv and no fdiv, and meltdown POC
+# Build spectre POC, fdiv and no fdiv, and meltdown POC, allowed and unallowed load
 RUN bash -c ". /cellift-meta/env.sh && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1_nofdiv/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_forbidden/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_load_tainted_data_user_mode && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_ok"
-# Simulate them
+# Simulate the POCs (4 executables)
 RUN bash -c ". /cellift-meta/env.sh && python plot_tainted_elements.py"
 
+# Reproduce ubench metrics (Figure 6)
 COPY cellift-ubenchmarks /cellift-meta/cellift-ubenchmarks
 WORKDIR /cellift-meta/cellift-ubenchmarks
 RUN bash -c ". ../env.sh && make verilator_build NUM_EXECUTIONS=10"
 RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=10"
 RUN bash -c ". ../env.sh && make collect -j$CELLIFT_JOBS NUM_EXECUTIONS=10"
+RUN bash -c ". ../env.sh && python3 plot_separate_perf_prec.py"
 
+# Reproduce scenarios experiments (described in Section 8.4)
+WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
+RUN sed -i 's/riscv64-unknown-elf/riscv32-unknown-elf/' `git grep -l RISCV_PREFIX sw/bug*`
+RUN bash -e run_scenarios.sh
+
+# Reproduce instrumentation & synthesis performance (Figure 7)
+WORKDIR /cellift-meta/python-experiments
+RUN bash -c ". ../env.sh && python3 plot_instrumentation_performance.py"
+RUN bash -c ". ../env.sh && python3 python3 plot_rss.py"
+
+# Reproduce benchmark performance (Figure 8)
+RUN bash -c ". ../env.sh && python3 python3 python3 plot_benchmark_performance.py"
