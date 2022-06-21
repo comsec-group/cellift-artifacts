@@ -70,3 +70,17 @@ RUN bash tests.sh glift_notrace
 
 RUN bash -c "du -hs /.  ; find / -name '*.o' | xargs -n50 rm  ; apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ; du -hs /. ; true" || true
 
+COPY build-patches /build-patches/
+WORKDIR /cellift-designs/cellift-chipyard
+# More last minute changes
+RUN /bin/patch -p1 </build-patches/patch-makefiles # apply last-minute patches to cellift-meta repo after image was frozen
+# More last minute changes
+COPY build-patches/plot_tainted_elements.py /cellift-meta/python-experiments/plot_tainted_elements.py
+
+# Execute Meltdown and Spectre experiments (data for Figure 11).
+WORKDIR /cellift-meta/python-experiments
+# Build spectre POCs, fdiv and no fdiv, and meltdown POC
+RUN bash -c ". /cellift-meta/env.sh && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1_nofdiv/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_forbidden/"
+# Simulate them
+RUN bash -c ". /cellift-meta/env.sh && python plot_tainted_elements.py"
+

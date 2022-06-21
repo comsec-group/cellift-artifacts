@@ -1,0 +1,31 @@
+diff --git a/cellift-boom/sw/boom_attacks_v1/Makefile b/cellift-boom/sw/boom_attacks_v1/Makefile
+index b5dfe3c..9b47ced 100644
+--- a/cellift-boom/sw/boom_attacks_v1/Makefile
++++ b/cellift-boom/sw/boom_attacks_v1/Makefile
+@@ -14,8 +14,8 @@ DMP:=dump
+ DEP:=dep
+ 
+ # Commands and flags
+-CC:=riscv64-unknown-elf-gcc
+-OBJDUMP:=riscv64-unknown-elf-objdump -S
++CC:=riscv32-unknown-elf-gcc 
++OBJDUMP:=riscv32-unknown-elf-objdump -S
+ ARCHFLAGS=-march=rv64gc -mabi=lp64
+ CFLAGS=-mcmodel=medany -l -std=gnu99 -O0 -g -fno-common -fno-builtin-printf -Wall -I$(INC) -Wno-unused-function -Wno-unused-variable $(ARCHFLAGS)
+ LDFLAGS:=-static -nostdlib -nostartfiles -lgcc $(ARCHFLAGS)
+diff --git a/cellift-boom/sw/boom_attacks_v1_nofdiv/Makefile b/cellift-boom/sw/boom_attacks_v1_nofdiv/Makefile
+index b5dfe3c..a4c6541 100644
+--- a/cellift-boom/sw/boom_attacks_v1_nofdiv/Makefile
++++ b/cellift-boom/sw/boom_attacks_v1_nofdiv/Makefile
+@@ -14,8 +14,8 @@ DMP:=dump
+ DEP:=dep
+ 
+ # Commands and flags
+-CC:=riscv64-unknown-elf-gcc
+-OBJDUMP:=riscv64-unknown-elf-objdump -S
++CC:=riscv32-unknown-elf-gcc
++OBJDUMP:=riscv32-unknown-elf-objdump -S
+ ARCHFLAGS=-march=rv64gc -mabi=lp64
+ CFLAGS=-mcmodel=medany -l -std=gnu99 -O0 -g -fno-common -fno-builtin-printf -Wall -I$(INC) -Wno-unused-function -Wno-unused-variable $(ARCHFLAGS)
+ LDFLAGS:=-static -nostdlib -nostartfiles -lgcc $(ARCHFLAGS)
+
