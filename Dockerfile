@@ -68,7 +68,7 @@ RUN bash tests.sh glift_notrace
 WORKDIR /cellift-designs/cellift-chipyard/cellift-rocket
 RUN bash tests.sh glift_notrace
 
-RUN bash -c "du -hs /.  ; find / -name '*.o' -o -name 'V*.a' | xargs -n50 rm  ; apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ; du -hs /. ; true" || true
+RUN bash -c "du -hs /.  ; find / -name 'V*.a' | xargs -n50 rm  ; apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ; du -hs /. ; true" || true
 
 COPY build-patches /build-patches/
 WORKDIR /cellift-designs/cellift-chipyard
@@ -83,4 +83,10 @@ WORKDIR /cellift-meta/python-experiments
 RUN bash -c ". /cellift-meta/env.sh && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1_nofdiv/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_forbidden/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_load_tainted_data_user_mode && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_ok"
 # Simulate them
 RUN bash -c ". /cellift-meta/env.sh && python plot_tainted_elements.py"
+
+COPY cellift-ubenchmarks /cellift-meta/cellift-ubenchmarks
+WORKDIR /cellift-meta/cellift-ubenchmarks
+RUN bash -c ". ../env.sh && make verilator_build NUM_EXECUTIONS=10"
+RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=10"
+RUN bash -c ". ../env.sh && make collect -j$CELLIFT_JOBS NUM_EXECUTIONS=10"
 
