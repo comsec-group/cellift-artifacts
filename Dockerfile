@@ -80,7 +80,7 @@ RUN /bin/patch -p1 </build-patches/patch-makefiles # apply last-minute patches t
 # Execute Meltdown and Spectre experiments (data for Figure 11).
 WORKDIR /cellift-meta/python-experiments
 # Build spectre POCs, fdiv and no fdiv, and meltdown POC
-RUN bash -c ". /cellift-meta/env.sh && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1_nofdiv/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_forbidden/"
+RUN bash -c ". /cellift-meta/env.sh && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1_nofdiv/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/boom_attacks_v1/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_1_load_tainted_data_forbidden/ && make -C /cellift-designs/cellift-chipyard/cellift-boom/sw/scenario_load_tainted_data_user_mode"
 # Simulate them
 RUN bash -c ". /cellift-meta/env.sh && python plot_tainted_elements.py"
 
