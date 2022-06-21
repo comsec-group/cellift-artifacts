@@ -1,0 +1,3 @@
+FROM ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation-2 as build
+FROM docker.io/ethcomsec/cellift@sha256:61fd0d2e0ad79329dba62805f9ebe418aae65fd9adbd4c1fb013b4b4726d434b
+COPY --from=build / /
