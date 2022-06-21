@@ -1,0 +1,5 @@
+for fn in collectrss/luigi/plot.py common/designcfgs.py listtaintedelems/luigi/plotcountelems.py perfbenchmark/common.py perfbenchmark/luigi/plot.py perfinstrum/luigi/plot.py plot_benchmark_performance.py plot_instrumentation_performance.py plot_rss.py plot_tainted_elements.py
+do
+	docker cp 4e3617b5de01:/cellift-meta/python-experiments/$fn ../cellift-meta/python-experiments/$fn
+done
+
