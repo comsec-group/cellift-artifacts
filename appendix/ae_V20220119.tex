@@ -16,6 +16,31 @@
 \documentclass[letterpaper,twocolumn,10pt]{article}
 \usepackage{usenix-2020-09}
 
+\usepackage[hyphens]{xurl}                % allow \url in bibtex for clickable links
+
+% BJG - to suppress a warning
+\microtypecontext{spacing=nonfrench}
+
+% to be able to draw some self-contained figs
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{xspace}
+
+% inlined bib file
+% BJG -commented out to avoid the warning, seems harmless
+%\usepackage{filecontents}
+
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{lipsum}
+\usepackage{comment}
+\usepackage{relsize}
+\usepackage[inline]{enumitem}
+\usepackage{multirow}
+
+% colored Observation boxes
+\usepackage{tcolorbox}
+
 \usepackage{hyperref}
 
 \pagestyle{empty}
@@ -42,12 +67,15 @@
 
 \begin{document}
 
+
 \special{papersize=8.5in,11in}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % When adding this appendix to your paper, 
 % please remove the part above
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\ourname}{C{\smaller[1]ELL}IFT\xspace}
 
 \appendix
 \section{Artifact Appendix}
@@ -65,79 +93,131 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Abstract}
 
-{\em Obligatory. Briefly describe your artifact including minimal hardware and software requirements, how it supports your paper, how it can be validated, and what is the expected result. At submission time, it will also be used to select appropriate reviewers. It will also help readers understand what was evaluated and how.}
+In our Artifact, we provide full source code of \ourname, and source code
+of a native toolchain and RISCV toolchain and other dependencies. We also
+provide source code to perform all experiments described in this paper,
+and to analyze the results. All of this is packaged as a Docker image to
+allow optimal reproducibility. To reproduce all experiments, we expect
+a machine with 256GB memory and 350GB of free storage will be needed. Less memory is needed if the
+precompiled executables of the designs are used so that synthesis (i.e.\ compiling)
+isn't necessary. In that case we believe 64GB will be enough.
 
 \subsection{Artifact check-list (meta-information)}
 
-{\em Obligatory. Fill in whatever is applicable with some keywords and remove unrelated items.}
+% {\em Obligatory. Fill in whatever is applicable with some keywords and remove unrelated items.}
 
 {\small
 \begin{itemize}
-  \item {\bf Algorithm: }
-  \item {\bf Program: }
-  \item {\bf Compilation: }
-  \item {\bf Transformations: }
-  \item {\bf Binary: }
-  \item {\bf Model: }
-  \item {\bf Data set: }
-  \item {\bf Run-time environment: }
-  \item {\bf Hardware: }
-  \item {\bf Run-time state: }
-  \item {\bf Execution: }
-  \item {\bf Security, privacy, and ethical concerns: }
-  \item {\bf Metrics: }
-  \item {\bf Output: }
-  \item {\bf Experiments: }
-  \item {\bf How much disk space required (approximately)?: }
-  \item {\bf How much time is needed to prepare workflow (approximately)?: }
-  \item {\bf How much time is needed to complete experiments (approximately)?: }
-  \item {\bf Publicly available (explicitly provide evolving version reference)?: }
-  \item {\bf Code licenses (if publicly available)?: }
-  \item {\bf Data licenses (if publicly available)?: }
-  \item {\bf Workflow frameworks used?: }
-  \item {\bf Archived (explicitly provide DOI or stable reference)?: }
+  \item {\bf Algorithm: } In the Yosys pass that implements \ourname, a newly developed algorithm to efficiently generate IFT shadow logic is presented.
+  \item {\bf Program: } We use a set of 5 external Verilog designs (Ariane, BOOM, Ibex, Rocket, PULPissimo) as evaluation targets, as well as benchmarks
+      from the RISC-V Architectural testing framework. All of this code is included in our artifact.
+  \item {\bf Compilation: } We include the required compilers and interpreters.
+  \item {\bf Transformations: } We include the required Verilog transformations (\ourname and GLIFT), implemented as Yosys passes.
+  \item {\bf Binary: } We include prebuilt Verilator-built binaries of all designs (5, see above) in all instrumentation modes (none, CellIFT, GLIFT) where possible (sometimes GLIFT fails, as explained in this paper).
+  \item {\bf Run-time environment: } The bulk of our artifact is a Docker image assuming a Linux kernel. We tested our image on an Ubuntu 22.04 system with 5.15.0-37-generic kernel.
+  \item {\bf Hardware: } We do not need any special hardware, but do need a relatively large amount of RAM (256GB) to run all experiments.
+  \item {\bf Metrics: } The experiments record runtime performance and IFT precision for microbenchmarks for \ourname as well as GLIFT. Further experiments record execution time and memory footprint of the instrumentation and synthesis process for uninstrumented designs, as well as \ourname and GLIFT instrumentations. We also measure benchmark simulation performance on instrumented designs (\ourname and GLIFT) vs uninstrumented designs. Lastly, we show resource usage and clockable frequency after FPGA synthesis for all 5 designs each under all 3 instrumentation modes, where possible.
+  \item {\bf Output: } For all experiments used in the Evaluation section of this paper, we include code to regenerate the charts. Also, we include code to reproduce all results in the Scenarios section of this paper: the Meltdown and Spectre scenarios, and the architectural vulnerabilities. 
+  \item {\bf Experiments: } With the exception of the FPGA results, all experiments were executed automatically when the Docker image was built. This means the way to reproduce all experiments is encoded in the Dockerfile, and a Docker container can be run that contains the generated results, and can be used to re-run individual experiments if desired. 
+  \item {\bf How much disk space required: } The docker image with all layers is 310GB.
+  \item {\bf How much time is needed to prepare workflow: } To prepare the workflow, conscious effort is only needed to retrieve the Git repository and the Docker image, a total amount of effort of only 5 minutes. For these steps to finish will no doubt take many hours, depending on available Internet bandwidth.
+  \item {\bf How much time is needed to complete experiments: } Approximately 3 days. 
+  \item {\bf Publicly available: } \url{https://github.com/comsec-group/cellift-artifacts} 
+  \item {\bf Code licenses: } \ourname is licensed under GPL3. 
+  \item {\bf Workflow frameworks used: } Docker, Make, Luigi. 
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Description}
 
-{\em Obligatory. For inapplicable subsections (e.g., the ``How to access'' subsection when not applying for the ``Artifacts Available'' badge), please specify 'N/A'.}
+% {\em Obligatory. For inapplicable subsections (e.g., the ``How to access'' subsection when not applying for the ``Artifacts Available'' badge), please specify 'N/A'.}
 
 \subsubsection{How to access}
 
+The evolving project is hosted at the URL mentioned in the Introduction
+of this paper. Our artifact is a single Git repository designed primarily to
+build a Docker image that has run all the experiments automatically. This
+Git repository is hosted at the `Publicly available' checklist entry above.
+The README in that repository contains further instructions to obtain the
+prebuilt Docker image from Dockerhub.
+
 \subsubsection{Hardware dependencies}
+
+The artifact will run all experiments on a machine with 256GB of memory. A subset can be run using the prebuilt binaries on a 64GB machine.
 
 \subsubsection{Software dependencies}
 
+We expect the artifact to run on a wide range of Linux distributions,
+however we tested it on Ubuntu 22.04 LTS kernel 5.15.0-37-generic. We
+furthermore depend on the Xilinx Vivado FPGA synthesis tool to reproduce
+the FPGA experiments.
+
 \subsubsection{Data sets}
+
+N/A
 
 \subsubsection{Models}
 
+N/A
+
 \subsubsection{Security, privacy, and ethical concerns}
+
+N/A
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Installation}
 
-{\em Obligatory. Describe the setup procedures for your artifact targeting novice users (even if you use a VM image or access to a remote machine).}
+At a high level, installation of our artifact is done by
+\begin{enumerate}
+    \item clone the git repository specified in the checklist.
+    \item Using its README, pull the Docker image artifact
+        hosted on Dockerhub.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experiment workflow}
 
-{\em Describe the high-level view of your experimental workflow and how it is implemented, invoked and customized (if needed), i.e. some OS scripts, IPython/Jupyter notebook, portable CK workflow, etc. This subsection is optional as long as the experiment workflow can be easily embedded in the next subsection.
-% See past reproduced papers with a similar Artifact Appendix.
-% https://cknowledge.io/?q=%22reproduced-papers%22+AND+lib+AND+%28secur*+OR+harden*+OR+mitigat*+OR+defen*+OR+attack*+OR+bug*+OR+vulnerab*%29
-}
+Follow the instructions in the git repository README that specifies
+in detail how to start a Docker container with the image, and how to
+reproduce each experiment, and examine the results.
+
+In principle, cloning the git repository and rebuilding the Docker image
+using the Dockerfile in the git repository will rebuild all \ourname code
+and designs from scratch and perform the experiments, but for maximum
+reliability we also provide the Docker image with all code, binaries
+and results that we have found to work.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Evaluation and expected results}
 
 {\em Obligatory. Start by listing the main claims in your paper. Next, list your key results and detail how they each support the main claims. Finally, detail all the steps to reproduce each of the key results in your paper by running the artifacts. Describe the expected results and the maximum variation of empirical results (particularly important for performance numbers).}
 
+The main claims in our paper are
+\begin{enumerate}
+    \item \ourname is an RTL dynamic information flow tracking instrumentation framework that scales up to SOC-size designs, contrary to the competition (GLIFT).
+    \item \ourname is able to instrument larger designs than the competition, and when the resulting instrumented design is simulated, has a lower performance overhead than the competition (GLIFT), and with a higher tainting precision.
+    \item \ourname is able to detect microarchitectural design flaws such as Meltdown and Spectre.
+    \item \ourname is able to detect architectural design flaws such as missing reset functionality.
+    \item Instrumented \ourname designs are synthesizable, and can be synthesized with less resources and to a higher frequency than the competition (GLIFT).
+\end{enumerate}
+
+The key results from our experiments are as follows. For each result, we point to a script (usually Python but sometimes bash) that drives the experiments and shows the analysis.
+\begin{enumerate}
+    \item Instrumented designs that can synthesize to C++ (i.e. be compiled) for all 5 target designs, contrary to the competition, and with fewer cpu time and less memory (follows from plot\_instrumentation\_performance.py and plot\_rss.py), and with higher tainting precision (plot\_num\_tainted\_states\_ibex.py).
+    \item For the designs that can be compiled in both instrumentation modes, we show a lower performance overhead than GLIFT (follows from plot\_benchmark\_performance.py). 
+    \item The Meltdown and Spectre simulations reproduce Figure 11, showing they can both be detected (plot\_tainted\_elements.py).
+    \item We show several bug scenarios detected by \ourname (run\_scenarios.sh).
+    \item We show FPGA synthesis results, showing that \ournames instrumented designs can be synthesized, with fewer resources than GLIFT instrumented designs.
+\end{enumerate}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Experiment customization}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Notes}
+There is ample customization opportunity in the Docker image, because
+the code of the instrumentation tool as well as the target designs is
+there and can be modified and rebuilt. This does require a deeper knowledge
+than we can describe in this appendix, and we haven't prepared any
+helper material for customization.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Version}
