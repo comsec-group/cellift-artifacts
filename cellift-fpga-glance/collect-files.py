@@ -12,16 +12,16 @@ designs={
 
 def create_container():
     containername='cellift-evaluation-container'
-    imagename='ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation-2'
+    imagename='ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation'
     subprocess.call(['docker', 'rm', containername], stdout=open('/dev/null', 'w'), stderr=open('/dev/null', 'w'))
     container_id=subprocess.check_output(['docker', 'create', '--name', containername, imagename])
     container_id=container_id.decode('ascii').rstrip()
     return container_id
 
 def container_cmd(cmdlist):
-    # docker run --rm --entrypoint ls  ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation-2
+    # docker run --rm --entrypoint ls  ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation
     containername='cellift-evaluation-container'
-    imagename='ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation-2'
+    imagename='ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation'
     subprocess.call(['docker', 'rm', containername], stdout=open('/dev/null', 'w'), stderr=open('/dev/null', 'w'))
     fullcmdline=['docker', 'run', '--rm',imagename] + cmdlist
 #    print('executing: %s' % fullcmdline)
