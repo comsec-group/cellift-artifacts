@@ -88,6 +88,15 @@ RUN bash -c ". /cellift-meta/env.sh && python plot_tainted_elements.py"
 WORKDIR /cellift-designs/cellift-ibex/cellift
 RUN bash tests.sh glift_trace
 
+WORKDIR /cellift-designs/cellift-ibex/cellift
+RUN bash tests.sh passthrough_notrace
+WORKDIR /cellift-designs/cellift-cva6/cellift
+RUN bash tests.sh passthrough_notrace
+WORKDIR /cellift-designs/cellift-chipyard/cellift-boom
+RUN bash tests.sh passthrough_notrace
+WORKDIR /cellift-designs/cellift-chipyard/cellift-rocket
+RUN bash tests.sh passthrough_notrace
+
 # Reproduce instrumentation & synthesis performance (Figure 7)
 WORKDIR /cellift-meta/python-experiments
 RUN bash -c ". ../env.sh && python3 plot_instrumentation_performance.py"
