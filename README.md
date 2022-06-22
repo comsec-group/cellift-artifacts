@@ -8,7 +8,6 @@ Steps needed after this git repo is cloned:
 1. Obtain the Docker image. (Human time: 1 minute. Computer time: likely many hours.)
 2. Install Xilinx Vivado. (Human time: 2 minutes. Computer time: several hours.)
 3. Run experiments. (Human time: 5 minutes, on and off. Computer time: several days.)
-4. Inspect results. (Human time: 30 minutes.)
 
 Welcome to the Artifact of this paper. We have made considerable effort to
 make the process of reproducing experiments both reliable and painless,
