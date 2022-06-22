@@ -58,24 +58,31 @@ for instr in ['cellift','glift','vanilla']:
     filelist = read_commands(commands)
     for file in filelist:
         destfile='%s/%s' % (designdir, file)
-        if os.path.exists(destfile):
-            print('%s: exists' % destfile)
+        if os.path.exists(destfile+'.bz2'):
+#            print('%s.bz2: exists' % destfile)
             continue
-        result=container_cmd(['find',designs[designdir],'-name',file])
-        results=result.split('\n')
-        results=[r for r in results if len(r) > 0]
-        results=[r for r in results if '/build/' not in r]
-        if len(results) == 0:
-            print('%s: not found' % destfile)
-            continue
-        if len(results) > 1:
-            print('%s: ambiguous' % destfile)
-            continue
-        assert len(results) == 1
-        result=results.pop()
-        assert len(results) == 0
-        print('%s for %s, result: %s' % (file, designdir, result))
-        cid=create_container()
-        cpline=['docker', 'cp', '%s:%s' % (cid, result), destfile]
-        print('doing %s' % cpline)
-        subprocess.check_call(cpline)
+        if os.path.exists(file):
+            print('found locally')
+            subprocess.check_call(['cp', file, destfile])
+        else:
+            result=container_cmd(['find',designs[designdir],'-name',file])
+            results=result.split('\n')
+            results=[r for r in results if len(r) > 0]
+            results=[r for r in results if '/build/' not in r]
+            if len(results) == 0:
+                print('%s: not found' % destfile)
+                continue
+            if len(results) > 1:
+                print('%s: ambiguous' % destfile)
+                continue
+            assert len(results) == 1
+            result=results.pop()
+            assert len(results) == 0
+            print('%s for %s, result: %s' % (file, designdir, result))
+            cid=create_container()
+            cpline=['docker', 'cp', '%s:%s' % (cid, result), destfile]
+            print('doing %s' % cpline)
+            subprocess.check_call(cpline)
+        print('compressing')
+        subprocess.check_call(['bzip2', destfile])
+        print('compressing done')
