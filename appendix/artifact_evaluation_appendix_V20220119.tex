@@ -147,10 +147,14 @@ The artifact will run all experiments on a machine with 256GB of memory. A subse
 
 \subsubsection{Software dependencies}
 
-We expect the artifact to run on a wide range of Linux distributions,
-however we tested it on Ubuntu 22.04 LTS kernel 5.15.0-37-generic. We
-furthermore depend on the Xilinx Vivado FPGA synthesis tool (version 2019.3) to reproduce
-the FPGA experiments.
+As it'sa Docker container, we expect the artifact to run on a wide range
+of Linux distributions, however we tested it on Ubuntu 22.04 LTS kernel
+5.15.0-37-generic.
+
+To reproduce the FPGA experiments in the paper, we furthermore depend
+on the Xilinx Vivado FPGA synthesis tool (version 2019.3).  The large
+FPGA target we use requires a Vivado license. Vivado needs to be downloaded
+and installed from its manufacturer's website.
 
 \subsubsection{Data sets}
 
@@ -172,6 +176,9 @@ At a high level, installation of our artifact is done by
     \item Cloning the git repository specified in the checklist.
     \item Using its README, pull the Docker image artifact
         hosted on Dockerhub.
+    \item To reproduce the FPGA experiments: following instructions
+        from the Xilinx website, install the full edition of Vivado.
+        This requires a license.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -196,7 +203,7 @@ The main claims in our paper are the following.
 
 \begin{enumerate}
     \item \ourname is an RTL dynamic information flow tracking instrumentation framework that scales up to complex CPU and SoC designs.
-    \item \ourname is able to instrument larger designs than the competition (GLIFT), and when the resulting instrumented designs are simulated, has a lower performance overhead than the competition (GLIFT), and with a higher tainting precision.
+    \item \ourname is able to instrument larger designs than the competition (GLIFT), consumes less time and memory while instrumenting, and when the resulting instrumented designs are simulated, has a lower performance overhead than the competition (GLIFT), and with a higher tainting precision.
     \item \ourname is able to detect microarchitectural design flaws such as Meltdown and Spectre.
     \item \ourname is able to detect architectural design flaws such as missing reset functionality.
     \item \ourname-instrumented designs are synthesizable, and can be synthesized with typically less resources and to a typically higher frequency than the competition (GLIFT).
