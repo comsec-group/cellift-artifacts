@@ -120,8 +120,9 @@ RUN bash -c ". /cellift-meta/env.sh && bash -e run_scenarios.sh"
 COPY cellift-ubenchmarks /cellift-meta/cellift-ubenchmarks
 WORKDIR /cellift-meta/cellift-ubenchmarks
 RUN bash -c ". ../env.sh && make verilator_build NUM_EXECUTIONS=10 -j8"
-RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=10 -j$CELLIFT_JOBS"
-RUN bash -c ". ../env.sh && make collect -j$CELLIFT_JOBS NUM_EXECUTIONS=10"
+RUN echo 100000 | tee `find . -name num_executions.txt`
+RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=100000 -j$CELLIFT_JOBS"
+RUN bash -c ". ../env.sh && make collect -j$CELLIFT_JOBS NUM_EXECUTIONS=100000"
 RUN bash -c ". ../env.sh && python3 plot_separate_perf_prec.py"
 
 # Generate FPGA dependencies for Ibex
