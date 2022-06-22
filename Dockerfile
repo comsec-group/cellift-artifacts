@@ -112,14 +112,15 @@ RUN bash -c ". ../env.sh && python3 plot_benchmark_performance.py"
 
 # Reproduce scenarios experiments (described in Section 8.4)
 WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
+RUN chown root /cellift-designs/cellift-pulpissimo-hdac-2018
 RUN sed -i 's/riscv64-unknown-elf/riscv32-unknown-elf/' `git grep -l RISCV_PREFIX sw/bug*`
-RUN bash -e run_scenarios.sh
+RUN bash -c ". /cellift-meta/env.sh && bash -e run_scenarios.sh"
 
 # Reproduce ubench metrics (Figure 6)
 COPY cellift-ubenchmarks /cellift-meta/cellift-ubenchmarks
 WORKDIR /cellift-meta/cellift-ubenchmarks
-RUN bash -c ". ../env.sh && make verilator_build NUM_EXECUTIONS=10"
-RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=10"
+RUN bash -c ". ../env.sh && make verilator_build NUM_EXECUTIONS=10 -j8"
+RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=10 -j$CELLIFT_JOBS"
 RUN bash -c ". ../env.sh && make collect -j$CELLIFT_JOBS NUM_EXECUTIONS=10"
 RUN bash -c ". ../env.sh && python3 plot_separate_perf_prec.py"
 
