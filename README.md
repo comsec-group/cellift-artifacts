@@ -51,6 +51,10 @@ Pull image:
 
         docker pull docker.io/ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation
 
+Stable digest:
+
+        Digest: sha256:9a15d4070d321026ad4d5d9ba5a236842c6c456279f9c08f4fa4132de7b399ce
+
 ### Install Xilinx Vivado. (Human time: 2 minutes. Computer time: several hours.)
 
 Download Vivado full edition from the Xilinx website. Install it in a
@@ -105,7 +109,10 @@ The final chart will be saved in
 
         /cellift-meta/cellift-ubenchmarks/fig/ubench_separate.png
 
-and can be retrieved with `docker cp`. The result should look like Figure 6 in the paper.
+and can be retrieved with `docker cp`. The result should look like Figure
+6 in the paper.  Example:
+
+        docker cp b446538f950c:/cellift-meta/cellift-ubenchmarks/fig/ubench_separate.png .           
 
 #### Instrument and synthesize the design files for reproducing Figure 7 (human time: several minutes at a time. computer time: many hours)
 
@@ -171,6 +178,20 @@ The result is in respectively:
 Together these should look like Figure 8.
 
 #### FPGA synthesis to reproduce Figure 9 (human time: several minutes at a time. computer time: several days)
+
+Reproducing the FPGA synthesis experiments is outside a Docker container. 
+
+Go to the Artifacts repo, to the `cellift-fpga-glance` dir. In each design directory, for each instrumentation
+type, create a run directory, and execute `vivado` from there:
+
+        cd cellift-fpga-glance/ibex
+        mkdir run-vanilla
+        cd run-vanilla
+        vivado -mode tcl -source ../commands_vanilla.tcl
+
+repeat this step for each design (ibex, cva6, pulpissimo, rocket, boom) and for each commands file
+(commands_cellift.tcl, commands_glift.tcl, commands_vanilla.tcl). The results will be text files in
+the run directories.
 
 #### Execute Spectre and Meltdown POCs to reproduce Figure 11 (human time: a few minutes. computer time: a few minutes.)
 
