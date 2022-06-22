@@ -124,3 +124,8 @@ RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=10 -j$CELLIFT_JOBS
 RUN bash -c ". ../env.sh && make collect -j$CELLIFT_JOBS NUM_EXECUTIONS=10"
 RUN bash -c ". ../env.sh && python3 plot_separate_perf_prec.py"
 
+# Generate FPGA dependencies for Ibex
+WORKDIR /cellift-designs/cellift-ibex/cellift
+COPY cellift-fpga-glance/morty_deps.sh /cellift-designs/cellift-ibex/cellift/
+RUN bash -c ". /cellift-meta/env.sh && bash morty_deps.sh"
+
