@@ -130,3 +130,15 @@ WORKDIR /cellift-designs/cellift-ibex/cellift
 COPY cellift-fpga-glance/morty_deps.sh /cellift-designs/cellift-ibex/cellift/
 RUN bash -c ". /cellift-meta/env.sh && bash morty_deps.sh"
 
+# Generate glift .sv files for FPGA
+WORKDIR /cellift-designs/cellift-cva6/cellift 
+RUN bash -c ". /cellift-meta/env.sh && make generated/out/glift.sv"
+WORKDIR /cellift-designs/cellift-chipyard/cellift-boom
+RUN bash -c ". /cellift-meta/env.sh && make generated/out/glift.sv"
+
+# Reproduce instrumentation & synthesis performance (Figure 7)
+# (Repeated)
+WORKDIR /cellift-meta/python-experiments
+RUN bash -c ". ../env.sh && python3 plot_instrumentation_performance.py"
+RUN bash -c ". ../env.sh && python3 plot_rss.py"
+
