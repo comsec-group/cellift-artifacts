@@ -92,10 +92,9 @@ RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=10"
 RUN bash -c ". ../env.sh && make collect -j$CELLIFT_JOBS NUM_EXECUTIONS=10"
 RUN bash -c ". ../env.sh && python3 plot_separate_perf_prec.py"
 
-# Reproduce scenarios experiments (described in Section 8.4)
-WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
-RUN sed -i 's/riscv64-unknown-elf/riscv32-unknown-elf/' `git grep -l RISCV_PREFIX sw/bug*`
-RUN bash -e run_scenarios.sh
+# build glift trace, needed for instrumentation, synthesis, and benchmark performance plots
+WORKDIR /cellift-designs/cellift-ibex/cellift
+RUN bash tests.sh glift_trace
 
 # Reproduce instrumentation & synthesis performance (Figure 7)
 WORKDIR /cellift-meta/python-experiments
@@ -103,4 +102,10 @@ RUN bash -c ". ../env.sh && python3 plot_instrumentation_performance.py"
 RUN bash -c ". ../env.sh && python3 python3 plot_rss.py"
 
 # Reproduce benchmark performance (Figure 8)
-RUN bash -c ". ../env.sh && python3 python3 python3 plot_benchmark_performance.py"
+WORKDIR /cellift-meta/python-experiments
+RUN bash -c ". ../env.sh && python3 plot_benchmark_performance.py"
+
+# Reproduce scenarios experiments (described in Section 8.4)
+WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
+RUN sed -i 's/riscv64-unknown-elf/riscv32-unknown-elf/' `git grep -l RISCV_PREFIX sw/bug*`
+RUN bash -e run_scenarios.sh
