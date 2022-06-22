@@ -142,3 +142,6 @@ WORKDIR /cellift-meta/python-experiments
 RUN bash -c ". ../env.sh && python3 plot_instrumentation_performance.py"
 RUN bash -c ". ../env.sh && python3 plot_rss.py"
 
+# Reproduce benchmark precision performance (Figure 8)
+WORKDIR /cellift-meta/python-experiments
+RUN bash -c ". ../env.sh && python3 plot_num_tainted_states_ibex.py"
