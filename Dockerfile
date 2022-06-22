@@ -84,14 +84,6 @@ RUN bash -c ". /cellift-meta/env.sh && make -C /cellift-designs/cellift-chipyard
 # Simulate the POCs (4 executables)
 RUN bash -c ". /cellift-meta/env.sh && python plot_tainted_elements.py"
 
-# Reproduce ubench metrics (Figure 6)
-COPY cellift-ubenchmarks /cellift-meta/cellift-ubenchmarks
-WORKDIR /cellift-meta/cellift-ubenchmarks
-RUN bash -c ". ../env.sh && make verilator_build NUM_EXECUTIONS=10"
-RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=10"
-RUN bash -c ". ../env.sh && make collect -j$CELLIFT_JOBS NUM_EXECUTIONS=10"
-RUN bash -c ". ../env.sh && python3 plot_separate_perf_prec.py"
-
 # build glift trace, needed for instrumentation, synthesis, and benchmark performance plots
 WORKDIR /cellift-designs/cellift-ibex/cellift
 RUN bash tests.sh glift_trace
@@ -109,3 +101,12 @@ RUN bash -c ". ../env.sh && python3 plot_benchmark_performance.py"
 WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
 RUN sed -i 's/riscv64-unknown-elf/riscv32-unknown-elf/' `git grep -l RISCV_PREFIX sw/bug*`
 RUN bash -e run_scenarios.sh
+
+# Reproduce ubench metrics (Figure 6)
+COPY cellift-ubenchmarks /cellift-meta/cellift-ubenchmarks
+WORKDIR /cellift-meta/cellift-ubenchmarks
+RUN bash -c ". ../env.sh && make verilator_build NUM_EXECUTIONS=10"
+RUN bash -c ". ../env.sh && make verilator_run NUM_EXECUTIONS=10"
+RUN bash -c ". ../env.sh && make collect -j$CELLIFT_JOBS NUM_EXECUTIONS=10"
+RUN bash -c ". ../env.sh && python3 plot_separate_perf_prec.py"
+
