@@ -1,7 +1,7 @@
 create_project ibex_vanilla ./ibex_vanilla -part xcvu440-flga2892-3-e
 add_files {../ibex_fpga_top.sv ../dependencies.sv ../vanilla.sv}
 import_files -force -norecurse
-import_files -fileset constrs_1 ../../../constraints.xdc
+import_files -fileset constrs_1 ../../constraints.xdc
 set_property steps.synth_design.args.flatten_hierarchy full [get_runs synth_1]
 
 set_property top ibex_fpga_top [current_fileset]
