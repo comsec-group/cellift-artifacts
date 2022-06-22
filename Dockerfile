@@ -74,6 +74,8 @@ COPY build-patches /build-patches/
 WORKDIR /cellift-designs/cellift-chipyard
 # More last minute changes
 RUN /bin/patch -p1 </build-patches/patch-makefiles # apply last-minute patches to cellift-meta repo after image was frozen
+WORKDIR /cellift-meta/
+RUN /bin/patch -p1 </build-patches/cellift-meta-patch # apply last-minute patches to cellift-meta repo after image was frozen
 RUN cd /cellift-designs/cellift-chipyard/cellift-boom/sw && tar xvf /build-patches/scenario_1_load_tainted_data_ok.tar
 RUN mkdir -p /cellift-meta/design-processing/../../cellift-designs/cellift-chipyard/cellift-boom/taint_data/scenario_1_load_tainted_data_ok/ && echo 0 80000100 8 FFFFFFFFFFFFFFFF > /cellift-meta/design-processing/../../cellift-designs/cellift-chipyard/cellift-boom/taint_data/scenario_1_load_tainted_data_ok/taint_data.txt
 
@@ -96,11 +98,13 @@ WORKDIR /cellift-designs/cellift-chipyard/cellift-boom
 RUN bash tests.sh passthrough_notrace
 WORKDIR /cellift-designs/cellift-chipyard/cellift-rocket
 RUN bash tests.sh passthrough_notrace
+WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
+RUN bash tests.sh passthrough_notrace
 
 # Reproduce instrumentation & synthesis performance (Figure 7)
 WORKDIR /cellift-meta/python-experiments
 RUN bash -c ". ../env.sh && python3 plot_instrumentation_performance.py"
-RUN bash -c ". ../env.sh && python3 python3 plot_rss.py"
+RUN bash -c ". ../env.sh && python3 plot_rss.py"
 
 # Reproduce benchmark performance (Figure 8)
 WORKDIR /cellift-meta/python-experiments
