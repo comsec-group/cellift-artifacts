@@ -198,7 +198,7 @@ type, create a run directory, and execute `vivado` from there:
         vivado -mode tcl -source ../commands_vanilla.tcl
 
 repeat this step for each design (ibex, cva6, pulpissimo, rocket, boom) and for each commands file
-(commands_cellift.tcl, commands_glift.tcl, commands_vanilla.tcl). The results will be text files in
+(`commands_cellift.tcl`, `commands_glift.tcl`, `commands_vanilla.tcl`). The results will be text files in
 the run directories.
 
 #### Execute Spectre and Meltdown POCs to reproduce Figure 11 (human time: a few minutes. computer time: a few minutes.)
@@ -245,3 +245,25 @@ analyzing the signal trace that each simulation in `scenarios.py`. The
 control flow of that script is very readable and shows us how these
 conclusions are reached in detail.
 
+#### Execute stats to support Section 8.4. (human time: a few minutes. computer time: many hours.)
+
+To reproduce the cellstats figure in the appendix, we provide the raw data
+in the image, as they take quite some time to produce (instrmentation).
+
+To generate the plot from this data:
+
+        cd /cellift-meta/python-experiments
+        python3 plot_cellstats.py
+
+this produces
+
+        /cellift-meta/python-experiments/cellstats.png
+
+If you wish to regenerate the stats
+file from scratch, remove the .log files in
+`/cellift-designs/cellift-pulpissimo-hdac-2018/cellift/statistics`
+and all other design dir. Then in each design dir, run:
+
+        make statistics/glift.log statistics/cellift.log statistics/vanilla.log
+
+and re-run the `plot_cellstats.py` script.
