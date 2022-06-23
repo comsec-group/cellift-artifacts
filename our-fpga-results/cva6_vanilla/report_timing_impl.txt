@@ -1,0 +1,181 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2019.1.1 (lin64) Build 2580384 Sat Jun 29 08:04:45 MDT 2019
+| Date              : Wed Jan 26 18:51:05 2022
+| Host              : lagrev3.ee.ethz.ch running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command           : report_timing
+| Design            : ariane_fpga_top
+| Device            : xcvu440-flga2892
+| Speed File        : -3  PRODUCTION 1.26 12-04-2018
+| Temperature Grade : E
+---------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -2.340ns  (required time - arrival time)
+  Source:                 i_ariane_mem_top/i_ariane/csr_regfile_i/pmpaddr_q_reg[0][5]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            i_ariane_mem_top/i_ariane/i_cache_subsystem/i_wt_dcache/i_wt_dcache_mem/gen_data_banks[0].i_data_sram/gen_cut[2].gen_mem.i_ram/Mem_DP_reg/WEBWE[4]
+                            (rising edge-triggered cell RAMB36E2 clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_i rise@10.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        11.693ns  (logic 3.474ns (29.710%)  route 8.219ns (70.290%))
+  Logic Levels:           31  (CARRY8=5 LUT2=1 LUT3=3 LUT5=4 LUT6=18)
+  Clock Path Skew:        -0.160ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    2.399ns = ( 12.399 - 10.000 ) 
+    Source Clock Delay      (SCD):    3.063ns
+    Clock Pessimism Removal (CPR):    0.503ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.670ns (routing 0.279ns, distribution 1.391ns)
+  Clock Net Delay (Destination): 1.429ns (routing 0.251ns, distribution 1.178ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    BB36                                              0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i_IBUF_inst/I
+    BB36                 INBUF (Prop_INBUF_HPIOB_PAD_O)
+                                                      0.601     0.601 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.079     0.680    clk_i_IBUF_inst/OUT
+    BB36                 IBUFCTRL (Prop_IBUFCTRL_HPIOB_I_O)
+                                                      0.000     0.680 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, routed)           0.646     1.326    clk_i_IBUF
+    BUFGCE_X1Y194        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.067     1.393 r  clk_i_IBUF_BUFG_inst/O
+    X7Y8 (CLOCK_ROOT)    net (fo=23739, routed)       1.670     3.063    clk_i_IBUF_BUFG
+    SLICE_X311Y481       FDCE                                         r  i_ariane_mem_top/i_ariane/csr_regfile_i/pmpaddr_q_reg[0][5]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X311Y481       FDCE (Prop_CFF_SLICEL_C_Q)
+                                                      0.102     3.165 r  i_ariane_mem_top/i_ariane/csr_regfile_i/pmpaddr_q_reg[0][5]/Q
+                         net (fo=22, routed)          0.324     3.489    i_ariane_mem_top/i_ariane/pmpaddr[0][5]
+    SLICE_X311Y481       LUT2 (Prop_B6LUT_SLICEL_I1_O)
+                                                      0.153     3.642 r  FSM_sequential_state_q[1]_i_631/O
+                         net (fo=5, routed)           0.380     4.022    FSM_sequential_state_q[1]_i_631_n_0
+    SLICE_X311Y480       LUT6 (Prop_A6LUT_SLICEL_I1_O)
+                                                      0.062     4.084 r  FSM_sequential_state_q[1]_i_1111/O
+                         net (fo=3, routed)           0.346     4.430    FSM_sequential_state_q[1]_i_1111_n_0
+    SLICE_X309Y483       LUT6 (Prop_H6LUT_SLICEM_I1_O)
+                                                      0.155     4.585 r  FSM_sequential_state_q[1]_i_618/O
+                         net (fo=6, routed)           0.405     4.990    FSM_sequential_state_q[1]_i_618_n_0
+    SLICE_X309Y487       LUT6 (Prop_E6LUT_SLICEM_I4_O)
+                                                      0.035     5.025 r  FSM_sequential_state_q[1]_i_638/O
+                         net (fo=2, routed)           0.143     5.168    FSM_sequential_state_q[1]_i_638_n_0
+    SLICE_X309Y489       LUT6 (Prop_G6LUT_SLICEM_I2_O)
+                                                      0.167     5.335 r  FSM_sequential_state_q[1]_i_635/O
+                         net (fo=6, routed)           0.392     5.727    FSM_sequential_state_q[1]_i_635_n_0
+    SLICE_X307Y489       LUT6 (Prop_D6LUT_SLICEL_I2_O)
+                                                      0.035     5.762 r  d_o[66]_i_407/O
+                         net (fo=1, routed)           0.200     5.962    d_o[66]_i_407_n_0
+    SLICE_X307Y488       LUT6 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.115     6.077 r  d_o[66]_i_167/O
+                         net (fo=1, routed)           0.002     6.079    d_o[66]_i_167_n_0
+    SLICE_X307Y488       CARRY8 (Prop_CARRY8_SLICEL_S[5]_CO[7])
+                                                      0.222     6.301 f  i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/i_pmp_data/d_o_reg[66]_i_57/CO[7]
+                         net (fo=1, routed)           0.021     6.322    i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/i_pmp_data/d_o_reg[66]_i_57_n_0
+    SLICE_X307Y489       CARRY8 (Prop_CARRY8_SLICEL_CI_CO[2])
+                                                      0.088     6.410 f  i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/i_pmp_data/d_o_reg[66]_i_26/CO[2]
+                         net (fo=1, routed)           0.415     6.825    i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/i_pmp_data/d_o_reg[66]_i_26_n_5
+    SLICE_X304Y494       LUT6 (Prop_H6LUT_SLICEL_I4_O)
+                                                      0.163     6.988 f  i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/i_pmp_data/d_o[66]_i_13/O
+                         net (fo=3, routed)           0.296     7.284    i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/i_pmp_data/d_o[66]_i_13_n_0
+    SLICE_X302Y497       LUT6 (Prop_C6LUT_SLICEL_I5_O)
+                                                      0.153     7.437 r  i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/i_pmp_data/d_o[66]_i_10/O
+                         net (fo=1, routed)           0.133     7.570    i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/i_pmp_data/d_o[66]_i_10_n_0
+    SLICE_X302Y497       LUT5 (Prop_G6LUT_SLICEL_I1_O)
+                                                      0.115     7.685 r  i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/i_pmp_data/d_o[66]_i_7/O
+                         net (fo=6, routed)           0.132     7.817    i_ariane_mem_top/i_ariane/ex_stage_i/lsu_i/i_mmu/pmp_data_allow
+    SLICE_X302Y497       LUT6 (Prop_D6LUT_SLICEL_I2_O)
+                                                      0.101     7.918 r  d_o[3]_i_2/O
+                         net (fo=13, routed)          0.204     8.122    d_o[3]_i_2_n_0
+    SLICE_X302Y496       LUT6 (Prop_E6LUT_SLICEL_I0_O)
+                                                      0.153     8.275 f  load_data_q[operator][6]_i_2/O
+                         net (fo=80, routed)          0.191     8.466    load_data_q[operator][6]_i_2_n_0
+    SLICE_X301Y496       LUT6 (Prop_D6LUT_SLICEL_I0_O)
+                                                      0.101     8.567 f  FSM_sequential_state_q[2]_i_7__0/O
+                         net (fo=10, routed)          0.057     8.624    i_ariane_mem_top/i_ariane/dcache_req_ports_ex_cache[1][kill_req]
+    SLICE_X301Y496       LUT3 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.101     8.725 f  FSM_sequential_state_q[2]_i_13__0/O
+                         net (fo=2, routed)           0.138     8.863    FSM_sequential_state_q[2]_i_13__0_n_0
+    SLICE_X300Y496       LUT6 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.163     9.026 r  address_tag_q[48]_i_2/O
+                         net (fo=98, routed)          0.511     9.537    address_tag_q[48]_i_1_n_0
+    SLICE_X308Y496       LUT6 (Prop_E6LUT_SLICEL_I1_O)
+                                                      0.101     9.638 f  rd_hit_oh_q[3]_i_124/O
+                         net (fo=1, routed)           0.140     9.778    rd_hit_oh_q[3]_i_124_n_0
+    SLICE_X310Y496       LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.035     9.813 r  rd_hit_oh_q[3]_i_68/O
+                         net (fo=5, routed)           0.697    10.510    rd_hit_oh_q[3]_i_68_n_0
+    SLICE_X296Y495       LUT6 (Prop_B6LUT_SLICEM_I3_O)
+                                                      0.120    10.630 r  rd_hit_oh_q[0]_i_20/O
+                         net (fo=1, routed)           0.001    10.631    rd_hit_oh_q[0]_i_20_n_0
+    SLICE_X296Y495       CARRY8 (Prop_CARRY8_SLICEM_S[1]_CO[7])
+                                                      0.295    10.926 r  rd_hit_oh_q_reg[0]_i_5/CO[7]
+                         net (fo=1, routed)           0.021    10.947    rd_hit_oh_q_reg[0]_i_5_n_0
+    SLICE_X296Y496       CARRY8 (Prop_CARRY8_SLICEM_CI_CO[7])
+                                                      0.024    10.971 r  rd_hit_oh_q_reg[0]_i_3/CO[7]
+                         net (fo=1, routed)           0.021    10.992    rd_hit_oh_q_reg[0]_i_3_n_0
+    SLICE_X296Y497       CARRY8 (Prop_CARRY8_SLICEM_CI_CO[0])
+                                                      0.091    11.083 r  rd_hit_oh_q_reg[0]_i_2/CO[0]
+                         net (fo=66, routed)          0.678    11.761    i_ariane_mem_top/i_ariane/i_cache_subsystem/i_wt_dcache/i_wt_dcache_mem/rd_hit_oh_o2
+    SLICE_X297Y500       LUT3 (Prop_E6LUT_SLICEL_I0_O)
+                                                      0.034    11.795 r  rd_hit_oh_q[0]_i_1/O
+                         net (fo=4, routed)           0.445    12.240    i_ariane_mem_top/i_ariane/i_cache_subsystem/i_wt_dcache/rd_hit_oh[0]
+    SLICE_X299Y505       LUT5 (Prop_C6LUT_SLICEL_I2_O)
+                                                      0.100    12.340 r  FSM_sequential_state_q[1]_i_5__0/O
+                         net (fo=5, routed)           0.150    12.490    FSM_sequential_state_q[1]_i_5__0_n_0
+    SLICE_X299Y507       LUT3 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.163    12.653 r  data_rvalid_q_i_4/O
+                         net (fo=2, routed)           0.135    12.788    data_rvalid_q_i_4_n_0
+    SLICE_X299Y509       LUT5 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.035    12.823 r  data_rvalid_q_i_2/O
+                         net (fo=2, routed)           0.231    13.054    data_rvalid_q_i_2_n_0
+    SLICE_X299Y510       LUT5 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.062    13.116 r  data_size_q[1]_i_1__0/O
+                         net (fo=13, routed)          0.141    13.257    i_ariane_mem_top/i_ariane/dcache_req_ports_cache_ex[0][data_gnt]
+    SLICE_X299Y512       LUT6 (Prop_A6LUT_SLICEL_I4_O)
+                                                      0.062    13.319 r  i___169_i_16/O
+                         net (fo=3, routed)           0.335    13.654    i___169_i_16_n_0
+    SLICE_X303Y513       LUT6 (Prop_D6LUT_SLICEM_I4_O)
+                                                      0.064    13.718 f  Mem_DP_reg_i_152/O
+                         net (fo=32, routed)          0.394    14.112    Mem_DP_reg_i_152_n_0
+    SLICE_X303Y522       LUT6 (Prop_B6LUT_SLICEM_I4_O)
+                                                      0.104    14.216 r  Mem_DP_reg_i_68__2/O
+                         net (fo=2, routed)           0.540    14.756    Mem_DP_reg_i_68__2_n_0
+    RAMB36_X9Y107        RAMB36E2                                     r  i_ariane_mem_top/i_ariane/i_cache_subsystem/i_wt_dcache/i_wt_dcache_mem/gen_data_banks[0].i_data_sram/gen_cut[2].gen_mem.i_ram/Mem_DP_reg/WEBWE[4]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     10.000    10.000 r  
+    BB36                                              0.000    10.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    10.000    clk_i_IBUF_inst/I
+    BB36                 INBUF (Prop_INBUF_HPIOB_PAD_O)
+                                                      0.342    10.342 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.045    10.387    clk_i_IBUF_inst/OUT
+    BB36                 IBUFCTRL (Prop_IBUFCTRL_HPIOB_I_O)
+                                                      0.000    10.387 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, routed)           0.523    10.910    clk_i_IBUF
+    BUFGCE_X1Y194        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.060    10.970 r  clk_i_IBUF_BUFG_inst/O
+    X7Y8 (CLOCK_ROOT)    net (fo=23739, routed)       1.429    12.399    clk_i_IBUF_BUFG
+    RAMB36_X9Y107        RAMB36E2                                     r  i_ariane_mem_top/i_ariane/i_cache_subsystem/i_wt_dcache/i_wt_dcache_mem/gen_data_banks[0].i_data_sram/gen_cut[2].gen_mem.i_ram/Mem_DP_reg/CLKBWRCLK
+                         clock pessimism              0.503    12.903    
+                         clock uncertainty           -0.035    12.867    
+    RAMB36_X9Y107        RAMB36E2 (Setup_RAMB36E2_RAMB36_CLKBWRCLK_WEBWE[4])
+                                                     -0.452    12.415    i_ariane_mem_top/i_ariane/i_cache_subsystem/i_wt_dcache/i_wt_dcache_mem/gen_data_banks[0].i_data_sram/gen_cut[2].gen_mem.i_ram/Mem_DP_reg
+  -------------------------------------------------------------------
+                         required time                         12.415    
+                         arrival time                         -14.756    
+  -------------------------------------------------------------------
+                         slack                                 -2.340    
+
+
+
+
+report_timing: Time (s): cpu = 00:00:33 ; elapsed = 00:00:09 . Memory (MB): peak = 4172.496 ; gain = 123.648 ; free physical = 536 ; free virtual = 222809

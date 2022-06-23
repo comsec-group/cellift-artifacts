@@ -1,0 +1,294 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2018.3 (lin64) Build 2405991 Thu Dec  6 23:36:41 MST 2018
+| Date              : Fri Mar 18 20:08:02 2022
+| Host              : lagrev3.ee.ethz.ch running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command           : report_timing
+| Design            : ariane_fpga_top
+| Device            : xcvu440-flga2892
+| Speed File        : -3  PRODUCTION 1.26 10-29-2018
+| Temperature Grade : E
+---------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -15.773ns  (required time - arrival time)
+  Source:                 i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/commit_pointer_q_reg[0]/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/mem_q_t0_reg[1073]/D
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_i rise@10.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        25.640ns  (logic 4.552ns (17.753%)  route 21.088ns (82.247%))
+  Logic Levels:           103  (CARRY8=9 LUT1=2 LUT2=7 LUT3=12 LUT4=10 LUT5=15 LUT6=48)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    3.282ns = ( 13.282 - 10.000 ) 
+    Source Clock Delay      (SCD):    3.837ns
+    Clock Pessimism Removal (CPR):    0.411ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+                                                      0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i_IBUF_inst/I
+                         INBUF (Prop_INBUF_PAD_O)     0.520     0.520 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, unplaced)         0.079     0.599    clk_i_IBUF_inst/OUT
+                         IBUFCTRL (Prop_IBUFCTRL_I_O)
+                                                      0.000     0.599 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, unplaced)         0.587     1.186    clk_i_IBUF
+                         BUFGCE (Prop_BUFGCE_I_O)     0.067     1.253 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=73453, unplaced)     2.584     3.837    clk_i_IBUF_BUFG
+                         FDCE                                         r  i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/commit_pointer_q_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_FDCE_C_Q)         0.103     3.940 r  i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/commit_pointer_q_reg[0]/Q
+                         net (fo=16, unplaced)        0.253     4.193    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/commit_pointer_q_reg_n_0_[0]
+                         CARRY8 (Prop_CARRY8_S[0]_O[0])
+                                                      0.066     4.259 r  sepc_q_t0_reg[63]_i_18/O[0]
+                         net (fo=5966, unplaced)      0.380     4.639    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2233_[0]
+                         LUT6 (Prop_LUT6_I4_O)        0.034     4.673 f  sepc_q_t0[63]_i_847/O
+                         net (fo=4, unplaced)         0.232     4.905    sepc_q_t0[63]_i_847_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034     4.939 f  sepc_q_t0[59]_i_265/O
+                         net (fo=2, unplaced)         0.202     5.141    sepc_q_t0[59]_i_265_n_0
+                         LUT3 (Prop_LUT3_I2_O)        0.034     5.175 f  sepc_q_t0[59]_i_121/O
+                         net (fo=4, unplaced)         0.232     5.407    sepc_q_t0[59]_i_121_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034     5.441 f  sepc_q_t0[27]_i_40/O
+                         net (fo=2, unplaced)         0.202     5.643    sepc_q_t0[27]_i_40_n_0
+                         LUT3 (Prop_LUT3_I2_O)        0.034     5.677 f  sepc_q_t0[27]_i_17/O
+                         net (fo=2, unplaced)         0.220     5.897    sepc_q_t0[27]_i_17_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034     5.931 f  speculative_read_pointer_q[1]_i_11/O
+                         net (fo=2, unplaced)         0.202     6.133    speculative_read_pointer_q[1]_i_11_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.034     6.167 f  speculative_read_pointer_q[1]_i_5/O
+                         net (fo=130, unplaced)       0.293     6.460    i_ariane_mem_top/i_ariane/commit_instr_id_commit[68]
+                         LUT3 (Prop_LUT3_I2_O)        0.034     6.494 r  medeleg_q[15]_i_15/O
+                         net (fo=111, unplaced)       0.290     6.784    medeleg_q[15]_i_15_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034     6.818 r  _3766_[1]_i_10/O
+                         net (fo=10, unplaced)        0.223     7.041    i_ariane_mem_top/i_ariane/csr_op_commit_csr[3]
+                         LUT5 (Prop_LUT5_I0_O)        0.153     7.194 r  medeleg_q[15]_i_19/O
+                         net (fo=3, unplaced)         0.208     7.402    medeleg_q[15]_i_19_n_0
+                         LUT5 (Prop_LUT5_I3_O)        0.034     7.436 f  medeleg_q[15]_i_56/O
+                         net (fo=6, unplaced)         0.224     7.660    medeleg_q[15]_i_56_n_0
+                         LUT2 (Prop_LUT2_I0_O)        0.034     7.694 f  medeleg_q[15]_i_23/O
+                         net (fo=67, unplaced)        0.278     7.972    i_ariane_mem_top/i_ariane/csr_regfile_i/csr_read
+                         LUT2 (Prop_LUT2_I0_O)        0.034     8.006 f  priv_lvl_q[1]_i_29/O
+                         net (fo=2, unplaced)         0.202     8.208    priv_lvl_q[1]_i_29_n_0
+                         LUT4 (Prop_LUT4_I3_O)        0.034     8.242 f  priv_lvl_q[1]_i_14/O
+                         net (fo=116, unplaced)       0.291     8.533    i_ariane_mem_top/i_ariane/csr_exception_csr_commit[66]
+                         LUT4 (Prop_LUT4_I1_O)        0.034     8.567 f  scause_q_t0[1]_i_2/O
+                         net (fo=24, unplaced)        0.255     8.822    i_ariane_mem_top/i_ariane/ex_commit[66]
+                         LUT3 (Prop_LUT3_I0_O)        0.034     8.856 r  priv_lvl_q[1]_i_37/O
+                         net (fo=1, unplaced)         0.009     8.865    priv_lvl_q[1]_i_37_n_0
+                         CARRY8 (Prop_CARRY8_S[0]_CO[7])
+                                                      0.307     9.172 f  priv_lvl_q_reg[1]_i_19/CO[7]
+                         net (fo=1, unplaced)         0.000     9.172    priv_lvl_q_reg[1]_i_19_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.031     9.203 f  priv_lvl_q_reg[1]_i_7/CO[7]
+                         net (fo=1, unplaced)         0.000     9.203    priv_lvl_q_reg[1]_i_7_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[5])
+                                                      0.109     9.312 f  priv_lvl_q_reg[1]_i_3/CO[5]
+                         net (fo=15, unplaced)        0.248     9.560    i_ariane_mem_top/i_ariane/csr_regfile_i/_3498_
+                         LUT3 (Prop_LUT3_I1_O)        0.034     9.594 f  sepc_q_t0[0]_i_9/O
+                         net (fo=23, unplaced)        0.254     9.848    i_ariane_mem_top/i_ariane/csr_regfile_i/_3437_
+                         LUT3 (Prop_LUT3_I2_O)        0.034     9.882 r  i___1_i_10/O
+                         net (fo=4, unplaced)         0.214    10.096    i_ariane_mem_top/i_ariane/flush_csr_ctrl
+                         LUT6 (Prop_LUT6_I1_O)        0.034    10.130 r  i___1_i_6__0/O
+                         net (fo=10, unplaced)        0.235    10.365    i_ariane_mem_top/i_ariane/controller_i/_010___0
+                         LUT5 (Prop_LUT5_I4_O)        0.034    10.399 r  out_valid_o_i_3/O
+                         net (fo=128, unplaced)       0.293    10.692    out_valid_o_i_3_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.034    10.726 f  genblk1.req_nodes_t0_8_i_79/O
+                         net (fo=163, unplaced)       0.299    11.025    i_ariane_mem_top/i_ariane/ex_stage_i/mult_valid
+                         LUT3 (Prop_LUT3_I2_O)        0.034    11.059 r  genblk1.req_nodes_t0_8_i_80/O
+                         net (fo=4, unplaced)         0.214    11.273    genblk1.req_nodes_t0_8_i_80_n_0
+                         LUT5 (Prop_LUT5_I1_O)        0.034    11.307 f  genblk1.req_nodes_t0_8_i_81/O
+                         net (fo=21, unplaced)        0.252    11.559    i_ariane_mem_top/i_ariane/flu_trans_id_ex_id[1]
+                         LUT1 (Prop_LUT1_I0_O)        0.037    11.596 r  genblk1.req_nodes_t0_8_i_179/O
+                         net (fo=1, unplaced)         0.008    11.604    genblk1.req_nodes_t0_8_i_179_n_0
+                         CARRY8 (Prop_CARRY8_S[1]_O[1])
+                                                      0.066    11.670 f  genblk1.req_nodes_t0_8_i_88__0/O[1]
+                         net (fo=6686, unplaced)      0.429    12.099    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2238_[1]
+                         LUT1 (Prop_LUT1_I0_O)        0.037    12.136 r  genblk1.req_nodes_t0_8_i_6195/O
+                         net (fo=1, unplaced)         0.008    12.144    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0240_[1]
+                         CARRY8 (Prop_CARRY8_S[1]_O[1])
+                                                      0.066    12.210 r  genblk1.req_nodes_t0_8_i_2627/O[1]
+                         net (fo=6, unplaced)         0.270    12.480    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3053_[1]
+                         LUT6 (Prop_LUT6_I5_O)        0.034    12.514 r  genblk1.req_nodes_t0_8_i_2632/O
+                         net (fo=2, unplaced)         0.202    12.716    genblk1.req_nodes_t0_8_i_2632_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.034    12.750 r  genblk1.req_nodes_t0_8_i_13003/O
+                         net (fo=2, unplaced)         0.202    12.952    genblk1.req_nodes_t0_8_i_13003_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    12.986 r  genblk1.req_nodes_t0_8_i_6187/O
+                         net (fo=2, unplaced)         0.202    13.188    genblk1.req_nodes_t0_8_i_6187_n_0
+                         LUT2 (Prop_LUT2_I1_O)        0.034    13.222 r  genblk1.req_nodes_t0_8_i_2626/O
+                         net (fo=3, unplaced)         0.208    13.430    genblk1.req_nodes_t0_8_i_2626_n_0
+                         LUT5 (Prop_LUT5_I1_O)        0.034    13.464 r  genblk1.req_nodes_t0_8_i_13006/O
+                         net (fo=2, unplaced)         0.202    13.666    genblk1.req_nodes_t0_8_i_13006_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.034    13.700 r  genblk1.req_nodes_t0_8_i_6202/O
+                         net (fo=2, unplaced)         0.202    13.902    genblk1.req_nodes_t0_8_i_6202_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    13.936 r  genblk1.req_nodes_t0_8_i_6199/O
+                         net (fo=2, unplaced)         0.202    14.138    genblk1.req_nodes_t0_8_i_6199_n_0
+                         LUT2 (Prop_LUT2_I1_O)        0.034    14.172 r  genblk1.req_nodes_t0_8_i_2635/O
+                         net (fo=2, unplaced)         0.202    14.374    genblk1.req_nodes_t0_8_i_2635_n_0
+                         LUT4 (Prop_LUT4_I0_O)        0.034    14.408 f  genblk1.req_nodes_t0_8_i_1130/O
+                         net (fo=3, unplaced)         0.208    14.616    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/p_91_in[11]
+                         LUT2 (Prop_LUT2_I1_O)        0.037    14.653 r  genblk1.req_nodes_t0_8_i_2641/O
+                         net (fo=1, unplaced)         0.008    14.661    genblk1.req_nodes_t0_8_i_2641_n_0
+                         CARRY8 (Prop_CARRY8_S[3]_CO[7])
+                                                      0.290    14.951 r  genblk1.req_nodes_t0_8_i_1124/CO[7]
+                         net (fo=1, unplaced)         0.000    14.951    genblk1.req_nodes_t0_8_i_1124_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.031    14.982 r  genblk1.req_nodes_t0_8_i_558__0/CO[7]
+                         net (fo=1, unplaced)         0.000    14.982    genblk1.req_nodes_t0_8_i_558__0_n_0
+                         CARRY8 (Prop_CARRY8_CI_O[5])
+                                                      0.159    15.141 r  genblk1.req_nodes_t0_8_i_1134/O[5]
+                         net (fo=1, unplaced)         0.206    15.347    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3106_[29]
+                         LUT6 (Prop_LUT6_I5_O)        0.034    15.381 r  genblk1.req_nodes_t0_8_i_555__0/O
+                         net (fo=1, unplaced)         0.202    15.583    genblk1.req_nodes_t0_8_i_555__0_n_0
+                         LUT4 (Prop_LUT4_I3_O)        0.034    15.617 r  genblk1.req_nodes_t0_8_i_309__0/O
+                         net (fo=1, unplaced)         0.202    15.819    genblk1.req_nodes_t0_8_i_309__0_n_0
+                         LUT6 (Prop_LUT6_I1_O)        0.034    15.853 r  genblk1.req_nodes_t0_8_i_195__0/O
+                         net (fo=9, unplaced)         0.233    16.086    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_1023_
+                         LUT5 (Prop_LUT5_I0_O)        0.034    16.120 r  genblk1.req_nodes_t0_8_i_200/O
+                         net (fo=4, unplaced)         0.214    16.334    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/p_23_in[2]
+                         LUT2 (Prop_LUT2_I0_O)        0.034    16.368 f  genblk1.req_nodes_t0_8_i_50/O
+                         net (fo=1, unplaced)         0.202    16.570    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0662_[2]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    16.604 r  genblk1.req_nodes_t0_8_i_42/O
+                         net (fo=1, unplaced)         0.202    16.806    genblk1.req_nodes_t0_8_i_42_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    16.840 r  genblk1.req_nodes_t0_8_i_33__0/O
+                         net (fo=1, unplaced)         0.202    17.042    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2848_
+                         LUT5 (Prop_LUT5_I0_O)        0.034    17.076 r  genblk1.req_nodes_t0_8_i_19__0/O
+                         net (fo=1, unplaced)         0.202    17.278    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/p_337_in
+                         LUT6 (Prop_LUT6_I3_O)        0.034    17.312 r  genblk1.req_nodes_t0_8_i_9__0/O
+                         net (fo=1, unplaced)         0.202    17.514    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0433_
+                         LUT6 (Prop_LUT6_I5_O)        0.034    17.548 r  genblk1.req_nodes_t0_8_i_3__0/O
+                         net (fo=1, unplaced)         0.202    17.750    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/p_1_in34_in
+                         LUT4 (Prop_LUT4_I2_O)        0.034    17.784 r  i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/i_sel_rs1/genblk1.req_nodes_t0_8/O
+                         net (fo=1, unplaced)         0.202    17.986    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/i_sel_rs1/genblk1.req_nodes_t0_8_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    18.020 r  i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/i_sel_rs1/genblk1.req_nodes_t0_3/O
+                         net (fo=3, unplaced)         0.208    18.228    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/genblk1.gen_levels[1].gen_level[0].sel_t0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    18.262 r  i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/i_sel_rs1/genblk1.req_nodes_t0_1/O
+                         net (fo=3, unplaced)         0.208    18.470    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/genblk1.gen_levels[0].gen_level[0].sel_t0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    18.504 r  i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/i_sel_rs1/req_o_t0/O
+                         net (fo=1, unplaced)         0.202    18.706    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/rs1_valid_t0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    18.740 r  vaddr_to_be_flushed_t0[63]_i_50/O
+                         net (fo=1, unplaced)         0.202    18.942    i_ariane_mem_top/i_ariane/issue_stage_i/rs1_valid_sb_iro_t0
+                         LUT4 (Prop_LUT4_I2_O)        0.034    18.976 r  vaddr_to_be_flushed_t0[63]_i_24/O
+                         net (fo=2, unplaced)         0.202    19.178    vaddr_to_be_flushed_t0[63]_i_24_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    19.212 r  mult_valid_o_t0_i_19/O
+                         net (fo=2, unplaced)         0.202    19.414    mult_valid_o_t0_i_19_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    19.448 f  issue_entry_valid_o_t0_i_8/O
+                         net (fo=1, unplaced)         0.202    19.650    issue_entry_valid_o_t0_i_8_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    19.684 r  issue_entry_valid_o_t0_i_7/O
+                         net (fo=1, unplaced)         0.202    19.886    i_ariane_mem_top/i_ariane/issue_stage_i/issue_ack_iro_sb_t0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    19.920 r  issue_entry_valid_o_t0_i_6/O
+                         net (fo=12, unplaced)        0.239    20.159    i_ariane_mem_top/i_ariane/issue_stage_i/issue_ack_sb_rename_t0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    20.193 r  issue_cnt_q_t0[2]_i_8/O
+                         net (fo=1049, unplaced)      0.341    20.534    issue_cnt_q_t0[2]_i_8_n_0
+                         LUT2 (Prop_LUT2_I1_O)        0.034    20.568 r  mem_q_t0[2903]_i_6454/O
+                         net (fo=1, unplaced)         0.202    20.770    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3019_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    20.804 r  mem_q_t0[2903]_i_6431/O
+                         net (fo=1, unplaced)         0.202    21.006    mem_q_t0[2903]_i_6431_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    21.040 r  mem_q_t0[2903]_i_6416/O
+                         net (fo=4, unplaced)         0.214    21.254    mem_q_t0[2903]_i_6416_n_0
+                         LUT6 (Prop_LUT6_I2_O)        0.034    21.288 r  mem_q_t0[2901]_i_261/O
+                         net (fo=5, unplaced)         0.220    21.508    mem_q_t0[2901]_i_261_n_0
+                         LUT3 (Prop_LUT3_I2_O)        0.034    21.542 r  mem_q_t0[2897]_i_224/O
+                         net (fo=4, unplaced)         0.214    21.756    mem_q_t0[2897]_i_224_n_0
+                         LUT4 (Prop_LUT4_I1_O)        0.034    21.790 r  mem_q_t0[2897]_i_217/O
+                         net (fo=5, unplaced)         0.220    22.010    mem_q_t0[2897]_i_217_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.034    22.044 r  mem_q_t0[2865]_i_162/O
+                         net (fo=4, unplaced)         0.214    22.258    mem_q_t0[2865]_i_162_n_0
+                         LUT3 (Prop_LUT3_I1_O)        0.034    22.292 r  mem_q_t0[2865]_i_153/O
+                         net (fo=5, unplaced)         0.220    22.512    mem_q_t0[2865]_i_153_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.034    22.546 r  mem_q_t0[2609]_i_130/O
+                         net (fo=4, unplaced)         0.214    22.760    mem_q_t0[2609]_i_130_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    22.794 r  mem_q_t0[1073]_i_110/O
+                         net (fo=1, unplaced)         0.202    22.996    mem_q_t0[1073]_i_110_n_0
+                         LUT4 (Prop_LUT4_I0_O)        0.034    23.030 r  mem_q_t0[1073]_i_104/O
+                         net (fo=2, unplaced)         0.202    23.232    mem_q_t0[1073]_i_104_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    23.266 r  mem_q_t0[1073]_i_113/O
+                         net (fo=1, unplaced)         0.202    23.468    mem_q_t0[1073]_i_113_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    23.502 r  mem_q_t0[1073]_i_109/O
+                         net (fo=1, unplaced)         0.202    23.704    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3577_[1073]
+                         LUT5 (Prop_LUT5_I4_O)        0.034    23.738 r  mem_q_t0[1073]_i_102/O
+                         net (fo=1, unplaced)         0.202    23.940    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3579_[1073]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    23.974 r  mem_q_t0[1073]_i_93/O
+                         net (fo=3, unplaced)         0.208    24.182    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3581_[1073]
+                         LUT5 (Prop_LUT5_I3_O)        0.034    24.216 r  mem_q_t0[1073]_i_92/O
+                         net (fo=2, unplaced)         0.202    24.418    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3585_[1073]
+                         LUT6 (Prop_LUT6_I3_O)        0.034    24.452 r  mem_q_t0[1073]_i_97/O
+                         net (fo=1, unplaced)         0.202    24.654    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2147_[1073]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    24.688 r  mem_q_t0[1073]_i_90/O
+                         net (fo=1, unplaced)         0.202    24.890    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3587_[1073]
+                         LUT3 (Prop_LUT3_I2_O)        0.034    24.924 r  mem_q_t0[1073]_i_83/O
+                         net (fo=1, unplaced)         0.202    25.126    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3589_[1073]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    25.160 r  mem_q_t0[1073]_i_68/O
+                         net (fo=3, unplaced)         0.208    25.368    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3591_[1073]
+                         LUT4 (Prop_LUT4_I3_O)        0.034    25.402 r  mem_q_t0[1073]_i_72/O
+                         net (fo=1, unplaced)         0.202    25.604    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0277_[1073]
+                         LUT6 (Prop_LUT6_I0_O)        0.034    25.638 r  mem_q_t0[1073]_i_59/O
+                         net (fo=1, unplaced)         0.202    25.840    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2135_[1073]
+                         LUT6 (Prop_LUT6_I2_O)        0.034    25.874 r  mem_q_t0[1073]_i_52/O
+                         net (fo=2, unplaced)         0.202    26.076    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0055_[1073]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    26.110 r  mem_q_t0[1073]_i_66/O
+                         net (fo=1, unplaced)         0.202    26.312    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0287_[1073]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    26.346 r  mem_q_t0[1073]_i_55/O
+                         net (fo=4, unplaced)         0.214    26.560    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0289_[1073]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    26.594 r  mem_q_t0[1073]_i_49/O
+                         net (fo=1, unplaced)         0.202    26.796    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0293_[1073]
+                         LUT6 (Prop_LUT6_I0_O)        0.034    26.830 r  mem_q_t0[1073]_i_38/O
+                         net (fo=2, unplaced)         0.202    27.032    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2126_[1073]
+                         LUT6 (Prop_LUT6_I3_O)        0.034    27.066 r  mem_q_t0[1073]_i_53/O
+                         net (fo=1, unplaced)         0.202    27.268    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2129_[1073]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    27.302 r  mem_q_t0[1073]_i_44/O
+                         net (fo=1, unplaced)         0.202    27.504    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3607_[1073]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    27.538 r  mem_q_t0[1073]_i_34/O
+                         net (fo=1, unplaced)         0.202    27.740    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3609_[1073]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    27.774 r  mem_q_t0[1073]_i_24/O
+                         net (fo=3, unplaced)         0.208    27.982    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_3611_[1073]
+                         LUT4 (Prop_LUT4_I3_O)        0.034    28.016 r  mem_q_t0[1073]_i_28/O
+                         net (fo=1, unplaced)         0.202    28.218    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0309_[1073]
+                         LUT6 (Prop_LUT6_I0_O)        0.034    28.252 r  mem_q_t0[1073]_i_20/O
+                         net (fo=1, unplaced)         0.202    28.454    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2117_[1073]
+                         LUT6 (Prop_LUT6_I2_O)        0.034    28.488 r  mem_q_t0[1073]_i_17/O
+                         net (fo=2, unplaced)         0.202    28.690    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0067_[1073]
+                         LUT3 (Prop_LUT3_I0_O)        0.034    28.724 r  mem_q_t0[1073]_i_14/O
+                         net (fo=1, unplaced)         0.202    28.926    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2110_[1073]
+                         LUT6 (Prop_LUT6_I5_O)        0.034    28.960 r  mem_q_t0[1073]_i_9/O
+                         net (fo=2, unplaced)         0.202    29.162    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_0075_[1073]
+                         LUT3 (Prop_LUT3_I0_O)        0.034    29.196 r  mem_q_t0[1073]_i_6/O
+                         net (fo=1, unplaced)         0.202    29.398    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/_2107_[1073]
+                         LUT6 (Prop_LUT6_I5_O)        0.034    29.432 r  mem_q_t0[1073]_i_1/O
+                         net (fo=1, unplaced)         0.045    29.477    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/mem_n_t0_0[1073]
+                         FDCE                                         r  i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/mem_q_t0_reg[1073]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     10.000    10.000 r  
+                                                      0.000    10.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    10.000    clk_i_IBUF_inst/I
+                         INBUF (Prop_INBUF_PAD_O)     0.263    10.263 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, unplaced)         0.045    10.308    clk_i_IBUF_inst/OUT
+                         IBUFCTRL (Prop_IBUFCTRL_I_O)
+                                                      0.000    10.308 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, unplaced)         0.475    10.783    clk_i_IBUF
+                         BUFGCE (Prop_BUFGCE_I_O)     0.060    10.843 r  clk_i_IBUF_BUFG_inst/O
+                         net (fo=73453, unplaced)     2.439    13.282    clk_i_IBUF_BUFG
+                         FDCE                                         r  i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/mem_q_t0_reg[1073]/C
+                         clock pessimism              0.411    13.692    
+                         clock uncertainty           -0.035    13.657    
+                         FDCE (Setup_FDCE_C_D)        0.047    13.704    i_ariane_mem_top/i_ariane/issue_stage_i/i_scoreboard/mem_q_t0_reg[1073]
+  -------------------------------------------------------------------
+                         required time                         13.704    
+                         arrival time                         -29.477    
+  -------------------------------------------------------------------
+                         slack                                -15.773    
+
+
+
+

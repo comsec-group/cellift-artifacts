@@ -1,0 +1,254 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2019.1.1 (lin64) Build 2580384 Sat Jun 29 08:04:45 MDT 2019
+| Date              : Wed Mar 16 17:10:54 2022
+| Host              : lagrev3.ee.ethz.ch running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command           : report_timing
+| Design            : soc_domain_fpga_top
+| Device            : xcvu440-flga2892
+| Speed File        : -3  PRODUCTION 1.26 12-04-2018
+| Temperature Grade : E
+---------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -11.650ns  (required time - arrival time)
+  Source:                 i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/id_stage_i/alu_operator_ex_o_t0_reg[4]/C
+                            (rising edge-triggered cell FDCE clocked by ref_clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/if_stage_i/prefetch_32.prefetch_buffer_i/fifo_i/rdata_Q_t0_reg[32]/D
+                            (rising edge-triggered cell FDCE clocked by ref_clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ref_clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ref_clk_i rise@10.000ns - ref_clk_i rise@0.000ns)
+  Data Path Delay:        21.517ns  (logic 3.540ns (16.452%)  route 17.977ns (83.548%))
+  Logic Levels:           83  (CARRY8=3 LUT2=2 LUT3=2 LUT4=6 LUT5=10 LUT6=60)
+  Clock Path Skew:        -0.145ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.364ns = ( 14.364 - 10.000 ) 
+    Source Clock Delay      (SCD):    4.900ns
+    Clock Pessimism Removal (CPR):    0.391ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ref_clk_i rise edge)
+                                                      0.000     0.000 r  
+                                                      0.000     0.000 r  ref_clk_i (IN)
+                         net (fo=0)                   0.000     0.000    ref_clk_i_IBUF_inst/I
+                         INBUF (Prop_INBUF_PAD_O)     0.520     0.520 r  ref_clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, unplaced)         0.079     0.599    ref_clk_i_IBUF_inst/OUT
+                         IBUFCTRL (Prop_IBUFCTRL_I_O)
+                                                      0.000     0.599 r  ref_clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=114, unplaced)       1.153     1.752    cluster_rtc_o_OBUF
+                         LUT2 (Prop_LUT2_I0_O)        0.062     1.814 r  EnPost_SP[0]_i_4/O
+                         net (fo=1, unplaced)         0.435     2.249    EnPost_SP[0]_i_4_n_0
+                         BUFGCE (Prop_BUFGCE_I_O)     0.067     2.316 r  EnPost_SP[0]_reg_i_2/O
+                         net (fo=6997, unplaced)      2.584     4.900    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/clk
+                         FDCE                                         r  i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/id_stage_i/alu_operator_ex_o_t0_reg[4]/C
+  -------------------------------------------------------------------    -------------------
+                         FDCE (Prop_FDCE_C_Q)         0.103     5.003 r  i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/id_stage_i/alu_operator_ex_o_t0_reg[4]/Q
+                         net (fo=11, unplaced)        0.244     5.247    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/alu_operator_ex_t0[4]
+                         LUT4 (Prop_LUT4_I0_O)        0.115     5.362 r  State_SP_t0[1]_i_9/O
+                         net (fo=9, unplaced)         0.233     5.595    State_SP_t0[1]_i_9_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034     5.629 f  BReg_DP_t0[17]_i_67/O
+                         net (fo=17, unplaced)        0.247     5.876    BReg_DP_t0[17]_i_67_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034     5.910 f  ctrl_fsm_cs_t0[2]_i_51/O
+                         net (fo=9, unplaced)         0.233     6.143    ctrl_fsm_cs_t0[2]_i_51_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.034     6.177 r  ctrl_fsm_cs_t0[2]_i_323/O
+                         net (fo=1, unplaced)         0.202     6.379    ctrl_fsm_cs_t0[2]_i_323_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034     6.413 r  ctrl_fsm_cs_t0[2]_i_282/O
+                         net (fo=3, unplaced)         0.208     6.621    ctrl_fsm_cs_t0[2]_i_282_n_0
+                         LUT4 (Prop_LUT4_I0_O)        0.034     6.655 f  ctrl_fsm_cs_t0[2]_i_192/O
+                         net (fo=3, unplaced)         0.208     6.863    ctrl_fsm_cs_t0[2]_i_192_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034     6.897 f  _3736_[5]_i_394/O
+                         net (fo=2, unplaced)         0.202     7.099    _3736_[5]_i_394_n_0
+                         LUT6 (Prop_LUT6_I2_O)        0.034     7.133 f  _3736_[5]_i_362/O
+                         net (fo=2, unplaced)         0.202     7.335    _3736_[5]_i_362_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034     7.369 r  _3736_[5]_i_322/O
+                         net (fo=1, unplaced)         0.209     7.578    _3736_[5]_i_322_n_0
+                         CARRY8 (Prop_CARRY8_DI[4]_CO[4])
+                                                      0.119     7.697 r  _3736__reg[5]_i_298/CO[4]
+                         net (fo=1, unplaced)         0.268     7.965    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/ex_stage_i/alu_i/_0095_
+                         LUT2 (Prop_LUT2_I1_O)        0.034     7.999 r  _3736_[5]_i_264/O
+                         net (fo=2, unplaced)         0.202     8.201    _3736_[5]_i_264_n_0
+                         LUT6 (Prop_LUT6_I2_O)        0.034     8.235 f  ctrl_fsm_cs_t0[2]_i_281/O
+                         net (fo=2, unplaced)         0.202     8.437    ctrl_fsm_cs_t0[2]_i_281_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.034     8.471 f  ctrl_fsm_cs_t0[2]_i_188/O
+                         net (fo=1, unplaced)         0.202     8.673    ctrl_fsm_cs_t0[2]_i_188_n_0
+                         LUT6 (Prop_LUT6_I1_O)        0.034     8.707 f  ctrl_fsm_cs_t0[2]_i_133/O
+                         net (fo=1, unplaced)         0.202     8.909    ctrl_fsm_cs_t0[2]_i_133_n_0
+                         LUT6 (Prop_LUT6_I2_O)        0.034     8.943 f  ctrl_fsm_cs_t0[2]_i_104/O
+                         net (fo=2, unplaced)         0.202     9.145    ctrl_fsm_cs_t0[2]_i_104_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034     9.179 r  i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/ex_stage_i/ctrl_fsm_cs_t0[2]_i_86/O
+                         net (fo=2, unplaced)         0.202     9.381    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/ex_stage_i/ctrl_fsm_cs_t0[2]_i_86_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034     9.415 f  ctrl_fsm_cs_t0[2]_i_63/O
+                         net (fo=7, unplaced)         0.227     9.642    ctrl_fsm_cs_t0[2]_i_63_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034     9.676 f  ctrl_fsm_cs_t0[2]_i_80/O
+                         net (fo=8, unplaced)         0.230     9.906    ctrl_fsm_cs_t0[2]_i_80_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.034     9.940 r  ctrl_fsm_cs_t0[2]_i_85/O
+                         net (fo=1, unplaced)         0.202    10.142    ctrl_fsm_cs_t0[2]_i_85_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    10.176 r  ctrl_fsm_cs_t0[2]_i_62/O
+                         net (fo=4, unplaced)         0.214    10.390    ctrl_fsm_cs_t0[2]_i_62_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    10.424 f  ctrl_fsm_cs_t0[2]_i_43/O
+                         net (fo=1, unplaced)         0.202    10.626    ctrl_fsm_cs_t0[2]_i_43_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    10.660 f  ctrl_fsm_cs_t0[2]_i_34/O
+                         net (fo=1, unplaced)         0.202    10.862    ctrl_fsm_cs_t0[2]_i_34_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    10.896 f  ctrl_fsm_cs_t0[2]_i_25/O
+                         net (fo=14, unplaced)        0.243    11.139    ctrl_fsm_cs_t0[2]_i_25_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    11.173 r  ctrl_fsm_cs_t0[2]_i_9/O
+                         net (fo=23, unplaced)        0.254    11.427    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/id_stage_i/branch_taken_ex_t0
+                         LUT5 (Prop_LUT5_I2_O)        0.034    11.461 r  i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/id_stage_i/offset_fsm_cs_t0_i_12/O
+                         net (fo=3, unplaced)         0.208    11.669    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/id_stage_i/offset_fsm_cs_t0_i_12_n_0
+                         LUT6 (Prop_LUT6_I2_O)        0.034    11.703 r  instr_addr_q_t0[31]_i_92/O
+                         net (fo=1, unplaced)         0.202    11.905    instr_addr_q_t0[31]_i_92_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    11.939 r  instr_addr_q_t0[31]_i_62/O
+                         net (fo=14, unplaced)        0.243    12.182    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/pc_mux_id_t0[1]
+                         LUT6 (Prop_LUT6_I5_O)        0.034    12.216 r  instr_addr_q_t0[1]_i_28/O
+                         net (fo=32, unplaced)        0.262    12.478    instr_addr_q_t0[1]_i_28_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.034    12.512 r  instr_addr_q_t0[22]_i_35/O
+                         net (fo=1, unplaced)         0.202    12.714    instr_addr_q_t0[22]_i_35_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    12.748 f  instr_addr_q_t0[22]_i_32/O
+                         net (fo=1, unplaced)         0.202    12.950    instr_addr_q_t0[22]_i_32_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    12.984 f  instr_addr_q_t0[22]_i_28/O
+                         net (fo=1, unplaced)         0.202    13.186    instr_addr_q_t0[22]_i_28_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    13.220 r  instr_addr_q_t0[22]_i_25/O
+                         net (fo=1, unplaced)         0.202    13.422    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/if_stage_i/p_23_out[22]
+                         LUT6 (Prop_LUT6_I5_O)        0.034    13.456 r  instr_addr_q_t0[22]_i_17/O
+                         net (fo=1, unplaced)         0.202    13.658    instr_addr_q_t0[22]_i_17_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    13.692 r  instr_addr_q_t0[22]_i_9/O
+                         net (fo=2, unplaced)         0.202    13.894    instr_addr_q_t0[22]_i_9_n_0
+                         LUT6 (Prop_LUT6_I1_O)        0.034    13.928 r  CS_t0[0]_i_133__0/O
+                         net (fo=3, unplaced)         0.208    14.136    i_soc_domain/pulp_soc_i/fc_subsystem_i.core_instr_addr_t0[22]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    14.170 r  CS_t0[0]_i_219__0/O
+                         net (fo=1, unplaced)         0.202    14.372    CS_t0[0]_i_219__0_n_0
+                         LUT5 (Prop_LUT5_I4_O)        0.034    14.406 r  CS_t0[0]_i_187__0/O
+                         net (fo=1, unplaced)         0.202    14.608    CS_t0[0]_i_187__0_n_0
+                         LUT6 (Prop_LUT6_I1_O)        0.034    14.642 r  CS_t0[0]_i_126__0/O
+                         net (fo=2, unplaced)         0.202    14.844    CS_t0[0]_i_126__0_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    14.878 r  CS_t0[0]_i_47__2/O
+                         net (fo=1, unplaced)         0.202    15.080    CS_t0[0]_i_47__2_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    15.114 r  CS_t0[0]_i_20__13/O
+                         net (fo=1, unplaced)         0.202    15.316    CS_t0[0]_i_20__13_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    15.350 f  CS_t0[0]_i_6__17/O
+                         net (fo=6, unplaced)         0.224    15.574    CS_t0[0]_i_6__17_n_0
+                         LUT2 (Prop_LUT2_I0_O)        0.034    15.608 f  fc_subsystem_i.fc_demux_instr_i.demux_state_q_t0_i_4/O
+                         net (fo=44, unplaced)        0.269    15.877    fc_subsystem_i.fc_demux_instr_i.demux_state_q_t0_i_4_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.034    15.911 r  i___23_i_56/O
+                         net (fo=56, unplaced)        0.274    16.185    i_soc_domain/pulp_soc_i/fc_subsystem_i.fc_demux_instr_i.addr_port0_t0[0]
+                         LUT4 (Prop_LUT4_I0_O)        0.085    16.270 r  CS_t0[1]_i_400__1/O
+                         net (fo=1, unplaced)         0.261    16.531    CS_t0[1]_i_400__1_n_0
+                         CARRY8 (Prop_CARRY8_DI[0]_CO[7])
+                                                      0.316    16.847 r  i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/FC_DEMUX_32[4].DEMUX_MASTER_32/CS_t0_reg[1]_i_238/CO[7]
+                         net (fo=1, unplaced)         0.000    16.847    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/FC_DEMUX_32[4].DEMUX_MASTER_32/CS_t0_reg[1]_i_238_n_0
+                         CARRY8 (Prop_CARRY8_CI_CO[7])
+                                                      0.031    16.878 r  i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/FC_DEMUX_32[4].DEMUX_MASTER_32/CS_t0_reg[1]_i_82/CO[7]
+                         net (fo=3, unplaced)         0.278    17.156    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/FC_DEMUX_32[4].DEMUX_MASTER_32/_051_
+                         LUT6 (Prop_LUT6_I2_O)        0.034    17.190 r  CS_t0[1]_i_25__0/O
+                         net (fo=1, unplaced)         0.190    17.380    CS_t0[1]_i_25__0_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.153    17.533 r  CS_t0[1]_i_13__2/O
+                         net (fo=2, unplaced)         0.220    17.753    CS_t0[1]_i_13__2_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.034    17.787 f  CS_t0[0]_i_4__3/O
+                         net (fo=2, unplaced)         0.202    17.989    CS_t0[0]_i_4__3_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    18.023 r  i___99_i_5/O
+                         net (fo=7, unplaced)         0.227    18.250    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/PER_data_req_DEM_2_L2_XBAR_t0[4]
+                         LUT4 (Prop_LUT4_I3_O)        0.034    18.284 r  i___99_i_3/O
+                         net (fo=42, unplaced)        0.268    18.552    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/XBAR_BRIDGE_i/data_req_from_MASTER[4]_t0[1]
+                         LUT6 (Prop_LUT6_I3_O)        0.034    18.586 r  data_rID_o_t0[4]_i_3/O
+                         net (fo=92, unplaced)        0.209    18.795    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/XBAR_BRIDGE_i/RequestBlock[1].CH0_CH1.i_RequestBlock2CH_BRIDGE/CH0_ARB_TREE.i_ArbitrationTree_BRIDGE/BINARY_TREE.STAGE[1].INCR_VERT[0].genblk1.MIDDLE_NODES.i_FanInPrimitive_Req_BRIDGE/SEL_t0
+                         LUT6 (Prop_LUT6_I1_O)        0.034    18.829 r  latched_full_s_t0_i_7/O
+                         net (fo=1, unplaced)         0.202    19.031    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/XBAR_BRIDGE_i/RequestBlock[1].CH0_CH1.i_RequestBlock2CH_BRIDGE/CH0_ARB_TREE.i_ArbitrationTree_BRIDGE/BINARY_TREE.data_wen_LEVEL[0]_t0
+                         LUT6 (Prop_LUT6_I1_O)        0.034    19.065 r  latched_full_s_t0_i_6/O
+                         net (fo=1, unplaced)         0.202    19.267    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/XBAR_BRIDGE_i/RequestBlock[1].CH0_CH1.i_RequestBlock2CH_BRIDGE/data_wen_CH0_t0
+                         LUT6 (Prop_LUT6_I1_O)        0.034    19.301 r  i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/XBAR_BRIDGE_i/RequestBlock[1].CH0_CH1.i_RequestBlock2CH_BRIDGE/latched_full_s_t0_i_5/O
+                         net (fo=5, unplaced)         0.220    19.521    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/PER_data_wen_TO_BRIDGE_t0[1]
+                         LUT5 (Prop_LUT5_I4_O)        0.034    19.555 r  CS_t0[1]_i_2__27/O
+                         net (fo=2, unplaced)         0.202    19.757    CS_t0[1]_i_2__27_n_0
+                         LUT5 (Prop_LUT5_I0_O)        0.034    19.791 r  CS_t0[2]_i_9__9/O
+                         net (fo=2, unplaced)         0.202    19.993    CS_t0[2]_i_9__9_n_0
+                         LUT3 (Prop_LUT3_I0_O)        0.034    20.027 r  CS_t0[2]_i_4__9/O
+                         net (fo=2, unplaced)         0.202    20.229    CS_t0[2]_i_4__9_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    20.263 r  i___98_i_9/O
+                         net (fo=1, unplaced)         0.202    20.465    i___98_i_9_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.034    20.499 r  i___98_i_1__2/O
+                         net (fo=5, unplaced)         0.220    20.719    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/PER_data_gnt_TO_BRIDGE_t0[1]
+                         LUT6 (Prop_LUT6_I1_O)        0.034    20.753 r  i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/XBAR_BRIDGE_i/RequestBlock[1].CH0_CH1.i_RequestBlock2CH_BRIDGE/i___98/O
+                         net (fo=3, unplaced)         0.208    20.961    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/XBAR_BRIDGE_i/RequestBlock[1].CH0_CH1.i_RequestBlock2CH_BRIDGE/CH0_ARB_TREE.i_ArbitrationTree_BRIDGE/BINARY_TREE.data_gnt_LEVEL[0]_t0
+                         LUT6 (Prop_LUT6_I2_O)        0.034    20.995 r  CS_t0[1]_i_380__1/O
+                         net (fo=2, unplaced)         0.202    21.197    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/XBAR_BRIDGE_i/RequestBlock[1].CH0_CH1.i_RequestBlock2CH_BRIDGE/CH0_ARB_TREE.i_ArbitrationTree_BRIDGE/BINARY_TREE.data_gnt_LEVEL[6]_t0
+                         LUT6 (Prop_LUT6_I2_O)        0.034    21.231 r  CS_t0[1]_i_103__3/O
+                         net (fo=2, unplaced)         0.202    21.433    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/XBAR_BRIDGE_i/data_gnt_from_MEM[1]_t0[0]
+                         LUT4 (Prop_LUT4_I3_O)        0.034    21.467 r  CS_t0[1]_i_108__3/O
+                         net (fo=1, unplaced)         0.202    21.669    CS_t0[1]_i_108__3_n_0
+                         LUT6 (Prop_LUT6_I1_O)        0.034    21.703 r  CS_t0[1]_i_40__7/O
+                         net (fo=1, unplaced)         0.202    21.905    CS_t0[1]_i_40__7_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    21.939 r  CS_t0[1]_i_15__6/O
+                         net (fo=1, unplaced)         0.202    22.141    i_soc_domain/pulp_soc_i/i_soc_interconnect_wrap.i_soc_interconnect/PER_data_gnt_DEM_2_L2_XBAR_t0[0]
+                         LUT6 (Prop_LUT6_I4_O)        0.034    22.175 f  CS_t0[1]_i_5/O
+                         net (fo=2, unplaced)         0.202    22.377    CS_t0[1]_i_5_n_0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    22.411 r  data_type_q_t0[0]_i_3/O
+                         net (fo=1, unplaced)         0.202    22.613    i_soc_domain/pulp_soc_i/fc_subsystem_i.fc_demux_data_i.gnt_port0_t0
+                         LUT6 (Prop_LUT6_I1_O)        0.034    22.647 r  data_type_q_t0[0]_i_2/O
+                         net (fo=18, unplaced)        0.249    22.896    i_soc_domain/pulp_soc_i/fc_subsystem_i.core_data_bus.gnt_t0
+                         LUT4 (Prop_LUT4_I1_O)        0.034    22.930 r  regfile_we_lsu_t0_i_17/O
+                         net (fo=1, unplaced)         0.202    23.132    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/load_store_unit_i/_0016_
+                         LUT6 (Prop_LUT6_I2_O)        0.034    23.166 r  regfile_we_lsu_t0_i_14/O
+                         net (fo=1, unplaced)         0.202    23.368    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/load_store_unit_i/_0667_
+                         LUT5 (Prop_LUT5_I0_O)        0.034    23.402 r  regfile_we_lsu_t0_i_13/O
+                         net (fo=2, unplaced)         0.202    23.604    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/lsu_ready_ex_t0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    23.638 f  alu_operand_b_ex_o_t0[22]_i_18/O
+                         net (fo=1, unplaced)         0.202    23.840    alu_operand_b_ex_o_t0[22]_i_18_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    23.874 r  alu_operand_b_ex_o_t0[22]_i_13/O
+                         net (fo=1, unplaced)         0.202    24.076    alu_operand_b_ex_o_t0[22]_i_13_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    24.110 r  alu_operand_b_ex_o_t0[22]_i_6/O
+                         net (fo=1, unplaced)         0.202    24.312    alu_operand_b_ex_o_t0[22]_i_6_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.034    24.346 r  alu_operand_b_ex_o_t0[22]_i_2/O
+                         net (fo=49, unplaced)        0.271    24.617    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/ex_ready_t0
+                         LUT6 (Prop_LUT6_I4_O)        0.034    24.651 r  id_valid_q_t0_i_3/O
+                         net (fo=30, unplaced)        0.260    24.911    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/id_ready_t0
+                         LUT6 (Prop_LUT6_I0_O)        0.034    24.945 r  illegal_c_insn_id_o_t0_i_11/O
+                         net (fo=2, unplaced)         0.202    25.147    illegal_c_insn_id_o_t0_i_11_n_0
+                         LUT6 (Prop_LUT6_I5_O)        0.034    25.181 r  illegal_c_insn_id_o_t0_i_2/O
+                         net (fo=10, unplaced)        0.235    25.416    illegal_c_insn_id_o_t0_i_2_n_0
+                         LUT6 (Prop_LUT6_I4_O)        0.034    25.450 r  is_hwlp_Q_t0[0]_i_4/O
+                         net (fo=105, unplaced)       0.289    25.739    is_hwlp_Q_t0[0]_i_4_n_0
+                         LUT3 (Prop_LUT3_I0_O)        0.034    25.773 r  rdata_Q_t0[95]_i_3/O
+                         net (fo=120, unplaced)       0.292    26.065    rdata_Q_t0[95]_i_3_n_0
+                         LUT6 (Prop_LUT6_I2_O)        0.034    26.099 f  rdata_Q_t0[59]_i_3/O
+                         net (fo=12, unplaced)        0.239    26.338    rdata_Q_t0[59]_i_3_n_0
+                         LUT6 (Prop_LUT6_I3_O)        0.034    26.372 r  rdata_Q_t0[32]_i_1/O
+                         net (fo=1, unplaced)         0.045    26.417    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/if_stage_i/prefetch_32.prefetch_buffer_i/fifo_i/_0497_[32]
+                         FDCE                                         r  i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/if_stage_i/prefetch_32.prefetch_buffer_i/fifo_i/rdata_Q_t0_reg[32]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ref_clk_i rise edge)
+                                                     10.000    10.000 r  
+                                                      0.000    10.000 r  ref_clk_i (IN)
+                         net (fo=0)                   0.000    10.000    ref_clk_i_IBUF_inst/I
+                         INBUF (Prop_INBUF_PAD_O)     0.263    10.263 r  ref_clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, unplaced)         0.045    10.308    ref_clk_i_IBUF_inst/OUT
+                         IBUFCTRL (Prop_IBUFCTRL_I_O)
+                                                      0.000    10.308 r  ref_clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=114, unplaced)       1.095    11.403    cluster_rtc_o_OBUF
+                         LUT2 (Prop_LUT2_I0_O)        0.049    11.452 r  EnPost_SP[0]_i_4/O
+                         net (fo=1, unplaced)         0.413    11.865    EnPost_SP[0]_i_4_n_0
+                         BUFGCE (Prop_BUFGCE_I_O)     0.060    11.925 r  EnPost_SP[0]_reg_i_2/O
+                         net (fo=6997, unplaced)      2.439    14.364    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/clk
+                         FDCE                                         r  i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/if_stage_i/prefetch_32.prefetch_buffer_i/fifo_i/rdata_Q_t0_reg[32]/C
+                         clock pessimism              0.391    14.755    
+                         clock uncertainty           -0.035    14.720    
+                         FDCE (Setup_FDCE_C_D)        0.047    14.767    i_soc_domain/pulp_soc_i/fc_subsystem_i.FC_CORE.lFC_CORE/if_stage_i/prefetch_32.prefetch_buffer_i/fifo_i/rdata_Q_t0_reg[32]
+  -------------------------------------------------------------------
+                         required time                         14.767    
+                         arrival time                         -26.417    
+  -------------------------------------------------------------------
+                         slack                                -11.650    
+
+
+
+
