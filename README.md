@@ -7,6 +7,7 @@
 Steps needed after this git repo is cloned:
 1. Obtain the Docker image. (Human time: 1 minute. Computer time: likely many hours.)
 2. Install Xilinx Vivado. (Human time: 2 minutes. Computer time: several hours.)
+   (Optional, we included our own Vivado logs)
 3. Run experiments. (Human time: 5 minutes, on and off. Computer time: several days.)
 
 Welcome to the Artifact of this paper. We have made considerable effort to
@@ -31,6 +32,7 @@ smaller, but it may be harder to provide incremental updates if needed,
 hence our decision to make the huge, layered image available.
 To download the image and download and install Vivado, together, we estimate
 a total of 500GB of storage will be needed.
+Installing Vivado is optional.
 
 Software: OS:
 we tested our Docker image on a Ubuntu 22.04 host machine.
@@ -41,7 +43,8 @@ but some recent Ubuntu distro's are supported.
 Software: FPGA synthesis tool (no fpga hardware required):
 We depend on Xilinx Vivado (we tested v2022.1) and a large device
 target. This requires a license. If no license is available, a 30-day
-trial license can be obtained automatically.
+trial license can be obtained automatically. If you don't wish to
+do this, you can use our Vivado logs.
 
 ## Steps to reproduce this work
 
@@ -60,6 +63,8 @@ Stable digest:
         Digest: sha256:9a15d4070d321026ad4d5d9ba5a236842c6c456279f9c08f4fa4132de7b399ce
 
 ### Install Xilinx Vivado. (Human time: 5 minutes. Computer time: several hours.)
+
+(This is optional if you re-use the Vivado logs we provide; see later.)
 
 Download Vivado full edition from the Xilinx website. Install it in a
 path of its own.  We use HOMEDIR/tools/xilinx/. To use it later, source
@@ -189,7 +194,41 @@ Together these should look like Figure 8.
 
 Reproducing the FPGA synthesis experiments is outside a Docker container. 
 
-First we source the settings file for Vivado. On our machine:
+First we show how to reproduce our results with our provided Vivado logs.
+We go to the repo and execute the chart script. that takes as an
+argument the root path where all the FPGA experiments and outputs are stored.
+We provded our own in GITREPO/our-fpga-results. Let's reproduce these
+first:
+
+        cd GITREPO/cellift-fpga-glance/plot_fpga
+        python3 plot.py ../../our-fpga-results
+
+This gives output like:
+
+        BOOM vanilla /home/beng/development/cellift-ae/our-fpga-results/boom_vanila/report_utilization_impl.txt
+        BOOM vanilla /home/beng/development/cellift-ae/our-fpga-results/boom_vanila/report_timing_impl.txt
+        data for paths:
+        {   'Ariane': {'cellift': 25.64, 'vanilla': 11.693},
+            'BOOM': {'cellift': 31.041, 'glift': 37.108, 'vanilla': 9.363},
+            'Ibex': {'cellift': 14.305, 'glift': 19.345, 'vanilla': 9.509},
+            'PULPissimo': {'cellift': 21.517, 'glift': 20.561, 'vanilla': 18.228},
+            'Rocket': {'cellift': 18.705, 'glift': 29.265, 'vanilla': 6.94}}
+        data for LUTs:
+        {   'Ariane': {'cellift': 970154, 'vanilla': 41192},
+            'BOOM': {'cellift': 1625704, 'glift': 1856776, 'vanilla': 73536},
+            'Ibex': {'cellift': 17417, 'glift': 25871, 'vanilla': 3469},
+            'PULPissimo': {'cellift': 154555, 'glift': 232830, 'vanilla': 32318},
+            'Rocket': {'cellift': 104128, 'glift': 118598, 'vanilla': 11965}}
+        ['BOOM', 'Ariane', 'PULPissimo', 'Ibex', 'Rocket']
+
+And output in:
+
+        fpga.png
+
+Which should look like Figure 9. (Some re-ordering is likely.)
+
+To reproduce all FPGA experiments, we need Vivado. This will take several
+days.  First we source the settings file for Vivado. On our machine:
 
         source ~/tools/xilinx/Vivado/2022.1/settings64.sh
 
