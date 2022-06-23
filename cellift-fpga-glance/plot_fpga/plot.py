@@ -1,8 +1,10 @@
 import matplotlib.pyplot as plt
+import sys
 import matplotlib
 import numpy as np
 import pprint
 import json
+from pathlib import Path
 
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
@@ -22,14 +24,93 @@ rectangle_colors = {
     "glift":       'orange', # default orange
 }
 
-with open("fpga_critical_paths.json", "r") as f:
-    data_paths = json.load(f) #
-with open("fpga_luts.json", "r") as f:
-    data_luts = json.load(f) #
+#for freq it is for example Data Path Delay:        25.640ns  in report_timing_impl.txt
+#for utilization it is for example CLB LUTs*               | 970154 in report_utilization_impl.txt
+
+# Generate json
+data_paths=dict()
+data_luts=dict()
+for path in Path(sys.argv[1]).rglob('*.txt'):
+    fn = str(path.resolve())
+
+    if 'report_utilization_impl.txt' not in fn and 'report_timing_impl.txt' not in fn:
+        continue
+
+    if '/pulpissimo/' in fn or 'pulpissimo_' in fn:
+        d="PULPissimo"
+    elif '/boom/' in fn or 'boom_' in fn:
+        d="BOOM"
+    elif '/cva6/' in fn or 'cva6_' in fn:
+        d="Ariane"
+    elif '/rocket/' in fn or 'rocket_' in fn:
+        d="Rocket"
+    elif '/ibex/' in fn or 'ibex_' in fn:
+        d="Ibex"
+    else:
+        raise Exception('did not recognize design')
+
+    if 'vanilla_proj' in fn or '_vanilla' in fn or '_vanila' in fn:
+        i='vanilla'
+    elif 'cellift_proj' in fn or '_cellift' in fn:
+        i='cellift'
+    elif 'glift_proj' in fn or '_glift' in fn:
+        i='glift'
+    else:
+        raise Exception('did not recognize instrumentation for %s' % fn)
+
+    if d not in data_luts:
+        data_luts[d] = dict()
+    if d not in data_paths:
+        data_paths[d] = dict()
+
+    if 'report_utilization_impl.txt' in fn:
+        used=None
+        for line in open(fn):
+            if 'CLB LUTs' in line:
+                fields=line.split('|')
+                assert len(fields) > 3
+                used=int(fields[2])
+                break
+
+        if used == None:
+            raise Exception('did not find CLB LUTs line in report')
+        assert i not in data_luts[d]
+        data_luts[d][i] = used
+
+    elif 'report_timing_impl.txt' in fn:
+        timing=None
+        for line in open(fn):
+            line=line.lstrip().rstrip()
+            fields=line.split(' ')
+            fields=[w for w in fields if w != '']
+            if 'Data Path Delay:' in line:
+                ns=fields[3]
+                assert 'ns' in ns
+                ns=float(ns[:-2])
+                timing=ns
+                break
+
+        if timing == None:
+            raise Exception('did not find timing line in report')
+        assert i not in data_paths[d]
+        data_paths[d][i] = timing
+    else:
+        raise Exception('did not recognize report type')
+
+    print(d, i, fn)
+
+# Read json
+#with open("fpga_critical_paths.json", "r") as f:
+#    data_paths = json.load(f) #
+#with open("fpga_luts.json", "r") as f:
+#    data_luts = json.load(f) #
 
 design_names = list(data_paths.keys())
 
+print('data for paths:')
 pp.pprint(data_paths)
+print('data for LUTs:')
+pp.pprint(data_luts)
 pp.pprint(design_names)
 
 ##########
