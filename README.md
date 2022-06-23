@@ -189,17 +189,23 @@ Together these should look like Figure 8.
 
 Reproducing the FPGA synthesis experiments is outside a Docker container. 
 
-Go to the Artifacts repo, to the `cellift-fpga-glance` dir. In each design directory, for each instrumentation
-type, create a run directory, and execute `vivado` from there:
+First we source the settings file for Vivado. On our machine:
 
-        cd cellift-fpga-glance/ibex
-        mkdir run-vanilla
-        cd run-vanilla
-        vivado -mode tcl -source ../commands_vanilla.tcl
+        source ~/tools/xilinx/Vivado/2022.1/settings64.sh
 
-repeat this step for each design (ibex, cva6, pulpissimo, rocket, boom) and for each commands file
-(`commands_cellift.tcl`, `commands_glift.tcl`, `commands_vanilla.tcl`). The results will be text files in
-the run directories.
+Now go to the Artifacts repo, to the `cellift-fpga-glance` dir.
+Now, in each design directory, for each instrumentation type, create a
+run directory, and execute `vivado` from there. To automate this, we do:
+
+    sh run-all.sh
+
+This will take a long time in total. The script does have some incremental
+logic to skip fully complete synthesis runs.
+
+The end result of this step is `report_timing_impl.txt`,
+`report_timing.txt`, `report_utilization_impl.txt`, and
+`report_utilization.txt` in dirs `DESIGN/INSTR_proj` (for 5 DESIGN values
+and 3 INSTR values).
 
 #### Execute Spectre and Meltdown POCs to reproduce Figure 11 (human time: a few minutes. computer time: a few minutes.)
 
