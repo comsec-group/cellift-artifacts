@@ -197,7 +197,7 @@ Reproducing the FPGA synthesis experiments is outside a Docker container.
 First we show how to reproduce our results with our provided Vivado logs.
 We go to the repo and execute the chart script. that takes as an
 argument the root path where all the FPGA experiments and outputs are stored.
-We provded our own in GITREPO/our-fpga-results. Let's reproduce these
+We provided our own in GITREPO/our-fpga-results. Let's reproduce these
 first:
 
         cd GITREPO/cellift-fpga-glance/plot_fpga
@@ -310,7 +310,7 @@ conclusions are reached in detail.
 #### Execute stats to support Section 8.4. (human time: a few minutes. computer time: many hours.)
 
 To reproduce the cellstats figure in the appendix, we provide the raw data
-in the image, as they take quite some time to produce (instrmentation).
+in the image, as they take quite some time to produce (instrumentation).
 
 To generate the plot from this data:
 
