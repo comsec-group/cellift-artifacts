@@ -11,6 +11,7 @@ do
                         echo " *** $design $instr report complete, skipping"
                         continue
                 fi
+                bzip2 -k -d -f *.bz2
                 echo " *** $design $instr not complete, synthesizing"
                 rm -rf ${instr}_proj
                 mkdir -p ${instr}_proj
