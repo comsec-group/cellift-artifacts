@@ -18,3 +18,4 @@ wait_on_run impl_1
 open_run impl_1
 report_timing > report_timing_impl.txt
 report_utilization > report_utilization_impl.txt
+exit
