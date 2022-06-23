@@ -259,6 +259,8 @@ this produces
 
         /cellift-meta/python-experiments/cellstats.png
 
+This should look like Figure 12.
+
 If you wish to regenerate the stats
 file from scratch, remove the .log files in
 `/cellift-designs/cellift-pulpissimo-hdac-2018/cellift/statistics`
