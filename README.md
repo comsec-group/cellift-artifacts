@@ -26,12 +26,17 @@ course this memory measurement step can't be done. Under these circumstances a
 64GB desktop should be able to run all the remaining experiments.
 
 Hardware: storage:
-The Docker image is 300GB. A squashed and tidied image will be vastly
+The Docker image is 330GB. A squashed and tidied image will be vastly
 smaller, but it may be harder to provide incremental updates if needed,
 hence our decision to make the huge, layered image available.
+To download the image and download and install Vivado, together, we estimate
+a total of 500GB of storage will be needed.
 
 Software: OS:
 we tested our Docker image on a Ubuntu 22.04 host machine.
+But we expect any reasonable modern docker-capable distro will work.
+The OS requirements for Vivado are of course entirely up to Xilinx,
+but some recent Ubuntu distro's are supported.
 
 Software: FPGA synthesis tool (no fpga hardware required):
 We depend on Xilinx Vivado (we tested v2022.1) and a large device
@@ -54,7 +59,7 @@ Stable digest:
 
         Digest: sha256:9a15d4070d321026ad4d5d9ba5a236842c6c456279f9c08f4fa4132de7b399ce
 
-### Install Xilinx Vivado. (Human time: 2 minutes. Computer time: several hours.)
+### Install Xilinx Vivado. (Human time: 5 minutes. Computer time: several hours.)
 
 Download Vivado full edition from the Xilinx website. Install it in a
 path of its own.  We use HOMEDIR/tools/xilinx/. To use it later, source
@@ -71,6 +76,10 @@ is also a convenient reference on how to run each experiment.
 First, start a new container with the image:
 
         docker run -it docker.io/ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation /bin/bash
+
+WARNING: if you exit this shell (thereby stopping the container), the
+state will not be saved. If you wish to save the state, run a 'docker
+commit' on the container to save its state.
 
 This procedure assumes you don't want to rebuild *everything* from
 scratch. If you do, the full source code for it is in /cellift-meta/
@@ -95,7 +104,7 @@ won't skip work because there are already results:
 this path contains charts and data from experiments captured on our own
 systems and can be used as comparison material.
 
-#### Cell microbenchmarks for reproducing Figure 6 (human time: seberal minutes at a time. computer time: a day)
+#### Cell microbenchmarks for reproducing Figure 6 (human time: several minutes at a time. computer time: a day)
 
         cd /cellift-meta/cellift-ubenchmarks
         make verilator_build NUM_EXECUTIONS=100000 

@@ -98,7 +98,7 @@ of a native toolchain and RISCV toolchain and other dependencies. We also
 provide source code to perform all experiments described in this paper,
 and to analyze the results. All of this is packaged as a Docker image to
 allow optimal reproducibility. To reproduce all experiments, we expect that
-a machine with 256GB memory and 350GB of free storage will be needed. Less memory is needed if the
+a machine with 256GB memory and 500GB of free storage will be needed. Less memory is needed if the
 precompiled executables of the designs are used so that synthesis (i.e.\ compiling)
 isn't necessary. In that case we believe 64GB will be enough.
 
@@ -119,7 +119,7 @@ isn't necessary. In that case we believe 64GB will be enough.
   \item {\bf Metrics: } The experiments record runtime performance and IFT precision for microbenchmarks for \ourname as well as GLIFT. Further experiments record execution time and memory footprint of the instrumentation and synthesis process for uninstrumented designs, as well as \ourname and GLIFT instrumentations. We also measure benchmark simulation performance on instrumented designs (\ourname and GLIFT) vs uninstrumented designs. Lastly, we show resource usage and clockable frequency after FPGA synthesis for all 5 designs each under all 3 instrumentation modes, where possible.
   \item {\bf Output: } For all experiments used in the Evaluation section of this paper, we include code to regenerate the charts. Also, we include code to reproduce all results in the Scenarios section of this paper: the Meltdown and Spectre scenarios, and the architectural vulnerabilities. 
   \item {\bf Experiments: } With the exception of the FPGA results, all experiments were executed automatically when the Docker image was built. This means the way to reproduce all experiments is encoded in the Dockerfile, and a Docker container can be run that contains the generated results, and can be used to re-run individual experiments if desired. 
-  \item {\bf How much disk space required: } The docker image with all layers is 310GB.
+  \item {\bf How much disk space required: } The docker image with all layers is 330GB, Xilinx Vivado is a large download (around 70GB) and install (around 80GB), so we estimate a total of 500GB free storage will be used.
   \item {\bf How much time is needed to prepare workflow: } To prepare the workflow, conscious effort is only needed to retrieve the Git repository and the Docker image, a total amount of effort of only 5 minutes. For these steps to finish will no doubt take many hours, depending on available Internet bandwidth.
   \item {\bf How much time is needed to complete experiments: } Approximately 3 days. 
   \item {\bf Publicly available: } Stable URL: \url{https://github.com/comsec-group/cellift-artifacts/commit/6a5128cdf6a5b738c040b3900ec6b95c1df10f0c}. The README points to a stable (sha256-verified) Docker image that contains the rest of the code and data.
