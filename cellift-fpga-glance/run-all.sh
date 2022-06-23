@@ -16,7 +16,7 @@ do
                 rm -rf ${instr}_proj
                 mkdir -p ${instr}_proj
                 cd ${instr}_proj
-                vivado -mode tcl -source ../$tcl 2>&1 | tee vivado-log-$design-$instr.txt
+                vivado -mode batch -source ../$tcl 2>&1 | tee vivado-log-$design-$instr.txt
             )
         done
 done
