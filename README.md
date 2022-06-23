@@ -20,10 +20,10 @@ this is unfortunately a very heavyweight artifact, due to
 the resource-intensive nature of the Verilog transformation and
 synthesis into C++ code (especially by the competition, GLIFT), and of FPGA synthesis.
 To reproduce all results, including memory requirements for C++ synthesis
-(figure 7), 256GB will be required. If such a machine is not available,
+(figure 7), 256GB of RAM will be required. If such a machine is not available,
 re-using already-generated binaries in the Docker image is possible, but of
 course this memory measurement step can't be done. Under these circumstances a
-64GB desktop should be able to run all the remaining experiments.
+desktop with 64GB of RAM should be able to run all the remaining experiments.
 
 Hardware: storage:
 The Docker image is 330GB. A squashed and tidied image will be vastly
@@ -149,7 +149,7 @@ Figure 7, the instrumentation and synthesis time.
 
 All of these have to be executed in each of the design directories
 above. This will take a long time, in particular for the glift
-targets. For Ariane (cellift-cva6 dir) and Boom (cellift-boom dir) the
+targets. For Ariane (cellift-cva6 dir) and Boom (cellift-chipyard/cellift-boom dir) the
 glift targets eventually fail (timeout or OOM), so we recommend these
 are skipped, although they can be tried if they are running on a machine
 with a lot of memory and the evaluator has much patience.
