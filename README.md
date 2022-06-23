@@ -236,15 +236,32 @@ Now go to the Artifacts repo, to the `cellift-fpga-glance` dir.
 Now, in each design directory, for each instrumentation type, create a
 run directory, and execute `vivado` from there. To automate this, we do:
 
-    sh run-all.sh
+        cd GITREPO/cellift-fpga-glance
+        sh run-all.sh
 
 This will take a long time in total. The script does have some incremental
-logic to skip fully complete synthesis runs.
+logic to skip fully complete synthesis runs, but it will take a little 
+flexibility from the operator to abort the GLIFT runs when they take too
+long. Intermediate results (see next step) can be generated continually,
+as the output .txt files are generated at each synthesis step, so
+long running synthesis cases are no disaster.
 
 The end result of this step is `report_timing_impl.txt`,
 `report_timing.txt`, `report_utilization_impl.txt`, and
 `report_utilization.txt` in dirs `DESIGN/INSTR_proj` (for 5 DESIGN values
 and 3 INSTR values).
+
+To generate the plots for your own data, point the plot script to the
+root of all the output files:
+
+        cd GITREPO/cellift-fpga-glance/plot_fpga
+        python3 plot.py ../
+
+This again produces this output:
+
+        fpga.png
+
+Which should look like Figure 9. (Some re-ordering is likely.)
 
 #### Execute Spectre and Meltdown POCs to reproduce Figure 11 (human time: a few minutes. computer time: a few minutes.)
 
