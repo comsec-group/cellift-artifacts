@@ -41,7 +41,7 @@ The OS requirements for Vivado are of course entirely up to Xilinx,
 but some recent Ubuntu distro's are supported.
 
 Software: FPGA synthesis tool (no fpga hardware required):
-We depend on Xilinx Vivado (we tested v2022.1) and a large device
+We depend on Xilinx Vivado (we tested v2019.3) and a large device
 target. This requires a license. If no license is available, a 30-day
 trial license can be obtained automatically. If you don't wish to
 do this, you can use our Vivado logs.
