@@ -169,7 +169,7 @@ These scripts will print the path names of the output charts they produced:
 To copy the chart out and view it, `docker cp` can be used. The result should look
 like Figure 7 in the paper.
 
-#### Execute RISCV benchmarks on vanilla and instrumented designs to reproduce Figure 8 (human time: several minutes at a time. computer time: a few minutes on a fast machine)
+#### Execute RISCV benchmarks on vanilla and instrumented designs to reproduce Figure 8 (human time: several minutes at a time. computer time: several hours on a fast machine.)
 
 To reproduce Figure 8 we execute benchmarks on many design variants. This is driven
 by the plotting target, so we only have to do this:
