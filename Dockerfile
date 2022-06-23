@@ -148,15 +148,15 @@ RUN bash -c ". ../env.sh && python3 plot_num_tainted_states_ibex.py"
 
 # Generate statistics for appendix statistics plot
 #WORKDIR /cellift-designs/cellift-chipyard/cellift-boom
-#RUN make statistics/glift.log statistics/cellift.log statistics/vanilla.log
+#RUN bash -c ". /cellift-meta/env.sh && make statistics/glift.log statistics/cellift.log statistics/vanilla.log"
 #WORKDIR /cellift-designs/cellift-chipyard/cellift-rocket
-#RUN make statistics/glift.log statistics/cellift.log statistics/vanilla.log
+#RUN bash -c ". /cellift-meta/env.sh && make statistics/glift.log statistics/cellift.log statistics/vanilla.log"
 #WORKDIR /cellift-designs/cellift-cva6/cellift
-#RUN make statistics/glift.log statistics/cellift.log statistics/vanilla.log
+#RUN bash -c ". /cellift-meta/env.sh && make statistics/glift.log statistics/cellift.log statistics/vanilla.log"
 #WORKDIR /cellift-designs/cellift-ibex/cellift
-#RUN make statistics/glift.log statistics/cellift.log statistics/vanilla.log
+#RUN bash -c ". /cellift-meta/env.sh && make statistics/glift.log statistics/cellift.log statistics/vanilla.log"
 #WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
-#RUN make statistics/glift.log statistics/cellift.log statistics/vanilla.log
+#RUN bash -c ". /cellift-meta/env.sh && make statistics/glift.log statistics/cellift.log statistics/vanilla.log"
 
 # Pre-generated files from the above
 # Copy statistics for appendix statistics plot
@@ -166,3 +166,7 @@ COPY stats-cells.tgz /
 RUN tar xf stats-cells.tgz
 WORKDIR /cellift-meta/python-experiments
 RUN bash -c ". ../env.sh && python3 plot_cellstats.py"
+
+# Remove this limit
+WORKDIR /cellift-meta/python-experiments
+RUN sed -i 's/MAX_SIM_CYCLES = 10/MAX_SIM_CYCLES = 100000000/' plot_benchmark_performance.py
