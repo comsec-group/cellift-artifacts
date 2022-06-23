@@ -145,3 +145,12 @@ RUN bash -c ". ../env.sh && python3 plot_rss.py"
 # Reproduce benchmark precision performance (Figure 8)
 WORKDIR /cellift-meta/python-experiments
 RUN bash -c ". ../env.sh && python3 plot_num_tainted_states_ibex.py"
+
+# Generate statistics for appendix statistics plot
+WORKDIR /cellift-designs/cellift-chipyard/cellift-boom
+RUN make statistics/glift.log statistics/cellift.log statistics/vanilla.log
+WORKDIR /cellift-designs/cellift-chipyard/cellift-rocket
+WORKDIR /cellift-designs/cellift-cva6/cellift
+WORKDIR /cellift-designs/cellift-ibex/cellift
+WORKDIR /cellift-designs/cellift-pulpissimo-hdac-2018/cellift
+
