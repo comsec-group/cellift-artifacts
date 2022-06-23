@@ -163,4 +163,4 @@ ax_lut.grid(which='major', axis='y')
 fig.tight_layout()
 
 plt.savefig("fpga.png", dpi=300)
-plt.savefig("../figures/fpga.pdf", dpi=300)
+plt.savefig("fpga.pdf", dpi=300)
