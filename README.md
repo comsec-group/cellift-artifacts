@@ -307,7 +307,7 @@ analyzing the signal trace that each simulation in `scenarios.py`. The
 control flow of that script is very readable and shows us how these
 conclusions are reached in detail.
 
-#### Execute stats to support Section 8.4. (human time: a few minutes. computer time: many hours.)
+#### Execute stats to regenerate chart in appendix. (human time: a few minutes. computer time: many hours.)
 
 To reproduce the cellstats figure in the appendix, we provide the raw data
 in the image, as they take quite some time to produce (instrumentation).
