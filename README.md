@@ -62,6 +62,12 @@ Stable digest:
 
         Digest: sha256:9a15d4070d321026ad4d5d9ba5a236842c6c456279f9c08f4fa4132de7b399ce
 
+Pull by hash:
+
+        docker pull docker.io/ethcomsec/cellift-artifact-evaluation@sha256:9a15d4070d321026ad4d5d9ba5a236842c6c456279f9c08f4fa4132de7b399ce
+
+However, if you pull by hash, make sure the new image has the tag `docker.io/ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation` so the next instructions work.
+
 ### Install Xilinx Vivado. (Human time: 5 minutes. Computer time: several hours.)
 
 (This is optional if you re-use the Vivado logs we provide; see later.)
