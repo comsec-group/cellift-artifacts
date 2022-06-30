@@ -170,3 +170,6 @@ RUN bash -c ". ../env.sh && python3 plot_cellstats.py"
 # Remove this limit
 WORKDIR /cellift-meta/python-experiments
 RUN sed -i 's/MAX_SIM_CYCLES = 10/MAX_SIM_CYCLES = 100000000/' plot_benchmark_performance.py
+
+COPY python-experiments /python-experiments/
+RUN cp /python-experiments/* /cellift-meta/python-experiments
