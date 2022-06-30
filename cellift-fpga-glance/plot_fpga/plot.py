@@ -24,12 +24,15 @@ rectangle_colors = {
     "glift":       'orange', # default orange
 }
 
+all_synth = list(rectangle_colors)
+all_designs = ["PULPissimo", "BOOM", "Ariane", "Rocket", "Ibex",]
+
 #for freq it is for example Data Path Delay:        25.640ns  in report_timing_impl.txt
 #for utilization it is for example CLB LUTs*               | 970154 in report_utilization_impl.txt
 
 # Generate json
-data_paths=dict()
-data_luts=dict()
+data_paths={d: {s: 0 for s in all_synth} for d in all_designs}
+data_luts={d: {s: 0 for s in all_synth} for d in all_designs}
 for path in Path(sys.argv[1]).rglob('*.txt'):
     fn = str(path.resolve())
 
@@ -74,7 +77,7 @@ for path in Path(sys.argv[1]).rglob('*.txt'):
 
         if used == None:
             raise Exception('did not find CLB LUTs line in report')
-        assert i not in data_luts[d]
+        assert i not in data_luts[d] or data_luts[d][i] == 0
         data_luts[d][i] = used
 
     elif 'report_timing_impl.txt' in fn:
@@ -92,7 +95,7 @@ for path in Path(sys.argv[1]).rglob('*.txt'):
 
         if timing == None:
             raise Exception('did not find timing line in report')
-        assert i not in data_paths[d]
+        assert i not in data_paths[d] or data_paths[d][i] == 0
         data_paths[d][i] = timing
     else:
         raise Exception('did not recognize report type')
@@ -121,7 +124,8 @@ plot_freqs = {}
 for design_name in design_names:
     plot_freqs[design_name] = {}
     for instrumentation, data_path in data_paths[design_name].items():
-        plot_freqs[design_name][instrumentation] = 1000/data_path if data_path else -1
+        plot_freqs[design_name][instrumentation] = 1000/data_path if data_path != 0 else -1
+        print('freq of %s %s: %.1f path: %.f ns' % (design_name, instrumentation, plot_freqs[design_name][instrumentation], data_path))
 
 plot_luts = {}
 for design_name in design_names:

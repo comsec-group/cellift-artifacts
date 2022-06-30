@@ -70,7 +70,7 @@ Download Vivado full edition from the Xilinx website. Install it in a
 path of its own.  We use HOMEDIR/tools/xilinx/. To use it later, source
 the settings file:
 
-        ~/tools/xilinx/Vivado/2022.1/settings64.sh
+        source ~/tools/xilinx/Vivado/2022.1/settings64.sh
 
 ### Start a container using the Docker image to run experiments. (Human time: 5 minutes, on and off. Computer time: several days.)
 
