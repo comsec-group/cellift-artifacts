@@ -28,9 +28,7 @@ do
                 cd ${instr}_proj
                 vivado -mode batch -source ../$tcl 
                 echo return code: $?
-                exit 0
             )
-                exit 0
         done
 done
 
