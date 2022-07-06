@@ -28,7 +28,7 @@ do
                 rm -rf ${instr}_proj
                 mkdir -p ${instr}_proj
                 cd ${instr}_proj
-                vivado -mode batch -source ../$tcl 
+                vivado -mode batch -source ../$tcl  || true
                 echo return code: $?
             )
         done
