@@ -259,6 +259,15 @@ Now source the Vivado settings script:
 
         $ source DESTINATIONDIR/Vivado/2019.1/settings64.sh
 
+If you need a license, apply for a license by starting vlm (X ssh forwarding may be needed):
+
+        $ vlm
+
+e.g. request a 30-day evaluation license. Click 'obtain license,' 'Start now! 30 day trial,' and
+click 'Process Now.'
+
+
+
 Now go to the Artifacts repo, to the `cellift-fpga-glance` dir.
 Now, in each design directory, for each instrumentation type, create a
 run directory, and execute `vivado` from there. To automate this, we do:
