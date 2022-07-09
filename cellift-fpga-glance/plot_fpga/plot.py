@@ -78,6 +78,8 @@ for path in Path(sys.argv[1]).rglob('*.txt'):
         if used == None:
             raise Exception('did not find CLB LUTs line in report')
         assert i not in data_luts[d] or data_luts[d][i] == 0
+        if i == 'glift':
+            print('luts %s %s = %.1f' % (d, i, used))
         data_luts[d][i] = used
 
     elif 'report_timing_impl.txt' in fn:
@@ -96,6 +98,8 @@ for path in Path(sys.argv[1]).rglob('*.txt'):
         if timing == None:
             raise Exception('did not find timing line in report')
         assert i not in data_paths[d] or data_paths[d][i] == 0
+        if i == 'glift':
+            print('paths %s %s = %.1f' % (d, i, used))
         data_paths[d][i] = timing
     else:
         raise Exception('did not recognize report type')
@@ -109,6 +113,12 @@ for path in Path(sys.argv[1]).rglob('*.txt'):
 #    data_luts = json.load(f) #
 
 design_names = list(data_paths.keys())
+orig_design_names = ["Ibex","Rocket","PULPissimo","Ariane","BOOM"]
+if set(design_names) != set(orig_design_names):
+    print('WARNING: design set mismatch. expect missing or re-ordered chart vs original.')
+else:
+    print('Design set OK; ordering columns according to original.')
+    design_names=orig_design_names
 
 print('data for paths:')
 pp.pprint(data_paths)
@@ -223,6 +233,9 @@ else:
 
 # ax_freq.legend(framealpha=1)
 ax_lut.legend(framealpha=1)
+
+ax_freq.set_ylim(0,130)
+ax_lut.set_ylim(0,125)
 
 # X ticks
 if PLOT_FREQ_VANILLA:
