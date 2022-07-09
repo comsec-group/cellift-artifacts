@@ -259,14 +259,18 @@ Now source the Vivado settings script:
 
         $ source DESTINATIONDIR/Vivado/2019.1/settings64.sh
 
-If you need a license, apply for a license by starting vlm (X ssh forwarding may be needed):
+Obtain the hostid by executing vlm on the target machine, click on 'view
+host information' under 'view system information.' copy the hostname
+and the first NIC ID exactly.
 
-        $ vlm
+Obtain a license on www.xilinx.com/getlicense. login (create an
+account if needed). pass the export check. get a license for 'vivado
+ml enterprise edition.' Get a host-locked license. Enter the
+hostname and the NIC ID. You will be mailed a license file. Copy that
+file, and in vlm click on 'load license,' press the button 'copy license,'
+and select the file.  It should be added successfully.
 
-e.g. request a 30-day evaluation license. Click 'obtain license,' 'Start now! 30 day trial,' and
-click 'Process Now.'
-
-
+Vivado can now be used for the fpga experiments.
 
 Now go to the Artifacts repo, to the `cellift-fpga-glance` dir.
 Now, in each design directory, for each instrumentation type, create a
