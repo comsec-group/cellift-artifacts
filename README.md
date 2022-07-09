@@ -68,16 +68,6 @@ Pull by hash:
 
 However, if you pull by hash, make sure the new image has the tag `docker.io/ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation` so the next instructions work.
 
-### Install Xilinx Vivado. (Human time: 5 minutes. Computer time: several hours.)
-
-(This is optional if you re-use the Vivado logs we provide; see later.)
-
-Download Vivado full edition from the Xilinx website. Install it in a
-path of its own.  We use HOMEDIR/tools/xilinx/. To use it later, source
-the settings file:
-
-        source ~/tools/xilinx/Vivado/2022.1/settings64.sh
-
 ### Start a container using the Docker image to run experiments. (Human time: 5 minutes, on and off. Computer time: several days.)
 
 All experiments have already been reproduced inside this image, as can
@@ -234,9 +224,40 @@ And output in:
 Which should look like Figure 9. (Some re-ordering is likely.)
 
 To reproduce all FPGA experiments, we need Vivado. This will take several
-days.  First we source the settings file for Vivado. On our machine:
+days to run. 
 
-        source ~/tools/xilinx/Vivado/2022.1/settings64.sh
+### Installing Vivado
+
+We used Vivado v.2019.1.1 (lin64) Build 2580384 for the paper.  To
+install Vivado, download the unified archive from
+https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html
+
+Download this file:
+Download: "Vivado Design Suite - HLx Editions - 2019.1  Full Product Installation"
+Vivado HLx 2019.1: All OS installer Single-File Download (TAR/GZIP - 21.39 GB)
+MD5 SUM Value : 47388a71dc5962a4b8d76e752928616e
+
+from the extracted directory, run these commands to install vivado from just the
+commandline:
+
+        $ ./xsetup -b ConfigGen
+
+choose 2. Vivado HL Design Edition
+
+The installer will respond with "Config file available at..". Edit the
+file, we'll call the file it prints CONFIGFILE, and set Destination=..
+to a suitable dir.  We'll call the dir you select DESINATIONDIR. Then
+run the installer:
+
+        $ ./xsetup --a XilinxEULA,3rdPartyEULA,WebTalkTerms -b Install -c CONFIGFILE
+
+it should finish with:
+
+        INFO : Installation completed successfully.
+
+Now source the Vivado settings script:
+
+        $ source DESTINATIONDIR/Vivado/2019.1/settings64.sh
 
 Now go to the Artifacts repo, to the `cellift-fpga-glance` dir.
 Now, in each design directory, for each instrumentation type, create a
