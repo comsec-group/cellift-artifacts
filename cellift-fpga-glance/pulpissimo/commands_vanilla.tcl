@@ -1,5 +1,5 @@
 create_project pulpissimo_vanilla ./pulpissimo_vanilla -part xcvu440-flga2892-3-e
-add_files {vanilla.sv ift_boot_rom_hdac_fpga.sv model_6144x32_2048x32scm.sv ift_sram_fpga.sv soc_domain_dummy_fpga_top.sv}
+add_files {../vanilla.sv ../ift_boot_rom_hdac_fpga.sv ../model_6144x32_2048x32scm.sv ../ift_sram_fpga.sv ../soc_domain_dummy_fpga_top.sv}
 import_files -force -norecurse
 import_files -fileset constrs_1 pulpissimo.xdc
 set_property steps.synth_design.args.flatten_hierarchy full [get_runs synth_1]

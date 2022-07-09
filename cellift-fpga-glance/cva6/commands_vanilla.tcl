@@ -1,5 +1,5 @@
 create_project cva6_vanilla ./cva6_vanilla -part xcvu440-flga2892-3-e
-add_files {ariane_fpga_top.sv vanilla.sv}
+add_files {../ariane_fpga_top.sv ../vanilla.sv}
 import_files -force -norecurse
 import_files -fileset constrs_1 cva6.xdc
 set_property steps.synth_design.args.flatten_hierarchy full [get_runs synth_1]

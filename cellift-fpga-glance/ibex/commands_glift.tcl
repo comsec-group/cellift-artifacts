@@ -1,5 +1,5 @@
 create_project ibex_glift ./ibex_glift -part xcvu440-flga2892-3-e
-add_files {ibex_fpga_top_taints.sv dependencies.sv glift.sv}
+add_files {../ibex_fpga_top_taints.sv ../dependencies.sv ../glift.sv}
 import_files -force -norecurse
 import_files -fileset constrs_1 ibex.xdc
 set_property steps.synth_design.args.flatten_hierarchy full [get_runs synth_1]

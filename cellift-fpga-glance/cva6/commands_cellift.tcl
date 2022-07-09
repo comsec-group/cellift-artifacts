@@ -1,5 +1,5 @@
 create_project cva6_cellift ./cva6_cellift -part xcvu440-flga2892-3-e
-add_files {ariane_fpga_top_taints.sv cellift.sv}
+add_files {../ariane_fpga_top_taints.sv ../cellift.sv}
 import_files -force -norecurse
 import_files -fileset constrs_1 cva6.xdc
 set_property steps.synth_design.args.flatten_hierarchy full [get_runs synth_1]

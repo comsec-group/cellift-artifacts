@@ -1,5 +1,5 @@
 create_project boom_vanilla ./boom_vanilla -part xcvu440-flga2892-3-e
-add_files {boom_fpga_top.sv vanilla.sv}
+add_files {../boom_fpga_top.sv ../vanilla.sv}
 import_files -force -norecurse
 import_files -fileset constrs_1 boom.xdc
 set_property steps.synth_design.args.flatten_hierarchy full [get_runs synth_1]
