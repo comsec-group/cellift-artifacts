@@ -27,7 +27,8 @@ do
                 bzip2 -k -d -f *.bz2
                 rm -rf ${instr}_proj
                 mkdir -p ${instr}_proj
-#                cd ${instr}_proj
+                cd ${instr}_proj
+                cp ../$tcl .
                 vivado -mode batch -source $tcl  || true
                 echo return code: $?
             )
