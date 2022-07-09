@@ -29,6 +29,7 @@ do
                 mkdir -p ${instr}_proj
                 cd ${instr}_proj
                 cp ../$tcl .
+                cp ../*.xdc .
                 vivado -mode batch -source $tcl  || true
                 echo return code: $?
             )
