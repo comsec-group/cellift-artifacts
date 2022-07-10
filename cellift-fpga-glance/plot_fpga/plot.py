@@ -78,8 +78,8 @@ for path in Path(sys.argv[1]).rglob('*.txt'):
         if used == None:
             raise Exception('did not find CLB LUTs line in report')
         assert i not in data_luts[d] or data_luts[d][i] == 0
-        if i == 'glift':
-            print('luts %s %s = %.1f' % (d, i, used))
+#        if i == 'glift':
+#            print('luts %s %s = %.1f' % (d, i, used))
         data_luts[d][i] = used
 
     elif 'report_timing_impl.txt' in fn:
@@ -98,13 +98,13 @@ for path in Path(sys.argv[1]).rglob('*.txt'):
         if timing == None:
             raise Exception('did not find timing line in report')
         assert i not in data_paths[d] or data_paths[d][i] == 0
-        if i == 'glift':
-            print('paths %s %s = %.1f' % (d, i, used))
+#        if i == 'glift':
+#            print('paths %s %s = %.1f' % (d, i, used))
         data_paths[d][i] = timing
     else:
         raise Exception('did not recognize report type')
 
-    print(d, i, fn)
+    #print(d, i, fn)
 
 # Read json
 #with open("fpga_critical_paths.json", "r") as f:
@@ -120,11 +120,11 @@ else:
     print('Design set OK; ordering columns according to original.')
     design_names=orig_design_names
 
-print('data for paths:')
-pp.pprint(data_paths)
-print('data for LUTs:')
-pp.pprint(data_luts)
-pp.pprint(design_names)
+#print('data for paths:')
+#pp.pprint(data_paths)
+#print('data for LUTs:')
+#pp.pprint(data_luts)
+#pp.pprint(design_names)
 
 ##########
 # Generate the data to plot
@@ -142,6 +142,7 @@ for design_name in design_names:
     plot_luts[design_name] = {}
     for instrumentation, data_lut in data_luts[design_name].items():
         plot_luts[design_name][instrumentation] = data_lut/1000
+        print('lut usage of %s %s: %d luts (1000)' % (design_name, instrumentation, plot_luts[design_name][instrumentation]))
 
 #####
 # Gen the labels
