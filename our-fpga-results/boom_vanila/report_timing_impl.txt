@@ -1,0 +1,142 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2019.1.1 (lin64) Build 2580384 Sat Jun 29 08:04:45 MDT 2019
+| Date              : Wed Jan 26 19:24:47 2022
+| Host              : lagrev3.ee.ethz.ch running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command           : report_timing
+| Design            : boom_fpga_top
+| Device            : xcvu440-flga2892
+| Speed File        : -3  PRODUCTION 1.26 12-04-2018
+| Temperature Grade : E
+---------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.200ns  (required time - arrival time)
+  Source:                 i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/bpd/banked_predictors_0/components_3/io_resp_f2_1_REG_is_br_reg/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/icache/dataArrayWay_1/dataArrayWay_0_ext/mem_0_0/ram_reg/ADDRBWRADDR[6]
+                            (rising edge-triggered cell RAMB36E2 clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_i rise@10.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        9.363ns  (logic 2.111ns (22.546%)  route 7.252ns (77.454%))
+  Logic Levels:           18  (CARRY8=2 LUT2=2 LUT3=3 LUT4=1 LUT5=1 LUT6=9)
+  Clock Path Skew:        -0.073ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    3.547ns = ( 13.547 - 10.000 ) 
+    Source Clock Delay      (SCD):    4.223ns
+    Clock Pessimism Removal (CPR):    0.603ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      2.744ns (routing 1.103ns, distribution 1.641ns)
+  Clock Net Delay (Destination): 2.491ns (routing 1.006ns, distribution 1.485ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    BG42                                              0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i_IBUF_inst/I
+    BG42                 INBUF (Prop_INBUF_HPIOB_PAD_O)
+                                                      0.687     0.687 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.079     0.766    clk_i_IBUF_inst/OUT
+    BG42                 IBUFCTRL (Prop_IBUFCTRL_HPIOB_I_O)
+                                                      0.000     0.766 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, routed)           0.646     1.412    clk_i_IBUF
+    BUFGCE_X1Y218        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.067     1.479 r  clk_i_IBUF_BUFG_inst/O
+    X6Y7 (CLOCK_ROOT)    net (fo=53417, routed)       2.744     4.223    clk_i_IBUF_BUFG
+    SLICE_X298Y388       FDRE                                         r  i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/bpd/banked_predictors_0/components_3/io_resp_f2_1_REG_is_br_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X298Y388       FDRE (Prop_EFF_SLICEM_C_Q)
+                                                      0.102     4.325 r  i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/bpd/banked_predictors_0/components_3/io_resp_f2_1_REG_is_br_reg/Q
+                         net (fo=3, routed)           1.417     5.742    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/bpd/banked_predictors_0/components_4_io_resp_in_0_f2_1_is_br
+    SLICE_X297Y389       LUT3 (Prop_D5LUT_SLICEL_I1_O)
+                                                      0.184     5.926 r  s2_ghist_old_history[0]_i_16/O
+                         net (fo=2, routed)           0.206     6.132    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/bpd/banked_predictors_0/components_1_io_resp_in_0_f2_1_is_br
+    SLICE_X297Y390       LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.115     6.247 r  s2_ghist_old_history[0]_i_23/O
+                         net (fo=3, routed)           0.519     6.766    s2_ghist_old_history[0]_i_23_n_0
+    SLICE_X296Y390       LUT6 (Prop_B6LUT_SLICEM_I4_O)
+                                                      0.120     6.886 r  s2_ghist_old_history[0]_i_20/O
+                         net (fo=3, routed)           0.638     7.524    s2_ghist_old_history[0]_i_20_n_0
+    SLICE_X298Y390       LUT2 (Prop_F6LUT_SLICEM_I1_O)
+                                                      0.103     7.627 f  s1_vpc[37]_i_19/O
+                         net (fo=44, routed)          0.611     8.238    s1_vpc[37]_i_19_n_0
+    SLICE_X296Y393       LUT6 (Prop_F6LUT_SLICEM_I2_O)
+                                                      0.066     8.304 r  s2_ghist_old_history[0]_i_12/O
+                         net (fo=1, routed)           0.624     8.928    s2_ghist_old_history[0]_i_12_n_0
+    SLICE_X298Y393       LUT6 (Prop_E6LUT_SLICEM_I4_O)
+                                                      0.035     8.963 f  s2_ghist_old_history[0]_i_5/O
+                         net (fo=2, routed)           0.139     9.102    s2_ghist_old_history[0]_i_5_n_0
+    SLICE_X298Y395       LUT2 (Prop_E6LUT_SLICEM_I1_O)
+                                                      0.035     9.137 r  s2_ghist_old_history[63]_i_8/O
+                         net (fo=181, routed)         0.392     9.529    s2_ghist_old_history[63]_i_8_n_0
+    SLICE_X301Y399       LUT3 (Prop_H6LUT_SLICEL_I1_O)
+                                                      0.062     9.591 r  s1_ghist_old_history[28]_i_5/O
+                         net (fo=2, routed)           0.437    10.028    s1_ghist_old_history[28]_i_5_n_0
+    SLICE_X300Y397       LUT6 (Prop_B6LUT_SLICEL_I3_O)
+                                                      0.164    10.192 r  s2_valid_i_32/O
+                         net (fo=1, routed)           0.002    10.194    s2_valid_i_32_n_0
+    SLICE_X300Y397       CARRY8 (Prop_CARRY8_SLICEL_S[1]_CO[7])
+                                                      0.281    10.475 r  s2_valid_reg_i_10/CO[7]
+                         net (fo=1, routed)           0.021    10.496    s2_valid_reg_i_10_n_0
+    SLICE_X300Y398       CARRY8 (Prop_CARRY8_SLICEL_CI_CO[5])
+                                                      0.109    10.605 r  s2_valid_reg_i_6/CO[5]
+                         net (fo=2, routed)           0.372    10.977    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/_f2_correct_f1_ghist_T_20
+    SLICE_X298Y392       LUT6 (Prop_G6LUT_SLICEM_I4_O)
+                                                      0.062    11.039 f  s2_valid_i_4/O
+                         net (fo=77, routed)          0.238    11.277    s2_valid_i_4_n_0
+    SLICE_X301Y392       LUT4 (Prop_B6LUT_SLICEL_I0_O)
+                                                      0.116    11.393 r  s1_mask[2]_i_19/O
+                         net (fo=61, routed)          0.359    11.752    s1_mask[2]_i_19_n_0
+    SLICE_X302Y391       LUT6 (Prop_B6LUT_SLICEL_I0_O)
+                                                      0.116    11.868 r  ram_R_0_addr_pipe_0_rep[0]_i_14/O
+                         net (fo=1, routed)           0.320    12.188    ram_R_0_addr_pipe_0_rep[0]_i_14_n_0
+    SLICE_X304Y396       LUT6 (Prop_C6LUT_SLICEL_I2_O)
+                                                      0.163    12.351 r  ram_R_0_addr_pipe_0_rep[0]_i_6/O
+                         net (fo=1, routed)           0.128    12.479    ram_R_0_addr_pipe_0_rep[0]_i_6_n_0
+    SLICE_X304Y396       LUT5 (Prop_B6LUT_SLICEL_I0_O)
+                                                      0.062    12.541 r  ram_R_0_addr_pipe_0_rep[0]_i_3/O
+                         net (fo=1, routed)           0.195    12.736    ram_R_0_addr_pipe_0_rep[0]_i_3_n_0
+    SLICE_X304Y396       LUT3 (Prop_A6LUT_SLICEL_I2_O)
+                                                      0.101    12.837 r  ram_R_0_addr_pipe_0_rep[0]_i_1__3/O
+                         net (fo=16, routed)          0.148    12.985    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/icache_io_req_bits_addr[3]
+    SLICE_X304Y398       LUT6 (Prop_G6LUT_SLICEL_I4_O)
+                                                      0.115    13.100 r  ram_reg_i_19__1/O
+                         net (fo=5, routed)           0.486    13.586    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/icache/dataArrayWay_0_RW0_addr[0]
+    RAMB36_X9Y77         RAMB36E2                                     r  i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/icache/dataArrayWay_1/dataArrayWay_0_ext/mem_0_0/ram_reg/ADDRBWRADDR[6]
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     10.000    10.000 r  
+    BG42                                              0.000    10.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    10.000    clk_i_IBUF_inst/I
+    BG42                 INBUF (Prop_INBUF_HPIOB_PAD_O)
+                                                      0.428    10.428 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.045    10.473    clk_i_IBUF_inst/OUT
+    BG42                 IBUFCTRL (Prop_IBUFCTRL_HPIOB_I_O)
+                                                      0.000    10.473 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, routed)           0.523    10.996    clk_i_IBUF
+    BUFGCE_X1Y218        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.060    11.056 r  clk_i_IBUF_BUFG_inst/O
+    X6Y7 (CLOCK_ROOT)    net (fo=53417, routed)       2.491    13.547    clk_i_IBUF_BUFG
+    RAMB36_X9Y77         RAMB36E2                                     r  i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/icache/dataArrayWay_1/dataArrayWay_0_ext/mem_0_0/ram_reg/CLKBWRCLK
+                         clock pessimism              0.603    14.150    
+                         clock uncertainty           -0.035    14.115    
+    RAMB36_X9Y77         RAMB36E2 (Setup_RAMB36E2_RAMB36_CLKBWRCLK_ADDRBWRADDR[6])
+                                                     -0.329    13.786    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/boom_tile/frontend/icache/dataArrayWay_1/dataArrayWay_0_ext/mem_0_0/ram_reg
+  -------------------------------------------------------------------
+                         required time                         13.786    
+                         arrival time                         -13.586    
+  -------------------------------------------------------------------
+                         slack                                  0.200    
+
+
+
+
+report_timing: Time (s): cpu = 00:00:48 ; elapsed = 00:00:10 . Memory (MB): peak = 4630.047 ; gain = 155.621 ; free physical = 3491 ; free virtual = 207355

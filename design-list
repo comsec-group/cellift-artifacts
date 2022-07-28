@@ -1,0 +1,7 @@
+# Design name - expect to find ../cellift-DESIGNNAME            Dockerfile/image-tag ...
+@tagprefix docker.io/ethcomsec/
+#cellift-meta   FILE: docker/Dockerfile-base TAG: cellift:cellift-tools-base-main FILE: Dockerfile-tools TAG: cellift:cellift-tools-main
+cellift-designs/cellift-ibex FILE: Dockerfile TAG: cellift-ibex:cellift-ibex-master
+cellift-designs/cellift-cva6 FILE: Dockerfile TAG: cellift-cva6:cellift-cva6-master
+cellift-designs/cellift-pulpissimo-hdac-2018 FILE: Dockerfile TAG: cellift-pulpissimo-hdac-2018:cellift-pulpissimo-hdac-2018-master
+cellift-designs/cellift-chipyard  FILE: Dockerfile-base TAG: cellift-chipyard-base:cellift-chipyard-base  FILE: Dockerfile-rocket TAG: cellift-chipyard-rocket:cellift-chipyard-rocket  FILE: Dockerfile-boom TAG: cellift-chipyard-boom:cellift-chipyard-boom 

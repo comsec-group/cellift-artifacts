@@ -1,0 +1,49 @@
+diff --git a/cellift-boom/sw/boom_attacks_v1/Makefile b/cellift-boom/sw/boom_attacks_v1/Makefile
+index b5dfe3c..9b47ced 100644
+--- a/cellift-boom/sw/boom_attacks_v1/Makefile
++++ b/cellift-boom/sw/boom_attacks_v1/Makefile
+@@ -14,8 +14,8 @@ DMP:=dump
+ DEP:=dep
+ 
+ # Commands and flags
+-CC:=riscv64-unknown-elf-gcc
+-OBJDUMP:=riscv64-unknown-elf-objdump -S
++CC:=riscv32-unknown-elf-gcc 
++OBJDUMP:=riscv32-unknown-elf-objdump -S
+ ARCHFLAGS=-march=rv64gc -mabi=lp64
+ CFLAGS=-mcmodel=medany -l -std=gnu99 -O0 -g -fno-common -fno-builtin-printf -Wall -I$(INC) -Wno-unused-function -Wno-unused-variable $(ARCHFLAGS)
+ LDFLAGS:=-static -nostdlib -nostartfiles -lgcc $(ARCHFLAGS)
+diff --git a/cellift-boom/sw/boom_attacks_v1_nofdiv/Makefile b/cellift-boom/sw/boom_attacks_v1_nofdiv/Makefile
+index b5dfe3c..a4c6541 100644
+--- a/cellift-boom/sw/boom_attacks_v1_nofdiv/Makefile
++++ b/cellift-boom/sw/boom_attacks_v1_nofdiv/Makefile
+@@ -14,8 +14,8 @@ DMP:=dump
+ DEP:=dep
+ 
+ # Commands and flags
+-CC:=riscv64-unknown-elf-gcc
+-OBJDUMP:=riscv64-unknown-elf-objdump -S
++CC:=riscv32-unknown-elf-gcc
++OBJDUMP:=riscv32-unknown-elf-objdump -S
+ ARCHFLAGS=-march=rv64gc -mabi=lp64
+ CFLAGS=-mcmodel=medany -l -std=gnu99 -O0 -g -fno-common -fno-builtin-printf -Wall -I$(INC) -Wno-unused-function -Wno-unused-variable $(ARCHFLAGS)
+ LDFLAGS:=-static -nostdlib -nostartfiles -lgcc $(ARCHFLAGS)
+diff --git a/cellift-boom/sw/scenario_load_tainted_data_machine_mode/Makefile b/cellift-boom/sw/scenario_load_tainted_data_machine_mode/Makefile
+index 6ee3628..811c83f 100644
+--- a/cellift-boom/sw/scenario_load_tainted_data_machine_mode/Makefile
++++ b/cellift-boom/sw/scenario_load_tainted_data_machine_mode/Makefile
+@@ -1,4 +1,4 @@
+-RISCV_PREFIX = riscv64-unknown-elf
++RISCV_PREFIX = riscv32-unknown-elf
+ 
+ 
+ RV_ARCH_FLAGS ?= -march=rv64g -mabi=lp64
+diff --git a/cellift-boom/sw/scenario_load_tainted_data_user_mode/Makefile b/cellift-boom/sw/scenario_load_tainted_data_user_mode/Makefile
+index 64bf197..59169a7 100644
+--- a/cellift-boom/sw/scenario_load_tainted_data_user_mode/Makefile
++++ b/cellift-boom/sw/scenario_load_tainted_data_user_mode/Makefile
+@@ -1,4 +1,4 @@
+-RV_TOOL_PREFIX = riscv64-unknown-elf-
++RV_TOOL_PREFIX = riscv32-unknown-elf-
+ RV_GCC = $(RV_TOOL_PREFIX)gcc
+ RV_OBJDUMP = $(RV_TOOL_PREFIX)objdump

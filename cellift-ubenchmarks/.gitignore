@@ -1,0 +1,10 @@
+.vscode
+collected
+collected.txt
+build
+fusesoc.conf
+__pycache__
+.log
+.png
+.pdf
+

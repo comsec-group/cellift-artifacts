@@ -1,0 +1,451 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2019.1.1 (lin64) Build 2580384 Sat Jun 29 08:04:45 MDT 2019
+| Date              : Fri Jan 28 05:55:55 2022
+| Host              : lagrev3.ee.ethz.ch running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command           : report_timing
+| Design            : boom_fpga_top
+| Device            : xcvu440-flga2892
+| Speed File        : -3  PRODUCTION 1.26 12-04-2018
+| Temperature Grade : E
+---------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -27.361ns  (required time - arrival time)
+  Source:                 i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleOut_0_a_q/ram_size[0]_t0_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleIn_0_d_q/ram_data[0]_t0_reg[50]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_i rise@10.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        37.108ns  (logic 11.330ns (30.532%)  route 25.778ns (69.467%))
+  Logic Levels:           121  (LUT3=3 LUT4=1 LUT5=3 LUT6=114)
+  Clock Path Skew:        -0.265ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.672ns = ( 14.672 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.556ns
+    Clock Pessimism Removal (CPR):    0.619ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      3.997ns (routing 1.341ns, distribution 2.656ns)
+  Clock Net Delay (Destination): 3.453ns (routing 1.226ns, distribution 2.227ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    BK27                                              0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i_IBUF_inst/I
+    BK27                 INBUF (Prop_INBUF_HRIO_PAD_O)
+                                                      0.730     0.730 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.078     0.808    clk_i_IBUF_inst/OUT
+    BK27                 IBUFCTRL (Prop_IBUFCTRL_HRIO_I_O)
+                                                      0.038     0.846 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, routed)           0.646     1.492    clk_i_IBUF
+    BUFGCE_X1Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.067     1.559 r  clk_i_IBUF_BUFG_inst/O
+    X4Y7 (CLOCK_ROOT)    net (fo=962400, routed)      3.997     5.556    clk_i_IBUF_BUFG
+    SLICE_X23Y316        FDRE                                         r  i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleOut_0_a_q/ram_size[0]_t0_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X23Y316        FDRE (Prop_CFF_SLICEL_C_Q)
+                                                      0.102     5.658 r  i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleOut_0_a_q/ram_size[0]_t0_reg[0]/Q
+                         net (fo=2, routed)           0.218     5.876    i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleOut_0_a_q/ram_size[0]_t0_reg_n_0_[0]
+    SLICE_X24Y316        LUT6 (Prop_H6LUT_SLICEM_I5_O)
+                                                      0.155     6.031 r  saved_size_t0[0]_i_2__0/O
+                         net (fo=9, routed)           0.149     6.180    i_mem_top/i_chip_top/system/subsystem_cbus_auto_coupler_to_bus_named_subsystem_pbus_bus_xing_out_a_bits_size_t0[0]
+    SLICE_X24Y317        LUT6 (Prop_H6LUT_SLICEM_I2_O)
+                                                      0.155     6.335 r  acknum_t0_reg[1]_i_12/O
+                         net (fo=2, routed)           0.345     6.680    acknum_t0_reg[1]_i_12_n_0
+    SLICE_X24Y318        LUT6 (Prop_B6LUT_SLICEM_I4_O)
+                                                      0.154     6.834 f  acknum_t0_reg[1]_i_7/O
+                         net (fo=3, routed)           0.360     7.194    acknum_t0_reg[1]_i_7_n_0
+    SLICE_X26Y320        LUT3 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.035     7.229 r  ram_data[1]_t0[13]_i_66/O
+                         net (fo=1, routed)           0.135     7.364    ram_data[1]_t0[13]_i_66_n_0
+    SLICE_X26Y319        LUT6 (Prop_C6LUT_SLICEL_I3_O)
+                                                      0.163     7.527 r  ram_data[1]_t0[13]_i_43/O
+                         net (fo=16, routed)          0.354     7.881    i_mem_top/i_chip_top/system/bootROMDomainWrapper_auto_bootrom_in_a_bits_address_t0__0[4]
+    SLICE_X27Y322        LUT6 (Prop_B6LUT_SLICEL_I1_O)
+                                                      0.153     8.034 f  ram_data[1]_t0[0]_i_53/O
+                         net (fo=45, routed)          0.134     8.168    ram_data[1]_t0[0]_i_53_n_0
+    SLICE_X27Y321        LUT6 (Prop_B6LUT_SLICEL_I4_O)
+                                                      0.062     8.230 r  ram_data[1]_t0[35]_i_596/O
+                         net (fo=8, routed)           0.291     8.521    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_12_t0_34
+    SLICE_X28Y321        LUT5 (Prop_B6LUT_SLICEL_I2_O)
+                                                      0.102     8.623 f  ram_data[1]_t0[35]_i_582/O
+                         net (fo=9, routed)           0.161     8.784    ram_data[1]_t0[35]_i_582_n_0
+    SLICE_X28Y323        LUT6 (Prop_F6LUT_SLICEL_I4_O)
+                                                      0.163     8.947 f  ram_data[1]_t0[47]_i_287/O
+                         net (fo=2, routed)           0.135     9.082    ram_data[1]_t0[47]_i_287_n_0
+    SLICE_X27Y323        LUT6 (Prop_H6LUT_SLICEL_I3_O)
+                                                      0.102     9.184 f  ram_data[1]_t0[47]_i_284/O
+                         net (fo=2, routed)           0.251     9.435    ram_data[1]_t0[47]_i_284_n_0
+    SLICE_X28Y325        LUT5 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.100     9.535 f  ram_data[1]_t0[47]_i_281/O
+                         net (fo=2, routed)           0.215     9.750    ram_data[1]_t0[47]_i_281_n_0
+    SLICE_X29Y324        LUT5 (Prop_B6LUT_SLICEL_I2_O)
+                                                      0.116     9.866 r  ram_data[1]_t0[48]_i_345/O
+                         net (fo=1, routed)           0.414    10.280    ram_data[1]_t0[48]_i_345_n_0
+    SLICE_X36Y324        LUT6 (Prop_C6LUT_SLICEL_I1_O)
+                                                      0.035    10.315 r  ram_data[1]_t0[48]_i_342/O
+                         net (fo=2, routed)           0.207    10.522    ram_data[1]_t0[48]_i_342_n_0
+    SLICE_X37Y324        LUT3 (Prop_E6LUT_SLICEM_I0_O)
+                                                      0.118    10.640 f  ram_data[1]_t0[50]_i_336/O
+                         net (fo=2, routed)           0.292    10.932    ram_data[1]_t0[50]_i_336_n_0
+    SLICE_X40Y323        LUT6 (Prop_G6LUT_SLICEM_I5_O)
+                                                      0.035    10.967 r  ram_data[1]_t0[50]_i_333/O
+                         net (fo=1, routed)           0.194    11.161    ram_data[1]_t0[50]_i_333_n_0
+    SLICE_X41Y322        LUT4 (Prop_C6LUT_SLICEL_I1_O)
+                                                      0.163    11.324 r  ram_data[1]_t0[50]_i_331/O
+                         net (fo=1, routed)           0.208    11.532    ram_data[1]_t0[50]_i_331_n_0
+    SLICE_X43Y321        LUT6 (Prop_A6LUT_SLICEL_I2_O)
+                                                      0.115    11.647 f  ram_data[1]_t0[50]_i_327/O
+                         net (fo=1, routed)           0.264    11.911    ram_data[1]_t0[50]_i_327_n_0
+    SLICE_X43Y318        LUT6 (Prop_B6LUT_SLICEL_I1_O)
+                                                      0.116    12.027 f  ram_data[1]_t0[50]_i_326/O
+                         net (fo=1, routed)           0.249    12.276    ram_data[1]_t0[50]_i_326_n_0
+    SLICE_X43Y314        LUT6 (Prop_B6LUT_SLICEL_I3_O)
+                                                      0.036    12.312 f  ram_data[1]_t0[50]_i_324/O
+                         net (fo=1, routed)           0.262    12.574    ram_data[1]_t0[50]_i_324_n_0
+    SLICE_X41Y311        LUT6 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.154    12.728 f  ram_data[1]_t0[50]_i_322/O
+                         net (fo=1, routed)           0.197    12.925    ram_data[1]_t0[50]_i_322_n_0
+    SLICE_X39Y309        LUT6 (Prop_F6LUT_SLICEL_I4_O)
+                                                      0.035    12.960 r  ram_data[1]_t0[50]_i_320/O
+                         net (fo=1, routed)           0.263    13.223    ram_data[1]_t0[50]_i_320_n_0
+    SLICE_X37Y307        LUT6 (Prop_E6LUT_SLICEM_I2_O)
+                                                      0.035    13.258 f  ram_data[1]_t0[50]_i_317/O
+                         net (fo=1, routed)           0.336    13.594    ram_data[1]_t0[50]_i_317_n_0
+    SLICE_X34Y305        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.154    13.748 f  ram_data[1]_t0[50]_i_315/O
+                         net (fo=1, routed)           0.124    13.872    ram_data[1]_t0[50]_i_315_n_0
+    SLICE_X33Y305        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.062    13.934 r  ram_data[1]_t0[50]_i_311/O
+                         net (fo=1, routed)           0.202    14.136    ram_data[1]_t0[50]_i_311_n_0
+    SLICE_X31Y307        LUT6 (Prop_B6LUT_SLICEL_I2_O)
+                                                      0.116    14.252 r  ram_data[1]_t0[50]_i_309/O
+                         net (fo=1, routed)           0.261    14.513    ram_data[1]_t0[50]_i_309_n_0
+    SLICE_X29Y310        LUT6 (Prop_F6LUT_SLICEL_I4_O)
+                                                      0.101    14.614 f  ram_data[1]_t0[50]_i_307/O
+                         net (fo=1, routed)           0.250    14.864    ram_data[1]_t0[50]_i_307_n_0
+    SLICE_X27Y313        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.035    14.899 f  ram_data[1]_t0[50]_i_306/O
+                         net (fo=1, routed)           0.288    15.187    ram_data[1]_t0[50]_i_306_n_0
+    SLICE_X25Y315        LUT6 (Prop_H6LUT_SLICEL_I2_O)
+                                                      0.035    15.222 f  ram_data[1]_t0[50]_i_305/O
+                         net (fo=1, routed)           0.342    15.564    ram_data[1]_t0[50]_i_305_n_0
+    SLICE_X22Y317        LUT6 (Prop_A6LUT_SLICEL_I5_O)
+                                                      0.035    15.599 f  ram_data[1]_t0[50]_i_303/O
+                         net (fo=1, routed)           0.203    15.802    ram_data[1]_t0[50]_i_303_n_0
+    SLICE_X20Y319        LUT6 (Prop_G6LUT_SLICEL_I4_O)
+                                                      0.115    15.917 f  ram_data[1]_t0[50]_i_301/O
+                         net (fo=1, routed)           0.266    16.183    ram_data[1]_t0[50]_i_301_n_0
+    SLICE_X18Y321        LUT6 (Prop_A6LUT_SLICEM_I5_O)
+                                                      0.153    16.336 f  ram_data[1]_t0[50]_i_300/O
+                         net (fo=1, routed)           0.189    16.525    ram_data[1]_t0[50]_i_300_n_0
+    SLICE_X17Y322        LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.036    16.561 f  ram_data[1]_t0[50]_i_298/O
+                         net (fo=1, routed)           0.061    16.622    ram_data[1]_t0[50]_i_298_n_0
+    SLICE_X17Y322        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.115    16.737 r  ram_data[1]_t0[50]_i_296/O
+                         net (fo=1, routed)           0.126    16.863    ram_data[1]_t0[50]_i_296_n_0
+    SLICE_X17Y322        LUT6 (Prop_G6LUT_SLICEL_I1_O)
+                                                      0.062    16.925 f  ram_data[1]_t0[50]_i_295/O
+                         net (fo=1, routed)           0.122    17.047    ram_data[1]_t0[50]_i_295_n_0
+    SLICE_X16Y322        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.063    17.110 f  ram_data[1]_t0[50]_i_293/O
+                         net (fo=1, routed)           0.140    17.250    ram_data[1]_t0[50]_i_293_n_0
+    SLICE_X16Y320        LUT6 (Prop_H6LUT_SLICEL_I5_O)
+                                                      0.163    17.413 f  ram_data[1]_t0[50]_i_292/O
+                         net (fo=1, routed)           0.269    17.682    ram_data[1]_t0[50]_i_292_n_0
+    SLICE_X15Y318        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.035    17.717 f  ram_data[1]_t0[50]_i_290/O
+                         net (fo=1, routed)           0.343    18.060    ram_data[1]_t0[50]_i_290_n_0
+    SLICE_X15Y315        LUT6 (Prop_B6LUT_SLICEL_I1_O)
+                                                      0.116    18.176 f  ram_data[1]_t0[50]_i_288/O
+                         net (fo=1, routed)           0.363    18.539    ram_data[1]_t0[50]_i_288_n_0
+    SLICE_X14Y313        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.101    18.640 r  ram_data[1]_t0[50]_i_285/O
+                         net (fo=1, routed)           0.199    18.839    ram_data[1]_t0[50]_i_285_n_0
+    SLICE_X12Y311        LUT6 (Prop_G6LUT_SLICEM_I4_O)
+                                                      0.035    18.874 f  ram_data[1]_t0[50]_i_282/O
+                         net (fo=1, routed)           0.192    19.066    ram_data[1]_t0[50]_i_282_n_0
+    SLICE_X11Y310        LUT6 (Prop_E6LUT_SLICEL_I3_O)
+                                                      0.034    19.100 r  ram_data[1]_t0[50]_i_280/O
+                         net (fo=1, routed)           0.213    19.313    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_178_t0_50
+    SLICE_X11Y310        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.063    19.376 r  ram_data[1]_t0[50]_i_278/O
+                         net (fo=1, routed)           0.055    19.431    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_180_t0_50
+    SLICE_X11Y310        LUT6 (Prop_C6LUT_SLICEL_I5_O)
+                                                      0.100    19.531 r  ram_data[1]_t0[50]_i_277/O
+                         net (fo=1, routed)           0.121    19.652    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_182_t0_50
+    SLICE_X11Y311        LUT6 (Prop_C6LUT_SLICEL_I5_O)
+                                                      0.035    19.687 r  ram_data[1]_t0[50]_i_275/O
+                         net (fo=1, routed)           0.129    19.816    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_184_t0_50
+    SLICE_X11Y313        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.101    19.917 r  ram_data[1]_t0[50]_i_274/O
+                         net (fo=1, routed)           0.123    20.040    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_186_t0_50
+    SLICE_X11Y314        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.035    20.075 r  ram_data[1]_t0[50]_i_273/O
+                         net (fo=1, routed)           0.123    20.198    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_188_t0_50
+    SLICE_X11Y315        LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.102    20.300 r  ram_data[1]_t0[50]_i_272/O
+                         net (fo=1, routed)           0.130    20.430    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_190_t0_50
+    SLICE_X11Y315        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.101    20.531 r  ram_data[1]_t0[50]_i_271/O
+                         net (fo=1, routed)           0.188    20.719    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_192_t0_50
+    SLICE_X11Y318        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.035    20.754 r  ram_data[1]_t0[50]_i_270/O
+                         net (fo=1, routed)           0.132    20.886    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_194_t0_50
+    SLICE_X11Y320        LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.116    21.002 r  ram_data[1]_t0[50]_i_269/O
+                         net (fo=1, routed)           0.129    21.131    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_196_t0_50
+    SLICE_X11Y322        LUT6 (Prop_E6LUT_SLICEL_I5_O)
+                                                      0.101    21.232 r  ram_data[1]_t0[50]_i_268/O
+                         net (fo=1, routed)           0.127    21.359    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_198_t0_50
+    SLICE_X11Y324        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.063    21.422 r  ram_data[1]_t0[50]_i_267/O
+                         net (fo=1, routed)           0.123    21.545    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_200_t0_50
+    SLICE_X11Y325        LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.102    21.647 r  ram_data[1]_t0[50]_i_266/O
+                         net (fo=1, routed)           0.201    21.848    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_202_t0_50
+    SLICE_X11Y326        LUT6 (Prop_E6LUT_SLICEL_I5_O)
+                                                      0.101    21.949 r  ram_data[1]_t0[50]_i_265/O
+                         net (fo=1, routed)           0.120    22.069    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_204_t0_50
+    SLICE_X10Y326        LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.062    22.131 r  ram_data[1]_t0[50]_i_264/O
+                         net (fo=1, routed)           0.136    22.267    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_206_t0_50
+    SLICE_X10Y327        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.154    22.421 r  ram_data[1]_t0[50]_i_263/O
+                         net (fo=1, routed)           0.123    22.544    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_208_t0_50
+    SLICE_X10Y328        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.101    22.645 r  ram_data[1]_t0[50]_i_262/O
+                         net (fo=1, routed)           0.168    22.813    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_210_t0_50
+    SLICE_X10Y330        LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.116    22.929 r  ram_data[1]_t0[50]_i_261/O
+                         net (fo=1, routed)           0.193    23.122    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_212_t0_50
+    SLICE_X9Y332         LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.036    23.158 r  ram_data[1]_t0[50]_i_260/O
+                         net (fo=1, routed)           0.322    23.480    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_214_t0_50
+    SLICE_X8Y334         LUT6 (Prop_H6LUT_SLICEL_I5_O)
+                                                      0.152    23.632 r  ram_data[1]_t0[50]_i_259/O
+                         net (fo=1, routed)           0.187    23.819    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_216_t0_50
+    SLICE_X7Y335         LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.063    23.882 r  ram_data[1]_t0[50]_i_258/O
+                         net (fo=1, routed)           0.253    24.135    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_218_t0_50
+    SLICE_X5Y337         LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.116    24.251 r  ram_data[1]_t0[50]_i_256/O
+                         net (fo=1, routed)           0.125    24.376    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_220_t0_50
+    SLICE_X5Y339         LUT6 (Prop_A6LUT_SLICEL_I5_O)
+                                                      0.062    24.438 r  ram_data[1]_t0[50]_i_254/O
+                         net (fo=1, routed)           0.243    24.681    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_222_t0_50
+    SLICE_X5Y339         LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.036    24.717 r  ram_data[1]_t0[50]_i_250/O
+                         net (fo=1, routed)           0.312    25.029    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_224_t0_50
+    SLICE_X5Y349         LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.115    25.144 r  ram_data[1]_t0[50]_i_249/O
+                         net (fo=1, routed)           0.133    25.277    ram_data[1]_t0[50]_i_249_n_0
+    SLICE_X5Y350         LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.164    25.441 r  ram_data[1]_t0[50]_i_243/O
+                         net (fo=1, routed)           0.241    25.682    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_229_t0_50
+    SLICE_X4Y353         LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.115    25.797 r  ram_data[1]_t0[50]_i_242/O
+                         net (fo=1, routed)           0.126    25.923    ram_data[1]_t0[50]_i_242_n_0
+    SLICE_X4Y353         LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.062    25.985 r  ram_data[1]_t0[50]_i_236/O
+                         net (fo=1, routed)           0.182    26.167    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_234_t0_50
+    SLICE_X4Y353         LUT6 (Prop_H6LUT_SLICEL_I0_O)
+                                                      0.152    26.319 r  ram_data[1]_t0[50]_i_235/O
+                         net (fo=1, routed)           0.260    26.579    ram_data[1]_t0[50]_i_235_n_0
+    SLICE_X7Y353         LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.035    26.614 r  ram_data[1]_t0[50]_i_229/O
+                         net (fo=1, routed)           0.276    26.890    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_239_t0_50
+    SLICE_X8Y353         LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.101    26.991 r  ram_data[1]_t0[50]_i_228/O
+                         net (fo=1, routed)           0.311    27.302    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_035963_
+    SLICE_X11Y350        LUT6 (Prop_E6LUT_SLICEL_I5_O)
+                                                      0.061    27.363 r  ram_data[1]_t0[50]_i_222/O
+                         net (fo=1, routed)           0.425    27.788    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_244_t0_50
+    SLICE_X15Y342        LUT6 (Prop_E6LUT_SLICEL_I0_O)
+                                                      0.034    27.822 r  ram_data[1]_t0[50]_i_221/O
+                         net (fo=1, routed)           0.323    28.145    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_036603_
+    SLICE_X19Y335        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.035    28.180 r  ram_data[1]_t0[50]_i_215/O
+                         net (fo=1, routed)           0.349    28.529    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_249_t0_50
+    SLICE_X22Y332        LUT6 (Prop_B6LUT_SLICEL_I0_O)
+                                                      0.116    28.645 r  ram_data[1]_t0[50]_i_214/O
+                         net (fo=1, routed)           0.269    28.914    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_037243_
+    SLICE_X22Y336        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.035    28.949 r  ram_data[1]_t0[50]_i_208/O
+                         net (fo=1, routed)           0.124    29.073    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_254_t0_50
+    SLICE_X23Y336        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.035    29.108 r  ram_data[1]_t0[50]_i_207/O
+                         net (fo=1, routed)           0.193    29.301    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_037883_
+    SLICE_X23Y340        LUT6 (Prop_H6LUT_SLICEL_I5_O)
+                                                      0.035    29.336 r  ram_data[1]_t0[50]_i_201/O
+                         net (fo=1, routed)           0.274    29.610    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_259_t0_50
+    SLICE_X24Y342        LUT6 (Prop_G6LUT_SLICEM_I0_O)
+                                                      0.101    29.711 r  ram_data[1]_t0[50]_i_200/O
+                         net (fo=1, routed)           0.139    29.850    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_038523_
+    SLICE_X26Y342        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.153    30.003 r  ram_data[1]_t0[50]_i_194/O
+                         net (fo=1, routed)           0.204    30.207    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_264_t0_50
+    SLICE_X26Y344        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.063    30.270 r  ram_data[1]_t0[50]_i_193/O
+                         net (fo=1, routed)           0.124    30.394    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_039163_
+    SLICE_X27Y344        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.035    30.429 r  ram_data[1]_t0[50]_i_187/O
+                         net (fo=1, routed)           0.259    30.688    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_269_t0_50
+    SLICE_X28Y343        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.035    30.723 r  ram_data[1]_t0[50]_i_186/O
+                         net (fo=1, routed)           0.134    30.857    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_039803_
+    SLICE_X29Y343        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.163    31.020 r  ram_data[1]_t0[50]_i_180/O
+                         net (fo=1, routed)           0.204    31.224    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_274_t0_50
+    SLICE_X32Y343        LUT6 (Prop_B6LUT_SLICEL_I0_O)
+                                                      0.116    31.340 r  ram_data[1]_t0[50]_i_179/O
+                         net (fo=1, routed)           0.145    31.485    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_040443_
+    SLICE_X34Y343        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.154    31.639 r  ram_data[1]_t0[50]_i_173/O
+                         net (fo=1, routed)           0.198    31.837    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_279_t0_50
+    SLICE_X35Y343        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.115    31.952 r  ram_data[1]_t0[50]_i_172/O
+                         net (fo=1, routed)           0.133    32.085    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_041083_
+    SLICE_X35Y343        LUT6 (Prop_B6LUT_SLICEL_I5_O)
+                                                      0.102    32.187 r  ram_data[1]_t0[50]_i_166/O
+                         net (fo=1, routed)           0.133    32.320    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_284_t0_50
+    SLICE_X35Y342        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.154    32.474 r  ram_data[1]_t0[50]_i_165/O
+                         net (fo=1, routed)           0.244    32.718    ram_data[1]_t0[50]_i_165_n_0
+    SLICE_X36Y340        LUT6 (Prop_F6LUT_SLICEL_I5_O)
+                                                      0.063    32.781 r  ram_data[1]_t0[50]_i_158/O
+                         net (fo=1, routed)           0.053    32.834    i_mem_top/i_chip_top/system/bootROMDomainWrapper/bootrom/_GEN_289_t0_50
+    SLICE_X36Y340        LUT6 (Prop_G6LUT_SLICEL_I3_O)
+                                                      0.062    32.896 r  ram_data[1]_t0[50]_i_149/O
+                         net (fo=1, routed)           0.221    33.117    ram_data[1]_t0[50]_i_149_n_0
+    SLICE_X39Y339        LUT6 (Prop_D6LUT_SLICEL_I3_O)
+                                                      0.101    33.218 f  ram_data[1]_t0[50]_i_143/O
+                         net (fo=1, routed)           0.135    33.353    ram_data[1]_t0[50]_i_143_n_0
+    SLICE_X40Y339        LUT6 (Prop_F6LUT_SLICEM_I3_O)
+                                                      0.103    33.456 r  ram_data[1]_t0[50]_i_138/O
+                         net (fo=1, routed)           0.261    33.717    ram_data[1]_t0[50]_i_138_n_0
+    SLICE_X43Y337        LUT6 (Prop_G6LUT_SLICEL_I3_O)
+                                                      0.153    33.870 f  ram_data[1]_t0[50]_i_130/O
+                         net (fo=1, routed)           0.175    34.045    ram_data[1]_t0[50]_i_130_n_0
+    SLICE_X44Y337        LUT6 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.063    34.108 f  ram_data[1]_t0[50]_i_124/O
+                         net (fo=1, routed)           0.297    34.405    ram_data[1]_t0[50]_i_124_n_0
+    SLICE_X48Y333        LUT6 (Prop_G6LUT_SLICEL_I1_O)
+                                                      0.101    34.506 f  ram_data[1]_t0[50]_i_119/O
+                         net (fo=1, routed)           0.253    34.759    ram_data[1]_t0[50]_i_119_n_0
+    SLICE_X50Y329        LUT6 (Prop_D6LUT_SLICEL_I4_O)
+                                                      0.115    34.874 f  ram_data[1]_t0[50]_i_111/O
+                         net (fo=1, routed)           0.286    35.160    ram_data[1]_t0[50]_i_111_n_0
+    SLICE_X52Y325        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.101    35.261 f  ram_data[1]_t0[50]_i_107/O
+                         net (fo=1, routed)           0.188    35.449    ram_data[1]_t0[50]_i_107_n_0
+    SLICE_X54Y323        LUT6 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.063    35.512 f  ram_data[1]_t0[50]_i_100/O
+                         net (fo=1, routed)           0.259    35.771    ram_data[1]_t0[50]_i_100_n_0
+    SLICE_X56Y320        LUT6 (Prop_F6LUT_SLICEL_I2_O)
+                                                      0.115    35.886 f  ram_data[1]_t0[50]_i_98/O
+                         net (fo=1, routed)           0.269    36.155    ram_data[1]_t0[50]_i_98_n_0
+    SLICE_X59Y320        LUT6 (Prop_F6LUT_SLICEL_I4_O)
+                                                      0.035    36.190 f  ram_data[1]_t0[50]_i_90/O
+                         net (fo=1, routed)           0.197    36.387    ram_data[1]_t0[50]_i_90_n_0
+    SLICE_X60Y320        LUT6 (Prop_C6LUT_SLICEL_I2_O)
+                                                      0.114    36.501 f  ram_data[1]_t0[50]_i_85/O
+                         net (fo=1, routed)           0.133    36.634    ram_data[1]_t0[50]_i_85_n_0
+    SLICE_X62Y320        LUT6 (Prop_G6LUT_SLICEL_I1_O)
+                                                      0.101    36.735 f  ram_data[1]_t0[50]_i_79/O
+                         net (fo=1, routed)           0.272    37.007    ram_data[1]_t0[50]_i_79_n_0
+    SLICE_X65Y322        LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.153    37.160 f  ram_data[1]_t0[50]_i_70/O
+                         net (fo=1, routed)           0.199    37.359    ram_data[1]_t0[50]_i_70_n_0
+    SLICE_X65Y323        LUT6 (Prop_A6LUT_SLICEL_I0_O)
+                                                      0.101    37.460 f  ram_data[1]_t0[50]_i_64/O
+                         net (fo=1, routed)           0.127    37.587    ram_data[1]_t0[50]_i_64_n_0
+    SLICE_X65Y324        LUT6 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.115    37.702 f  ram_data[1]_t0[50]_i_58/O
+                         net (fo=1, routed)           0.127    37.829    ram_data[1]_t0[50]_i_58_n_0
+    SLICE_X65Y324        LUT6 (Prop_G6LUT_SLICEL_I2_O)
+                                                      0.062    37.891 f  ram_data[1]_t0[50]_i_56/O
+                         net (fo=1, routed)           0.258    38.149    ram_data[1]_t0[50]_i_56_n_0
+    SLICE_X67Y327        LUT6 (Prop_G6LUT_SLICEL_I4_O)
+                                                      0.153    38.302 f  ram_data[1]_t0[50]_i_50/O
+                         net (fo=1, routed)           0.126    38.428    ram_data[1]_t0[50]_i_50_n_0
+    SLICE_X67Y329        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.035    38.463 f  ram_data[1]_t0[50]_i_48/O
+                         net (fo=1, routed)           0.225    38.688    ram_data[1]_t0[50]_i_48_n_0
+    SLICE_X66Y330        LUT6 (Prop_G6LUT_SLICEL_I4_O)
+                                                      0.101    38.789 f  ram_data[1]_t0[50]_i_42/O
+                         net (fo=1, routed)           0.278    39.067    ram_data[1]_t0[50]_i_42_n_0
+    SLICE_X67Y331        LUT6 (Prop_H6LUT_SLICEL_I2_O)
+                                                      0.116    39.183 f  ram_data[1]_t0[50]_i_40/O
+                         net (fo=1, routed)           0.197    39.380    ram_data[1]_t0[50]_i_40_n_0
+    SLICE_X68Y334        LUT6 (Prop_F6LUT_SLICEL_I4_O)
+                                                      0.115    39.495 f  ram_data[1]_t0[50]_i_33/O
+                         net (fo=1, routed)           0.273    39.768    ram_data[1]_t0[50]_i_33_n_0
+    SLICE_X70Y338        LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.153    39.921 f  ram_data[1]_t0[50]_i_29/O
+                         net (fo=1, routed)           0.199    40.120    ram_data[1]_t0[50]_i_29_n_0
+    SLICE_X71Y339        LUT6 (Prop_G6LUT_SLICEL_I4_O)
+                                                      0.164    40.284 f  ram_data[1]_t0[50]_i_22__0/O
+                         net (fo=1, routed)           0.428    40.712    ram_data[1]_t0[50]_i_22__0_n_0
+    SLICE_X72Y344        LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.101    40.813 f  ram_data[1]_t0[50]_i_19__0/O
+                         net (fo=1, routed)           0.203    41.016    ram_data[1]_t0[50]_i_19__0_n_0
+    SLICE_X74Y344        LUT6 (Prop_H6LUT_SLICEL_I5_O)
+                                                      0.035    41.051 f  ram_data[1]_t0[50]_i_13__1/O
+                         net (fo=1, routed)           0.297    41.348    ram_data[1]_t0[50]_i_13__1_n_0
+    SLICE_X76Y349        LUT6 (Prop_A6LUT_SLICEL_I2_O)
+                                                      0.035    41.383 r  ram_data[1]_t0[50]_i_10__2/O
+                         net (fo=1, routed)           0.192    41.575    i_mem_top/i_chip_top/system/bootROMDomainWrapper_auto_bootrom_in_d_bits_data_t0[50]
+    SLICE_X77Y351        LUT3 (Prop_B5LUT_SLICEL_I0_O)
+                                                      0.090    41.665 f  ram_data[1]_t0[50]_i_7__4/O
+                         net (fo=2, routed)           0.262    41.927    ram_data[1]_t0[50]_i_7__4_n_0
+    SLICE_X77Y353        LUT6 (Prop_H6LUT_SLICEL_I4_O)
+                                                      0.035    41.962 f  ram_data[1]_t0[50]_i_3__5/O
+                         net (fo=1, routed)           0.186    42.148    ram_data[1]_t0[50]_i_3__5_n_0
+    SLICE_X78Y354        LUT6 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.114    42.262 r  ram_data[1]_t0[50]_i_2__5/O
+                         net (fo=2, routed)           0.200    42.462    i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleIn_0_d_q/_0005__50
+    SLICE_X79Y354        LUT6 (Prop_G6LUT_SLICEL_I4_O)
+                                                      0.153    42.615 r  ram_data[0]_t0[50]_i_1__11/O
+                         net (fo=1, routed)           0.049    42.664    i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleIn_0_d_q/_1831_
+    SLICE_X79Y354        FDRE                                         r  i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleIn_0_d_q/ram_data[0]_t0_reg[50]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     10.000    10.000 r  
+    BK27                                              0.000    10.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    10.000    clk_i_IBUF_inst/I
+    BK27                 INBUF (Prop_INBUF_HRIO_PAD_O)
+                                                      0.516    10.516 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.051    10.567    clk_i_IBUF_inst/OUT
+    BK27                 IBUFCTRL (Prop_IBUFCTRL_HRIO_I_O)
+                                                      0.026    10.593 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, routed)           0.566    11.159    clk_i_IBUF
+    BUFGCE_X1Y122        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.060    11.219 r  clk_i_IBUF_BUFG_inst/O
+    X4Y7 (CLOCK_ROOT)    net (fo=962400, routed)      3.453    14.672    clk_i_IBUF_BUFG
+    SLICE_X79Y354        FDRE                                         r  i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleIn_0_d_q/ram_data[0]_t0_reg[50]/C
+                         clock pessimism              0.619    15.290    
+                         clock uncertainty           -0.035    15.255    
+    SLICE_X79Y354        FDRE (Setup_GFF_SLICEL_C_D)
+                                                      0.048    15.303    i_mem_top/i_chip_top/system/subsystem_cbus/buffer/bundleIn_0_d_q/ram_data[0]_t0_reg[50]
+  -------------------------------------------------------------------
+                         required time                         15.303    
+                         arrival time                         -42.664    
+  -------------------------------------------------------------------
+                         slack                                -27.361    
+
+
+
+
+report_timing: Time (s): cpu = 00:17:47 ; elapsed = 00:04:26 . Memory (MB): peak = 21789.098 ; gain = 1912.637 ; free physical = 10102 ; free virtual = 191998

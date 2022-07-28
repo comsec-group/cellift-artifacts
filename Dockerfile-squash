@@ -1,0 +1,3 @@
+FROM ethcomsec/cellift-artifact-evaluation:cellift-artifact-evaluation as build
+FROM scratch
+COPY --from=build / /

@@ -1,0 +1,120 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2019.1.1 (lin64) Build 2580384 Sat Jun 29 08:04:45 MDT 2019
+| Date              : Wed Jan 26 18:57:41 2022
+| Host              : lagrev3.ee.ethz.ch running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command           : report_timing
+| Design            : rocket_fpga_top
+| Device            : xcvu440-flga2892
+| Speed File        : -3  PRODUCTION 1.26 12-04-2018
+| Temperature Grade : E
+---------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             2.898ns  (required time - arrival time)
+  Source:                 i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/frontend/fq/valid_0_reg/C
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/frontend/fq/elts_0_pc_reg[38]/CE
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_i rise@10.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        6.940ns  (logic 1.186ns (17.089%)  route 5.754ns (82.911%))
+  Logic Levels:           11  (LUT2=2 LUT4=2 LUT5=1 LUT6=6)
+  Clock Path Skew:        -0.089ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    3.341ns = ( 13.341 - 10.000 ) 
+    Source Clock Delay      (SCD):    4.016ns
+    Clock Pessimism Removal (CPR):    0.586ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      2.537ns (routing 1.305ns, distribution 1.232ns)
+  Clock Net Delay (Destination): 2.285ns (routing 1.191ns, distribution 1.094ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    BG42                                              0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i_IBUF_inst/I
+    BG42                 INBUF (Prop_INBUF_HPIOB_PAD_O)
+                                                      0.687     0.687 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.079     0.766    clk_i_IBUF_inst/OUT
+    BG42                 IBUFCTRL (Prop_IBUFCTRL_HPIOB_I_O)
+                                                      0.000     0.766 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, routed)           0.646     1.412    clk_i_IBUF
+    BUFGCE_X1Y218        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.067     1.479 r  clk_i_IBUF_BUFG_inst/O
+    X5Y7 (CLOCK_ROOT)    net (fo=8613, routed)        2.537     4.016    clk_i_IBUF_BUFG
+    SLICE_X222Y449       FDRE                                         r  i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/frontend/fq/valid_0_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X222Y449       FDRE (Prop_EFF_SLICEM_C_Q)
+                                                      0.102     4.118 r  i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/frontend/fq/valid_0_reg/Q
+                         net (fo=168, routed)         0.325     4.443    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/frontend/fq_io_mask[0]
+    SLICE_X224Y454       LUT4 (Prop_F6LUT_SLICEL_I1_O)
+                                                      0.163     4.606 r  ex_ctrl_mem_cmd[4]_i_31/O
+                         net (fo=33, routed)          0.577     5.183    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/core/ibuf/icShiftAmt[1]
+    SLICE_X227Y443       LUT5 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.035     5.218 r  ex_reg_inst[31]_i_5/O
+                         net (fo=64, routed)          0.544     5.762    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/core/ibuf_io_inst_0_bits_raw[0]
+    SLICE_X230Y450       LUT2 (Prop_C5LUT_SLICEL_I0_O)
+                                                      0.134     5.896 r  ex_reg_inst[22]_i_11/O
+                         net (fo=10, routed)          0.499     6.395    ex_reg_inst[22]_i_11_n_0
+    SLICE_X231Y447       LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.101     6.496 r  ex_ctrl_jalr_i_6/O
+                         net (fo=1, routed)           0.124     6.620    ex_ctrl_jalr_i_6_n_0
+    SLICE_X231Y448       LUT6 (Prop_B6LUT_SLICEL_I3_O)
+                                                      0.102     6.722 r  ex_ctrl_jalr_i_2/O
+                         net (fo=71, routed)          0.588     7.310    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/core/ibuf_io_inst_0_bits_inst_bits[2]
+    SLICE_X229Y454       LUT4 (Prop_D6LUT_SLICEL_I0_O)
+                                                      0.165     7.475 f  ex_ctrl_mem_cmd[4]_i_39/O
+                         net (fo=1, routed)           0.258     7.733    ex_ctrl_mem_cmd[4]_i_39_n_0
+    SLICE_X230Y455       LUT6 (Prop_H6LUT_SLICEL_I1_O)
+                                                      0.035     7.768 f  ex_ctrl_mem_cmd[4]_i_17/O
+                         net (fo=5, routed)           0.485     8.253    ex_ctrl_mem_cmd[4]_i_17_n_0
+    SLICE_X233Y457       LUT6 (Prop_G6LUT_SLICEL_I2_O)
+                                                      0.035     8.288 r  ex_reg_load_use_i_2/O
+                         net (fo=3, routed)           0.197     8.485    ex_reg_load_use_i_2_n_0
+    SLICE_X231Y456       LUT2 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.114     8.599 r  buf__replay_i_6/O
+                         net (fo=1, routed)           0.303     8.902    buf__replay_i_6_n_0
+    SLICE_X226Y456       LUT6 (Prop_D6LUT_SLICEL_I1_O)
+                                                      0.165     9.067 r  buf__replay_i_3/O
+                         net (fo=12, routed)          0.712     9.779    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/core/ibuf_io_inst_0_ready
+    SLICE_X220Y448       LUT6 (Prop_H6LUT_SLICEL_I1_O)
+                                                      0.035     9.814 r  elts_0_pc[39]_i_1/O
+                         net (fo=74, routed)          1.142    10.956    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/frontend/fq/wen
+    SLICE_X233Y478       FDRE                                         r  i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/frontend/fq/elts_0_pc_reg[38]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     10.000    10.000 r  
+    BG42                                              0.000    10.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    10.000    clk_i_IBUF_inst/I
+    BG42                 INBUF (Prop_INBUF_HPIOB_PAD_O)
+                                                      0.428    10.428 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.045    10.473    clk_i_IBUF_inst/OUT
+    BG42                 IBUFCTRL (Prop_IBUFCTRL_HPIOB_I_O)
+                                                      0.000    10.473 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=1, routed)           0.523    10.996    clk_i_IBUF
+    BUFGCE_X1Y218        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.060    11.056 r  clk_i_IBUF_BUFG_inst/O
+    X5Y7 (CLOCK_ROOT)    net (fo=8613, routed)        2.285    13.341    clk_i_IBUF_BUFG
+    SLICE_X233Y478       FDRE                                         r  i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/frontend/fq/elts_0_pc_reg[38]/C
+                         clock pessimism              0.586    13.927    
+                         clock uncertainty           -0.035    13.892    
+    SLICE_X233Y478       FDRE (Setup_DFF_SLICEL_C_CE)
+                                                     -0.038    13.854    i_mem_top/i_chip_top/system/tile_prci_domain/tile_reset_domain/tile/frontend/fq/elts_0_pc_reg[38]
+  -------------------------------------------------------------------
+                         required time                         13.854    
+                         arrival time                         -10.956    
+  -------------------------------------------------------------------
+                         slack                                  2.898    
+
+
+
+

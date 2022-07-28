@@ -1,0 +1,26 @@
+{
+    "Ibex": {
+        "vanilla": 3469,
+        "cellift": 17417,
+        "glift": 25871
+    },
+    "Rocket": {
+        "vanilla": 11965,
+        "cellift": 104128,
+        "glift": 118598
+    },
+    "PULPissimo": {
+        "vanilla": 32318,
+        "cellift": 154555,
+        "glift": 232830
+    },
+    "Ariane": {
+        "vanilla": 41192,
+        "cellift": 970154
+    },
+    "BOOM": {
+        "vanilla": 73536,
+        "cellift": 1625704,
+        "glift": 1856776
+    }
+}

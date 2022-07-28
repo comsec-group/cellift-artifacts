@@ -1,0 +1,14 @@
+module mycell #(
+    parameter int unsigned DATA_WIDTH = <TEMPLATE_DATA_WIDTH>,
+    parameter int unsigned NUM_INSTANCES = <TEMPLATE_NUM_INSTANCES>
+) (
+    input logic  [NUM_INSTANCES-1:0] [128-1:0] a_i,
+    input logic  [NUM_INSTANCES-1:0] [128-1:0] b_i,
+    output logic [NUM_INSTANCES-1:0] out_o
+);
+
+    for (genvar instance_id = 0; instance_id < NUM_INSTANCES; instance_id++) begin : gen_instances
+        assign out_o[instance_id] = a_i[instance_id][DATA_WIDTH-1:0] == b_i[instance_id][DATA_WIDTH-1:0];
+    end
+
+endmodule

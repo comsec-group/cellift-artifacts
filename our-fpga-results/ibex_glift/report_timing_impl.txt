@@ -1,0 +1,219 @@
+INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -3, Temperature grade: E, Delay Type: max.
+INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
+INFO: [Timing 38-78] ReportTimingParams: -max_paths 1 -nworst 1 -delay_type max -sort_by slack.
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2019.1.1 (lin64) Build 2580384 Sat Jun 29 08:04:45 MDT 2019
+| Date              : Wed Jan 26 18:55:55 2022
+| Host              : lagrev3.ee.ethz.ch running 64-bit CentOS Linux release 7.9.2009 (Core)
+| Command           : report_timing
+| Design            : ibex_fpga_top_taints
+| Device            : xcvu440-flga2892
+| Speed File        : -3  PRODUCTION 1.26 12-04-2018
+| Temperature Grade : E
+---------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (VIOLATED) :        -9.418ns  (required time - arrival time)
+  Source:                 i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/rf_reg_reg[34]_reg/C
+                            (rising edge-triggered cell FDCE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/if_stage_i/instr_rdata_alu_id_o_t0_reg[17]/D
+                            (rising edge-triggered cell FDRE clocked by clk_i  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             clk_i
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (clk_i rise@10.000ns - clk_i rise@0.000ns)
+  Data Path Delay:        19.345ns  (logic 4.771ns (24.663%)  route 14.574ns (75.337%))
+  Logic Levels:           42  (LUT3=2 LUT4=3 LUT5=2 LUT6=35)
+  Clock Path Skew:        -0.086ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    4.571ns = ( 14.571 - 10.000 ) 
+    Source Clock Delay      (SCD):    5.509ns
+    Clock Pessimism Removal (CPR):    0.853ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.589ns (routing 0.279ns, distribution 1.310ns)
+  Clock Net Delay (Destination): 1.417ns (routing 0.251ns, distribution 1.166ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock clk_i rise edge)      0.000     0.000 r  
+    BG42                                              0.000     0.000 r  clk_i (IN)
+                         net (fo=0)                   0.000     0.000    clk_i_IBUF_inst/I
+    BG42                 INBUF (Prop_INBUF_HPIOB_PAD_O)
+                                                      0.687     0.687 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.079     0.766    clk_i_IBUF_inst/OUT
+    BG42                 IBUFCTRL (Prop_IBUFCTRL_HPIOB_I_O)
+                                                      0.000     0.766 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=2, routed)           2.385     3.151    clk_i_IBUF
+    SLICE_X297Y392       LUT2 (Prop_F6LUT_SLICEL_I1_O)
+                                                      0.154     3.305 r  gen_mult_single_cycle.mult_state_q_t0_i_8/O
+                         net (fo=1, routed)           0.548     3.853    gen_mult_single_cycle.mult_state_q_t0_i_8_n_0
+    BUFGCE_X1Y146        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.067     3.920 r  gen_mult_single_cycle.mult_state_q_t0_reg_i_3/O
+    X7Y6 (CLOCK_ROOT)    net (fo=4615, routed)        1.589     5.509    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/clk
+    SLICE_X292Y434       FDCE                                         r  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/rf_reg_reg[34]_reg/C
+  -------------------------------------------------------------------    -------------------
+    SLICE_X292Y434       FDCE (Prop_HFF_SLICEL_C_Q)
+                                                      0.102     5.611 r  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/rf_reg_reg[34]_reg/Q
+                         net (fo=7, routed)           0.939     6.550    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/rf_reg_reg[34]
+    SLICE_X288Y434       LUT5 (Prop_E6LUT_SLICEL_I0_O)
+                                                      0.153     6.703 r  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/i___447/O
+                         net (fo=1, routed)           0.289     6.992    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/i___447_n_0
+    SLICE_X287Y435       LUT6 (Prop_E6LUT_SLICEL_I2_O)
+                                                      0.153     7.145 r  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/i___470/O
+                         net (fo=1, routed)           0.194     7.339    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/i___470_n_0
+    SLICE_X287Y434       LUT6 (Prop_D6LUT_SLICEL_I5_O)
+                                                      0.115     7.454 f  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/i___1338_i_4/O
+                         net (fo=1, routed)           0.188     7.642    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/i___1338_i_4_n_0
+    SLICE_X287Y431       LUT6 (Prop_G6LUT_SLICEL_I5_O)
+                                                      0.101     7.743 f  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/i___1338/O
+                         net (fo=1, routed)           0.371     8.114    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/i___1338_n_0
+    SLICE_X290Y426       LUT6 (Prop_D6LUT_SLICEM_I3_O)
+                                                      0.119     8.233 f  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/data_mem_wdata_o_t0_OBUF[18]_inst_i_13/O
+                         net (fo=1, routed)           0.580     8.813    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/data_mem_wdata_o_t0_OBUF[18]_inst_i_13_n_0
+    SLICE_X291Y424       LUT6 (Prop_C6LUT_SLICEL_I5_O)
+                                                      0.062     8.875 r  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/gen_regfile_ff.register_file_i/data_mem_wdata_o_t0_OBUF[18]_inst_i_9/O
+                         net (fo=1, routed)           0.227     9.102    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/rf_rdata_b_ecc_t0[2]
+    SLICE_X292Y423       LUT6 (Prop_D6LUT_SLICEL_I4_O)
+                                                      0.155     9.257 r  data_mem_wdata_o_t0_OBUF[18]_inst_i_6/O
+                         net (fo=61, routed)          0.570     9.827    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/multdiv_operand_b_ex_t0[2]
+    SLICE_X286Y414       LUT5 (Prop_A6LUT_SLICEL_I4_O)
+                                                      0.062     9.889 r  data_mem_addr_o_t0_OBUF[0]_inst_i_14/O
+                         net (fo=1, routed)           0.126    10.015    data_mem_addr_o_t0_OBUF[0]_inst_i_14_n_0
+    SLICE_X286Y412       LUT6 (Prop_H6LUT_SLICEL_I5_O)
+                                                      0.035    10.050 r  data_mem_addr_o_t0_OBUF[0]_inst_i_9/O
+                         net (fo=6, routed)           0.316    10.366    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/alu_operand_b_ex_t0[2]
+    SLICE_X279Y412       LUT4 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.153    10.519 r  counter_val_o_t0_reg[0]_i_18__1/O
+                         net (fo=24, routed)          0.317    10.836    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/csr_addr_t0[2]
+    SLICE_X278Y411       LUT6 (Prop_C6LUT_SLICEM_I0_O)
+                                                      0.167    11.003 f  counter_val_o_t0_reg[0]_i_14__3/O
+                         net (fo=12, routed)          0.350    11.353    counter_val_o_t0_reg[0]_i_14__3_n_0
+    SLICE_X275Y408       LUT4 (Prop_E6LUT_SLICEL_I3_O)
+                                                      0.153    11.506 r  rf_wdata_fwd_wb_o_t0[4]_i_69/O
+                         net (fo=2, routed)           0.219    11.725    rf_wdata_fwd_wb_o_t0[4]_i_69_n_0
+    SLICE_X276Y408       LUT6 (Prop_H6LUT_SLICEL_I5_O)
+                                                      0.163    11.888 f  g_writeback_stage.rf_we_wb_q_t0_i_114/O
+                         net (fo=1, routed)           0.288    12.176    g_writeback_stage.rf_we_wb_q_t0_i_114_n_0
+    SLICE_X278Y407       LUT6 (Prop_F6LUT_SLICEM_I3_O)
+                                                      0.168    12.344 r  g_writeback_stage.rf_we_wb_q_t0_i_48/O
+                         net (fo=1, routed)           0.209    12.553    g_writeback_stage.rf_we_wb_q_t0_i_48_n_0
+    SLICE_X278Y405       LUT6 (Prop_B6LUT_SLICEM_I1_O)
+                                                      0.120    12.673 r  g_writeback_stage.rf_we_wb_q_t0_i_24/O
+                         net (fo=1, routed)           0.275    12.948    g_writeback_stage.rf_we_wb_q_t0_i_24_n_0
+    SLICE_X278Y408       LUT6 (Prop_H6LUT_SLICEM_I2_O)
+                                                      0.105    13.053 f  g_writeback_stage.rf_we_wb_q_t0_i_9/O
+                         net (fo=1, routed)           0.216    13.269    g_writeback_stage.rf_we_wb_q_t0_i_9_n_0
+    SLICE_X278Y413       LUT6 (Prop_A6LUT_SLICEM_I4_O)
+                                                      0.115    13.384 r  g_writeback_stage.rf_we_wb_q_t0_i_3/O
+                         net (fo=5, routed)           0.145    13.529    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/illegal_csr_insn_id_t0
+    SLICE_X278Y413       LUT6 (Prop_F6LUT_SLICEM_I2_O)
+                                                      0.103    13.632 r  illegal_insn_q_t0_i_6/O
+                         net (fo=4, routed)           0.145    13.777    illegal_insn_q_t0_i_6_n_0
+    SLICE_X278Y415       LUT6 (Prop_A6LUT_SLICEM_I3_O)
+                                                      0.115    13.892 r  data_mem_addr_o_t0_OBUF[14]_inst_i_62/O
+                         net (fo=2, routed)           0.195    14.087    data_mem_addr_o_t0_OBUF[14]_inst_i_62_n_0
+    SLICE_X276Y414       LUT6 (Prop_C6LUT_SLICEL_I5_O)
+                                                      0.062    14.149 r  data_mem_addr_o_t0_OBUF[14]_inst_i_32/O
+                         net (fo=1, routed)           0.139    14.288    data_mem_addr_o_t0_OBUF[14]_inst_i_32_n_0
+    SLICE_X276Y416       LUT6 (Prop_F6LUT_SLICEL_I3_O)
+                                                      0.163    14.451 f  data_mem_addr_o_t0_OBUF[14]_inst_i_13/O
+                         net (fo=4, routed)           0.266    14.717    data_mem_addr_o_t0_OBUF[14]_inst_i_13_n_0
+    SLICE_X274Y416       LUT6 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.035    14.752 r  data_mem_addr_o_t0_OBUF[14]_inst_i_8/O
+                         net (fo=12, routed)          0.518    15.270    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/lsu_req_t0
+    SLICE_X274Y416       LUT6 (Prop_A6LUT_SLICEL_I4_O)
+                                                      0.035    15.305 r  data_mem_addr_o_t0_OBUF[14]_inst_i_2/O
+                         net (fo=28, routed)          0.203    15.508    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/data_req_t0
+    SLICE_X274Y417       LUT6 (Prop_A6LUT_SLICEL_I1_O)
+                                                      0.101    15.609 r  gen_normal_fifo.rdata_int_t0[10]_i_2/O
+                         net (fo=15, routed)          0.369    15.978    i_cellift_rv_core_ibex_mem_top/i_data_tlul_adapter_sram/tlul_error_t0
+    SLICE_X272Y416       LUT6 (Prop_B6LUT_SLICEM_I3_O)
+                                                      0.104    16.082 r  ls_fsm_cs_t0[1]_i_11/O
+                         net (fo=1, routed)           0.439    16.521    ls_fsm_cs_t0[1]_i_11_n_0
+    SLICE_X272Y416       LUT6 (Prop_G6LUT_SLICEM_I5_O)
+                                                      0.116    16.637 f  ls_fsm_cs_t0[1]_i_2/O
+                         net (fo=1, routed)           0.435    17.072    ls_fsm_cs_t0[1]_i_2_n_0
+    SLICE_X273Y416       LUT6 (Prop_C6LUT_SLICEL_I0_O)
+                                                      0.153    17.225 r  ls_fsm_cs_t0[1]_i_1/O
+                         net (fo=3, routed)           0.402    17.627    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/load_store_unit_i/ls_fsm_ns_t0_1
+    SLICE_X274Y414       LUT6 (Prop_A6LUT_SLICEL_I3_O)
+                                                      0.153    17.780 r  id_fsm_q_t0_i_38/O
+                         net (fo=2, routed)           0.128    17.908    id_fsm_q_t0_i_38_n_0
+    SLICE_X274Y414       LUT6 (Prop_D6LUT_SLICEL_I4_O)
+                                                      0.115    18.023 f  id_fsm_q_t0_i_13/O
+                         net (fo=10, routed)          0.467    18.490    id_fsm_q_t0_i_13_n_0
+    SLICE_X276Y413       LUT4 (Prop_D6LUT_SLICEL_I3_O)
+                                                      0.115    18.605 f  id_fsm_q_t0_i_18/O
+                         net (fo=3, routed)           0.447    19.052    id_fsm_q_t0_i_18_n_0
+    SLICE_X277Y413       LUT6 (Prop_E6LUT_SLICEL_I2_O)
+                                                      0.061    19.113 f  g_writeback_stage.wb_instr_type_q_t0[0]_i_12/O
+                         net (fo=2, routed)           0.209    19.322    g_writeback_stage.wb_instr_type_q_t0[0]_i_12_n_0
+    SLICE_X277Y412       LUT6 (Prop_E6LUT_SLICEL_I5_O)
+                                                      0.115    19.437 f  g_writeback_stage.wb_instr_type_q_t0[0]_i_4/O
+                         net (fo=2, routed)           0.530    19.967    g_writeback_stage.wb_instr_type_q_t0[0]_i_4_n_0
+    SLICE_X279Y410       LUT6 (Prop_G6LUT_SLICEL_I0_O)
+                                                      0.062    20.029 f  g_writeback_stage.wb_instr_type_q_t0[0]_i_3/O
+                         net (fo=78, routed)          0.133    20.162    g_writeback_stage.wb_instr_type_q_t0[0]_i_3_n_0
+    SLICE_X279Y410       LUT6 (Prop_B6LUT_SLICEL_I2_O)
+                                                      0.102    20.264 r  rd_data_o_t0[1]_i_18/O
+                         net (fo=4, routed)           0.342    20.606    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/csr_op_en_t0
+    SLICE_X282Y407       LUT6 (Prop_F6LUT_SLICEL_I0_O)
+                                                      0.101    20.707 f  ctrl_fsm_cs_t0[3]_i_23/O
+                         net (fo=2, routed)           0.148    20.855    ctrl_fsm_cs_t0[3]_i_23_n_0
+    SLICE_X282Y405       LUT6 (Prop_C6LUT_SLICEL_I4_O)
+                                                      0.163    21.018 f  ctrl_fsm_cs_t0[3]_i_13/O
+                         net (fo=1, routed)           0.206    21.224    ctrl_fsm_cs_t0[3]_i_13_n_0
+    SLICE_X283Y405       LUT6 (Prop_B6LUT_SLICEL_I1_O)
+                                                      0.153    21.377 r  ctrl_fsm_cs_t0[3]_i_8/O
+                         net (fo=9, routed)           0.294    21.671    ctrl_fsm_cs_t0[3]_i_8_n_0
+    SLICE_X286Y405       LUT6 (Prop_B6LUT_SLICEL_I1_O)
+                                                      0.102    21.773 f  ctrl_fsm_cs_t0[0]_i_16/O
+                         net (fo=1, routed)           0.268    22.041    ctrl_fsm_cs_t0[0]_i_16_n_0
+    SLICE_X285Y405       LUT6 (Prop_E6LUT_SLICEL_I1_O)
+                                                      0.153    22.194 r  ctrl_fsm_cs_t0[0]_i_8/O
+                         net (fo=7, routed)           0.195    22.389    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/id_in_ready_t0
+    SLICE_X285Y408       LUT3 (Prop_G6LUT_SLICEL_I1_O)
+                                                      0.062    22.451 r  instr_rdata_alu_id_o_t0[1]_i_2/O
+                         net (fo=99, routed)          0.524    22.975    instr_rdata_alu_id_o_t0[1]_i_2_n_0
+    SLICE_X289Y409       LUT3 (Prop_A6LUT_SLICEL_I2_O)
+                                                      0.062    23.037 r  instr_rdata_alu_id_o_t0[1]_i_4/O
+                         net (fo=99, routed)          0.867    23.904    instr_rdata_alu_id_o_t0[1]_i_4_n_0
+    SLICE_X290Y407       LUT6 (Prop_H6LUT_SLICEM_I4_O)
+                                                      0.064    23.968 r  instr_rdata_alu_id_o_t0[17]_i_1/O
+                         net (fo=1, routed)           0.886    24.854    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/if_stage_i/_2371_
+    SLICE_X295Y430       FDRE                                         r  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/if_stage_i/instr_rdata_alu_id_o_t0_reg[17]/D
+  -------------------------------------------------------------------    -------------------
+
+                         (clock clk_i rise edge)     10.000    10.000 r  
+    BG42                                              0.000    10.000 r  clk_i (IN)
+                         net (fo=0)                   0.000    10.000    clk_i_IBUF_inst/I
+    BG42                 INBUF (Prop_INBUF_HPIOB_PAD_O)
+                                                      0.428    10.428 r  clk_i_IBUF_inst/INBUF_INST/O
+                         net (fo=1, routed)           0.045    10.473    clk_i_IBUF_inst/OUT
+    BG42                 IBUFCTRL (Prop_IBUFCTRL_HPIOB_I_O)
+                                                      0.000    10.473 r  clk_i_IBUF_inst/IBUFCTRL_INST/O
+                         net (fo=2, routed)           2.075    12.548    clk_i_IBUF
+    SLICE_X297Y392       LUT2 (Prop_F6LUT_SLICEL_I1_O)
+                                                      0.105    12.653 r  gen_mult_single_cycle.mult_state_q_t0_i_8/O
+                         net (fo=1, routed)           0.441    13.094    gen_mult_single_cycle.mult_state_q_t0_i_8_n_0
+    BUFGCE_X1Y146        BUFGCE (Prop_BUFCE_BUFGCE_I_O)
+                                                      0.060    13.154 r  gen_mult_single_cycle.mult_state_q_t0_reg_i_3/O
+    X7Y6 (CLOCK_ROOT)    net (fo=4615, routed)        1.417    14.571    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/clk
+    SLICE_X295Y430       FDRE                                         r  i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/if_stage_i/instr_rdata_alu_id_o_t0_reg[17]/C
+                         clock pessimism              0.853    15.423    
+                         clock uncertainty           -0.035    15.388    
+    SLICE_X295Y430       FDRE (Setup_DFF2_SLICEL_C_D)
+                                                      0.048    15.436    i_cellift_rv_core_ibex_mem_top/i_rv_core_ibex/u_core/u_ibex_core/if_stage_i/instr_rdata_alu_id_o_t0_reg[17]
+  -------------------------------------------------------------------
+                         required time                         15.436    
+                         arrival time                         -24.854    
+  -------------------------------------------------------------------
+                         slack                                 -9.418    
+
+
+
+

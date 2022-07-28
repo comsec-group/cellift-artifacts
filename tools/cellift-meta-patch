@@ -1,0 +1,7 @@
+diff --git a/design-processing/python-requirements.txt b/design-processing/python-requirements.txt
+index 78620c4..c032a8c 100644
+--- a/design-processing/python-requirements.txt
++++ b/design-processing/python-requirements.txt
+@@ -1 +1,2 @@
+ tqdm
++psutil
